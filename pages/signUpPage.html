@@ -4,6 +4,56 @@
     <meta charset="UTF-8">
     <title>Sign up Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../Assets/lib/fontawasome/fontawesome-free-6.7.2-web/css/all.css">
+    <link rel="stylesheet" href="../Assets/lib/normalize.css">
+
+    <style>
+
+        body {
+            background: url('../Assets/images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-container {
+            position: relative;
+            z-index: 1;
+            background: rgba(245, 222, 179, 0.62); /* White with 85% opacity */
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            backdrop-filter: blur(5px); /* Optional: subtle blur behind */
+        }
+
+        .btn-login{
+            background-color: #d35400;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background-color: #e67e22;
+        }
+
+        .social-login{
+            color: black;
+            font-size: 30px;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+    </style>
 </head>
 <body>
 <section class="auth-container">
@@ -24,6 +74,12 @@
             </div>
             <button type="submit" class="btn btn-login w-100" id="signUp">Sign Up</button>
             <p class="text-center mt-3">Already have an account? <a href="signIn.html">Sign In</a></p>
+<!--            <div class="social-login">-->
+<!--                <i class="fa-brands fa-facebook-f"></i>-->
+<!--                <i class="fa-brands fa-linkedin-in"></i>-->
+<!--                <i class="fa-brands fa-google"></i>-->
+<!--            </div>-->
+
         </form>
     </div>
 </section>
