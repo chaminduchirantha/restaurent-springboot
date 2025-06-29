@@ -20,6 +20,42 @@
     .navbar-custom .nav-link:hover {
         color: #ffd6ad; /* lighter orange */
     }
+
+    #home{
+        width: 100vw;
+        height: 100vh;
+        background-image: url('../Assets/images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        color: white;
+        text-align: center;
+    }
+
+    #home a{
+        color: white;
+        background-color: #e67e22;
+        margin: 10px;
+        transition-duration: 0.4s;
+    }
+
+    #home a:hover{
+        transform: scale(1.1);
+        border: 2px solid black;
+        background-color: #d35400;
+        margin: 10px;
+    }
+
+    #menu-btn{
+        border-radius: 30px 0 0 30px;
+    }
+    #service-btn{
+        border-radius: 0  30px 30px 0;
+    }
 </style>
 <body>
 <nav class="navbar navbar-expand-lg navbar-custom">
@@ -60,6 +96,26 @@
         </div>
     </div>
 </nav>
+
+<section id="home" >
+
+    <div style="
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;">
+    </div>
+
+    <div style="position: relative; z-index: 2; max-width: 700px; padding: 20px;">
+        <h1 class="display-4 fw-bold" style="color: wheat">Welcome to Saffron Serenity Restaurant</h1>
+        <p style="font-size: 1.25rem;">
+            Where culinary excellence meets wellness. Dive into gourmet dining and rejuvenating spa treatments all under one roof. Let your senses unwind.
+        </p>
+        <a href="#" class="btn btn-lg btn-login mt-3" id="menu-btn">Explore Our Menu</a>
+        <a href="#" class="btn btn-lg btn-login mt-3" id="service-btn">Explore Our Services</a>
+    </div>
+</section>
+
 
 
 
