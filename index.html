@@ -5,6 +5,8 @@
     <title>Title</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="Assets/lib/fontawasome/fontawesome-free-6.7.2-web/css/all.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 </head>
 <style>
     .navbar-custom {
@@ -56,7 +58,7 @@
         border-radius: 0  30px 30px 0;
     }
 </style>
-<body>
+<body style="overflow-x: hidden;">
 <nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Saffron Serenity Restaurant</a>
@@ -105,13 +107,19 @@
         z-index: 1;">
     </div>
 
-    <div style="position: relative; z-index: 2; max-width: 700px; padding: 20px;">
-        <h1 class="display-4 fw-bold" style="color: wheat">Welcome to Saffron Serenity Restaurant</h1>
-        <p style="font-size: 1.25rem;">
+    <div style="position: relative; z-index: 2; max-width: 700px; padding: 20px; " >
+        <h1 class="display-4 fw-bold" data-aos="fade-left"
+            data-aos-anchor="#example-anchor"
+            data-aos-offset="500"
+            data-aos-duration="1500" style="color: wheat">Welcome to Saffron Serenity Restaurant</h1>
+        <p style="font-size: 1.25rem;" data-aos="fade-left"
+           data-aos-anchor="#example-anchor"
+           data-aos-offset="500"
+           data-aos-duration="1800">
             Where culinary excellence meets wellness. Dive into gourmet dining and rejuvenating spa treatments all under one roof. Let your senses unwind.
         </p>
-        <a href="#" class="btn btn-lg btn-login mt-3" id="menu-btn">Explore Our Menu</a>
-        <a href="#" class="btn btn-lg btn-login mt-3" id="service-btn">Explore our Service</a>
+        <a href="#" class="btn btn-lg btn-login mt-3" id="menu-btn" data-aos="zoom-out-right">Explore Our Menu</a>
+        <a href="#" class="btn btn-lg btn-login mt-3" id="service-btn"data-aos="zoom-out-left">Explore our Service</a>
     </div>
 </section>
 
@@ -160,7 +168,10 @@
 
 
 
-
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
