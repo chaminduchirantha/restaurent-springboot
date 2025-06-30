@@ -25,7 +25,7 @@
 
     #home{
         width: 100vw;
-        height: 100vh;
+        height: auto;
         background-image: url('Assets/images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg');
         background-size: cover;
         background-position: center;
@@ -52,11 +52,44 @@
     }
 
     #menu-btn{
-        border-radius: 30px 0 0 30px;
+        border-radius: 30px 30px 30px 30px;
     }
     #service-btn{
-        border-radius: 0  30px 30px 0;
+        border-radius: 30px  30px 30px 30px;
     }
+
+    .slideshow-container {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: 0;
+        background-size: cover;
+        background-position: center;
+        animation: slideShow 24s infinite;
+    }
+
+    @keyframes slideShow {
+        0%   { background-image: url('Assets/images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg'); }
+        33%  { background-image: url('Assets/images/drinks-glasses-new-year-eve-celebration.jpg'); }
+        66%  { background-image: url('Assets/images/mixed-pizza-with-various-ingridients.jpg'); }
+        100% { background-image: url('Assets/images/img.png'); }
+    }
+
+    .animated-btn {
+        background-color: #e67e22;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .animated-btn:hover {
+        background-color: #d35400;
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
 </style>
 <body style="overflow-x: hidden;">
 <nav class="navbar navbar-expand-lg navbar-custom">
@@ -98,29 +131,31 @@
     </div>
 </nav>
 
-<section id="home" >
+<section id="home" style="position: relative; height: 100vh; overflow: hidden;">
 
+    <!-- Slideshow background images -->
+    <div class="slideshow-container"></div>
+
+    <!-- Black overlay -->
     <div style="
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.6);
         z-index: 1;">
     </div>
 
-    <div style="position: relative; z-index: 2; max-width: 700px; padding: 20px; " >
-        <h1 class="display-4 fw-bold" data-aos="fade-left"
-            data-aos-anchor="#example-anchor"
-            data-aos-offset="500"
-            data-aos-duration="1500" style="color: wheat">Welcome to Saffron Serenity Restaurant</h1>
-        <p style="font-size: 1.25rem;" data-aos="fade-left"
-           data-aos-anchor="#example-anchor"
-           data-aos-offset="500"
-           data-aos-duration="1800">
+    <!-- Text & buttons -->
+    <div style="position: relative; z-index: 2; max-width: 700px; padding: 20px; color: wheat;" data-aos="fade-up">
+        <h1 class="display-4 fw-bold" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1500">
+            Welcome to Saffron Serenity Restaurant
+        </h1>
+        <p style="font-size: 1.25rem;" data-aos="fade-left" data-aos-delay="400" data-aos-duration="1800">
             Where culinary excellence meets wellness. Dive into gourmet dining and rejuvenating spa treatments all under one roof. Let your senses unwind.
         </p>
-        <a href="#" class="btn btn-lg btn-login mt-3" id="menu-btn" data-aos="zoom-out-right">Explore Our Menu</a>
-        <a href="#" class="btn btn-lg btn-login mt-3" id="service-btn"data-aos="zoom-out-left">Explore our Service</a>
+        <a href="#" class="btn btn-lg animated-btn mt-3" id="menu-btn" data-aos="zoom-out-right" data-aos-delay="600">Explore Our Menu</a>
+        <a href="#" class="btn btn-lg animated-btn mt-3" id="service-btn" data-aos="zoom-out-left" data-aos-delay="800">Explore our Service</a>
     </div>
+
 </section>
 
 <section id="about" class="py-5" style="background-color: #fff3e0;">
@@ -194,6 +229,44 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <img src="Assets/images/chocolate-strawberry-cheesecake-plate-garnished-with-strawberry-syrup.jpg" class="card-img-top" alt="Dessert Corner">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark">Dessert & Pastry Corner</h5>
+                        <p class="card-text" style="color: #5a3e1b;">
+                            Indulge in a decadent selection of handcrafted desserts, artisan pastries, and sweet treats made fresh daily by our in-house patisserie chefs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <img src="Assets/images/gastronomy-experts-restaurant-professional-kitchen-cooking-delicious-gourmet-dish-culinary-school-course-cooks-shooting-video-about-food-preparation-process-gastronomic-television-show.jpg" class="card-img-top" alt="Live Cooking">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark">Live Cooking Station</h5>
+                        <p class="card-text" style="color: #5a3e1b;">
+                            Experience the excitement of our live cooking station, where chefs prepare dishes right before your eyes. Watch the artistry unfold and savor meals fresh off the grill.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <img src="Assets/images/people-ramadan-celebration.jpg" class="card-img-top" alt="Gourmet Buffet">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark">Gourmet Buffet</h5>
+                        <p class="card-text" style="color: #5a3e1b;">
+                            Explore an indulgent spread of international and local cuisines in our gourmet buffet. From appetizers to desserts, enjoy an all-you-can-eat experience in style.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="col-md-6 col-lg-4">
                 <div class="card h-100 border-0 shadow-sm">
