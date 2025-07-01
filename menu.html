@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Menu</title>
+    <title>Saffron Serenity Restaurant</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -37,22 +37,25 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <!-- Search Bar -->
-            <form class="d-flex me-3">
-                <div class="input-group">
-                    <input class="form-control" type="search" placeholder="Search menu..." aria-label="Search">
-                    <button class="btn btn-outline-warning" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </form>
+
         </div>
     </div>
 </nav>
 
-<section id="menu" class="py-4">
+<section id="menu" class="py-4" style="height: auto">
     <div class="container" style="position:relative; top:80px;">
         <div class="text-center mb-4">
             <h2 class="fw-bold text-dark">Most Popular Items</h2>
+            <div class="d-flex justify-content-center mt-3">
+                <form class="d-flex">
+                    <div class="input-group" style="width: 300px; border: 2px solid orange; border-radius: 20px;">
+                        <input class="form-control" type="search" placeholder="Search menu..." aria-label="Search" style="border-radius: 20px;">
+                        <button class="btn btn-outline-warning" type="submit" style="border-radius: 20px; border: 2px solid orange;">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
             <div class="d-flex justify-content-center mt-3">
                 <div class="px-3">
                     <i class="fas fa-coffee me-2" style="color: #e67e22;"></i>
@@ -392,6 +395,39 @@
         </div>
     </div>
 </section>
+
+<footer class="text-white text-center text-lg-start" style="background:linear-gradient(#0b2231, #1c4e6f,#b4642f); position: relative; top: 200px">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+
+            <div class="col-lg-4 mb-4">
+                <h4 class="fw-bold">Saffron Serenity</h4>
+                <p style="font-size: 17px; width: 100%">
+                    Experience the harmony of flavor and wellness. We blend luxury dining with total relaxation in one place.
+                </p>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <h6 class="fw-bold"  style="font-size: 22px;">Get in Touch</h6>
+                <p class=" mb-1" style="font-size: 17px;"><i class="fas fa-phone-alt me-2" style="color: #d35400"></i>077 335 2204</p>
+                <p class=" mb-1" style="font-size: 17px;"><i class="fas fa-envelope me-2" style="color: #d35400"></i>chaminduchirantha73@gmail.com</p>
+                <p style="font-size: 17px;"><i class="fas fa-map-marker-alt me-2" style="color: #d35400"></i>73/1 A Horana Road, Gonapala</p>
+            </div>
+        </div>
+
+        <div class="mt-4 d-flex justify-content-center gap-4">
+            <a href="https://facebook.com" class="text-white fs-5" ><i class="fab fa-facebook-f" style="font-size: 30px; color: #d35400" ></i></a>
+            <a href="https://linkedin.com" class="text-white fs-5"><i class="fab fa-linkedin-in" style="font-size: 30px;  color: #d35400"></i></a>
+            <a href="https://twitter.com" class="text-white fs-5"><i class="fab fa-twitter" style="font-size: 30px;  color: #d35400"></i></a>
+        </div>
+
+        <hr class="my-4 border-light">
+
+        <div class="text-center"style="font-size: 18px;">
+            &copy; 2025 Saffron Serenity. Designed with by chamindu chirantha
+        </div>
+    </div>
+</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
