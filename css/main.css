@@ -1,0 +1,96 @@
+.navbar-custom {
+    background-color: #d35400;
+    position: fixed;
+    z-index: 1000 ;
+    width: 100%;/* dark orange */
+}
+.navbar-custom .nav-link,
+.navbar-custom .navbar-brand {
+    color: white;
+}
+.navbar-custom .nav-link:hover {
+    color: #ffd6ad; /* lighter orange */
+}
+
+#home{
+    width: 100vw;
+    height: auto;
+    background-image: url('Assets/images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: white;
+    text-align: center;
+}
+
+#home a{
+    color: white;
+    background-color: #e67e22;
+    margin: 5px;
+    transition-duration: 0.4s;
+}
+
+#home a:hover{
+    transform: scale(1.1);
+    border: 2px solid black;
+    background-color: #d35400;
+}
+
+#menu-btn{
+    border-radius: 30px 30px 30px 30px;
+}
+#service-btn{
+    border-radius: 30px  30px 30px 30px;
+}
+
+.slideshow-container {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    animation: slideShow 24s infinite;
+}
+
+@keyframes slideShow {
+    0%   { background-image: url('Assets/images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg'); }
+    33%  { background-image: url('Assets/images/drinks-glasses-new-year-eve-celebration.jpg'); }
+    66%  { background-image: url('Assets/images/mixed-pizza-with-various-ingridients.jpg'); }
+    100% { background-image: url('Assets/images/img.png'); }
+}
+
+.animated-btn {
+    background-color: #e67e22;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.animated-btn:hover {
+    background-color: #d35400;
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.custom-card{
+    border-radius: 30px;
+}
+
+.custom-card:hover {
+    transform: scale(1.1);
+}
+
+.custom-img{
+    border-radius: 30px;
+}
+
+.custom-btn{
+    border-radius: 30px;
+}
