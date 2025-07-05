@@ -23,6 +23,43 @@
             background: #d35400;
         }
 
+        .show-all{
+            transition-duration: 800ms;
+        }
+
+        .show-breakfast{
+            transition-duration: 800ms;
+        }
+        .lunch{
+            transition-duration: 800ms;
+        }
+
+        .dinner{
+            transition-duration: 800ms;
+        }
+
+
+        .show-all:hover{
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+
+        .show-breakfast:hover{
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+
+        .lunch:hover{
+            cursor: pointer;
+            transform: scale(1.1);
+
+        }
+
+        .dinner:hover{
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+
     </style>
 </head>
 <body style="position: relative">
@@ -58,24 +95,30 @@
                 </form>
             </div>
             <div class="d-flex justify-content-center mt-3">
-                <div class="px-3">
+                <div class="px-3  border-end show-all " id="all" >
+                    <i class="fas fa-list me-2" style="color: #e67e22; "></i>
+                    <span class="fw-bold">Show <br>All</span>
+                </div>
+                <div class="px-3 show-breakfast" id="filter-breakfast">
                     <i class="fas fa-coffee me-2" style="color: #e67e22;"></i>
                     <span class="fw-bold">Popular <br>Breakfast</span>
                 </div>
-                <div class="px-3 border-start border-end">
+                <div class="px-3 border-start border-end lunch" id="filter-lunch">
                     <i class="fas fa-hamburger me-2" style="color: #e67e22;"></i>
                     <span class="fw-bold">Special <br>Lunch</span>
                 </div>
-                <div class="px-3">
+                <div class="px-3 dinner" id="filter-dinner">
                     <i class="fas fa-utensils me-2" style="color: #e67e22;"></i>
                     <span class="fw-bold">Lovely <br>Dinner</span>
                 </div>
+
+
             </div>
         </div>
 
         <div class="row g-1">
             <!-- Card 1 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2" data-category="dinner lunch all">
                 <div class="card h-100 shadow-sm">
                     <img src="Assets/images/close-up-appetizing-ramadan-meal.jpg" class="card-img-top" alt="Chicken Rice">
                     <div class="card-body p-3">
@@ -90,7 +133,7 @@
             </div>
 
             <!-- Card 2 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2" data-category="dinner lunch all">
                 <div class="card h-100 shadow-sm">
                     <img src="Assets/images/img_11.png" class="card-img-top" alt="Mix Rice">
                     <div class="card-body p-3">
@@ -105,7 +148,7 @@
             </div>
 
             <!-- Card 3 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2" data-category="breakfast lunch all">
                 <div class="card h-100 shadow-sm">
                     <img src="Assets/images/top-view-food-frame-with-copy-space.jpg" class="card-img-top" alt="Rice and Curry">
                     <div class="card-body p-3">
@@ -120,7 +163,7 @@
             </div>
 
             <!-- Card 4 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2" data-category="breakfast lunch all">
                 <div class="card h-100 shadow-sm">
                     <img src="Assets/images/img_1.png" class="card-img-top" alt="Vegetable Rice">
                     <div class="card-body p-3">
@@ -134,7 +177,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2" data-category="dinner lunch all">
                 <div class="card h-100 shadow-sm">
                     <img src="Assets/images/high-angle-pakistan-meal-composition.jpg" class="card-img-top" alt="Vegetable Rice">
                     <div class="card-body p-3">
@@ -148,7 +191,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2" data-category="dinner lunch all">
                 <div class="card h-100 shadow-sm">
                     <img src="Assets/images/img_2.png" class="card-img-top" alt="Vegetable Rice">
                     <div class="card-body p-3">
@@ -162,7 +205,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2" data-category="dinner all">
                 <div class="card h-100 shadow-sm">
                     <img src="Assets/images/img_3.png" class="card-img-top" alt="Rice and Curry">
                     <div class="card-body p-3">
@@ -176,7 +219,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2" data-category="dinner all">
                 <div class="card h-100 shadow-sm">
                     <img src="Assets/images/img_5.png" class="card-img-top" alt="Rice and Curry">
                     <div class="card-body p-3">
@@ -190,7 +233,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2" data-category="dinner all">
                 <div class="card h-100 shadow-sm">
                     <img src="Assets/images/img_4.png" class="card-img-top" alt="Mix Rice">
                     <div class="card-body p-3">
@@ -204,7 +247,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2" data-category="dinner all">
                 <div class="card h-100 shadow-sm">
                     <img src="Assets/images/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table.jpg" class="card-img-top" alt="Mix Rice">
                     <div class="card-body p-3">
@@ -218,7 +261,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2" data-category="breakfast dinner all" >
                 <div class="card h-100 shadow-sm">
                     <img src="Assets/images/img_6.png" class="card-img-top" alt="Mix Rice">
                     <div class="card-body p-3">
@@ -232,7 +275,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2" data-category="dinner all">
                 <div class="card h-100 shadow-sm">
                     <img src="Assets/images/img_7.png" class="card-img-top" alt="Chicken Rice">
                     <div class="card-body p-3">
@@ -247,7 +290,7 @@
             </div>
 
             <!-- Card 2 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2"data-category="dinner breakfast all" >
                 <div class="card h-100 shadow-sm">
                     <img src="Assets/images/img_8.png" class="card-img-top" alt="Mix Rice">
                     <div class="card-body p-3">
@@ -262,7 +305,7 @@
             </div>
 
             <!-- Card 3 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2" data-category="lunch all">
                 <div class="card h-100 shadow-sm">
                     <img src="Assets/images/crispy-chicken-burger.jpg" class="card-img-top" alt="Rice and Curry">
                     <div class="card-body p-3">
@@ -277,7 +320,7 @@
             </div>
 
 
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2" data-category="breakfast all">
                 <div class="card h-100 shadow-sm">
                     <img src="Assets/images/img_9.png" class="card-img-top" alt="Rice and Curry">
                     <div class="card-body p-3">
@@ -292,7 +335,7 @@
 
 
             <!-- Card 4 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2" data-category="dinner all" >
                 <div class="card h-100 shadow-sm">
                     <img src="Assets/images/img_10.png" class="card-img-top" alt="Vegetable Rice">
                     <div class="card-body p-3">
@@ -819,5 +862,10 @@
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/menu.js"></script>
+
+
+
 </body>
 </html>
