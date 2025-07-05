@@ -1,0 +1,57 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.card {
+    transition: transform 0.2s ease-in-out;
+    margin: 10px;
+}
+.card:hover {
+    transform: translateY(-2px);
+}
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.custom-navbar{
+    background: #d35400;
+}
+
+.show-all{
+    transition-duration: 800ms;
+}
+
+.show-breakfast{
+    transition-duration: 800ms;
+}
+.lunch{
+    transition-duration: 800ms;
+}
+
+.dinner{
+    transition-duration: 800ms;
+}
+
+.show-all:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.show-breakfast:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.lunch:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+
+}
+
+.dinner:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
