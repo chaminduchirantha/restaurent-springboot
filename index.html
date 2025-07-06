@@ -5,93 +5,12 @@
     <title> Saffron Serenity Restaurant</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="Assets/lib/fontawasome/fontawesome-free-6.7.2-web/css/all.css">
-        <link rel="icon" type="image/ico" href="Assets/images/1.png">
+    <link rel="icon" type="image/ico" href="Assets/images/1.png">
+    <link rel="stylesheet" href="css/main.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+
 </head>
-<style>
-    .navbar-custom {
-        background-color: #d35400;
-        position: fixed;
-        z-index: 1000 ;
-        width: 100%;/* dark orange */
-    }
-    .navbar-custom .nav-link,
-    .navbar-custom .navbar-brand {
-        color: white;
-    }
-    .navbar-custom .nav-link:hover {
-        color: #ffd6ad; /* lighter orange */
-    }
-
-    #home{
-        width: 100vw;
-        height: auto;
-        background-image: url('Assets/images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        color: white;
-        text-align: center;
-    }
-
-    #home a{
-        color: white;
-        background-color: #e67e22;
-        margin: 5px;
-        transition-duration: 0.4s;
-    }
-
-    #home a:hover{
-        transform: scale(1.1);
-        border: 2px solid black;
-        background-color: #d35400;
-    }
-
-    #menu-btn{
-        border-radius: 30px 30px 30px 30px;
-    }
-    #service-btn{
-        border-radius: 30px  30px 30px 30px;
-    }
-
-    .slideshow-container {
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 0;
-        background-size: cover;
-        background-position: center;
-        animation: slideShow 24s infinite;
-    }
-
-    @keyframes slideShow {
-        0%   { background-image: url('Assets/images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg'); }
-        33%  { background-image: url('Assets/images/drinks-glasses-new-year-eve-celebration.jpg'); }
-        66%  { background-image: url('Assets/images/mixed-pizza-with-various-ingridients.jpg'); }
-        100% { background-image: url('Assets/images/img.png'); }
-    }
-
-    .animated-btn {
-        background-color: #e67e22;
-        color: white;
-        padding: 12px 30px;
-        border-radius: 30px;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        display: inline-block;
-    }
-
-    .animated-btn:hover {
-        background-color: #d35400;
-        transform: scale(1.05);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    }
-
-</style>
 <body style="overflow-x: hidden;">
 <nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container-fluid">
@@ -169,16 +88,16 @@
             <div class="col-md-6 mb-4 mb-md-0">
                 <div class="row g-2">
                     <div class="col-6">
-                        <img src="Assets/images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg" class="img-fluid rounded" alt="Restaurant Image 1">
+                        <img src="Assets/images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg" class="img-fluid rounded custom-img" alt="Restaurant Image 1">
                     </div>
                     <div class="col-6">
-                        <img src="Assets/images/img.png" class="img-fluid rounded" alt="Restaurant Image 2">
+                        <img src="Assets/images/img.png" class="img-fluid rounded custom-img" alt="Restaurant Image 2" >
                     </div>
                     <div class="col-6">
-                        <img src="Assets/images/kyev-style-chicken-cutlet-with-side-potato.jpg" class="img-fluid rounded" alt="Restaurant Image 3">
+                        <img src="Assets/images/kyev-style-chicken-cutlet-with-side-potato.jpg" class="img-fluid rounded custom-img" alt="Restaurant Image 3">
                     </div>
                     <div class="col-6">
-                        <img src="Assets/images/people-ramadan-celebration.jpg" class="img-fluid rounded" alt="Restaurant Image 4">
+                        <img src="Assets/images/people-ramadan-celebration.jpg" class="img-fluid rounded custom-img" alt="Restaurant Image 4">
                     </div>
                 </div>
             </div>
@@ -200,8 +119,7 @@
                     Come indulge your senses because you deserve the best of both worlds.
                 </p>
 
-                <a href="#contact
-" class="btn btn-lg btn-login mt-3" style="background-color: #e67e22; color: white">Get In Touch</a>
+                <a href="#contact" class="btn btn-lg btn-login mt-3 custom-btn" style="background-color: #e67e22; color: white">Get In Touch</a>
             </div>
         </div>
     </div>
@@ -212,8 +130,8 @@
         <h2 class="text-center mb-5 text-dark" style="font-size: 40px">Our Services</h2>
         <div class="row g-4">
             <!-- Restaurant Service Card -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 border-0 shadow-sm">
+            <div class="col-md-6 col-lg-4 " >
+                <div class="card h-100 border-0 shadow-sm custom-card ">
                     <img src="Assets/images/gastronomy-experts-restaurant-professional-kitchen-cooking-delicious-gourmet-dish-culinary-school-course-cooks-shooting-video-about-food-preparation-process-gastronomic-television-show.jpg" class="card-img-top" alt="Live Cooking">
                     <div class="card-body">
                         <h5 class="card-title text-dark">Live Cooking Station</h5>
@@ -225,7 +143,7 @@
             </div>
 
             <div class="col-md-6 col-lg-4">
-                <div class="card h-100 border-0 shadow-sm">
+                <div class="card h-100 border-0 shadow-sm custom-card">
                     <img src="Assets/images/people-ramadan-celebration.jpg" class="card-img-top" alt="Gourmet Buffet">
                     <div class="card-body">
                         <h5 class="card-title text-dark">Gourmet Buffet</h5>
@@ -238,7 +156,7 @@
 
 
             <div class="col-md-6 col-lg-4">
-                <div class="card h-100 border-0 shadow-sm">
+                <div class="card h-100 border-0 shadow-sm custom-card">
                     <img src="Assets/images/chocolate-strawberry-cheesecake-plate-garnished-with-strawberry-syrup.jpg" class="card-img-top" alt="Dessert Corner">
                     <div class="card-body">
                         <h5 class="card-title text-dark">Dessert & Pastry Corner</h5>
@@ -250,7 +168,7 @@
             </div>
 
             <div class="col-md-6 col-lg-4">
-                <div class="card h-100 border-0 shadow-sm">
+                <div class="card h-100 border-0 shadow-sm custom-card">
                     <img src="Assets/images/gastronomy-experts-restaurant-professional-kitchen-cooking-delicious-gourmet-dish-culinary-school-course-cooks-shooting-video-about-food-preparation-process-gastronomic-television-show.jpg" class="card-img-top" alt="Live Cooking">
                     <div class="card-body">
                         <h5 class="card-title text-dark">Live Cooking Station</h5>
@@ -262,7 +180,7 @@
             </div>
 
             <div class="col-md-6 col-lg-4">
-                <div class="card h-100 border-0 shadow-sm">
+                <div class="card h-100 border-0 shadow-sm custom-card" >
                     <img src="Assets/images/people-ramadan-celebration.jpg" class="card-img-top" alt="Gourmet Buffet">
                     <div class="card-body">
                         <h5 class="card-title text-dark">Gourmet Buffet</h5>
@@ -275,7 +193,7 @@
 
 
             <div class="col-md-6 col-lg-4">
-                <div class="card h-100 border-0 shadow-sm">
+                <div class="card h-100 border-0 shadow-sm custom-card">
                     <img src="Assets/images/chocolate-strawberry-cheesecake-plate-garnished-with-strawberry-syrup.jpg" class="card-img-top" alt="Dessert Corner">
                     <div class="card-body">
                         <h5 class="card-title text-dark">Dessert & Pastry Corner</h5>
