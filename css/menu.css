@@ -55,3 +55,18 @@
     cursor: pointer;
     transform: scale(1.1);
 }
+
+#comment-btn{
+    text-align: center;
+    border: 2px solid #d35400;
+    background-color: #e67e22;
+    border-radius: 25px;
+    font-weight: bold;
+    color: white;
+
+}
+
+#comment-btn:hover{
+    background: linear-gradient(#d35400, #FFD43B , #ffd6ad);
+    color: black;
+}
