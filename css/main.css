@@ -15,7 +15,7 @@
 #home{
     width: 100vw;
     height: auto;
-    background-image: url('Assets/images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg');
+    background-image: url('../Assets/images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -57,10 +57,10 @@
 }
 
 @keyframes slideShow {
-    0%   { background-image: url('Assets/images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg'); }
-    33%  { background-image: url('Assets/images/drinks-glasses-new-year-eve-celebration.jpg'); }
-    66%  { background-image: url('Assets/images/mixed-pizza-with-various-ingridients.jpg'); }
-    100% { background-image: url('Assets/images/img.png'); }
+    0%   { background-image: url('../Assets/images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg'); }
+    33%  { background-image: url('../Assets/images/drinks-glasses-new-year-eve-celebration.jpg'); }
+    66%  { background-image: url('../Assets/images/mixed-pizza-with-various-ingridients.jpg'); }
+    100% { background-image: url('../Assets/images/img.png'); }
 }
 
 .animated-btn {
@@ -80,11 +80,12 @@
 }
 
 .custom-card{
-    border-radius: 30px;
+    border-radius: 20px;
+    transition-duration: 800ms;
 }
 
 .custom-card:hover {
-    transform: scale(1.1);
+    transform: scale(0.97);
 }
 
 .custom-img{
@@ -93,4 +94,21 @@
 
 .custom-btn{
     border-radius: 30px;
+}
+
+.custom-img{
+    transition-duration:800ms;
+}
+
+.custom-img:hover{
+    transform: scale(0.97);
+}
+
+.custom-btn{
+    transition-duration:800ms;
+    background: #d35400;
+}
+
+.custom-btn:hover{
+    transform: scale(1.05);
 }
