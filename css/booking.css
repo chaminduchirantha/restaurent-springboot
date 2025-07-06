@@ -36,3 +36,21 @@
     border: 2px solid black;
     background-color: #d35400;
 }
+
+#booking-btn{
+    border-radius: 25px;
+}
+
+.custom-navbar{
+    background: #d35400;
+}
+
+.custom-navbar a{
+    font-size: 18px;
+    font-weight: bold;
+    transition-duration: 800ms;
+}
+
+.custom-navbar a:hover{
+    transform: scale(1.1);
+}
