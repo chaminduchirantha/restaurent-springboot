@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body{
+    overflow-x: hidden;
+}
+
 #booking{
     width: 100vw;
     height: auto;
@@ -53,4 +57,22 @@
 
 .custom-navbar a:hover{
     transform: scale(1.1);
+}
+
+.custom-form{
+    border: 2px solid #d35400;
+    border-radius: 15px;
+}
+
+.custom-label{
+    font-weight: bold;
+}
+
+.custom-button{
+    border-radius: 15px;
+}
+
+.custom-image{
+    width: 400px;
+    max-width: 100%;
 }
