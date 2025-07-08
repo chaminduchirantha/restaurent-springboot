@@ -63,7 +63,7 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-between align-items-center bg-white py-2">
-                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#menuModal2">submit booking </button>
+                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#menuModal1">submit booking </button>
                     </div>
                 </div>
             </div>
@@ -103,6 +103,46 @@
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="menuModal1" tabindex="-1" aria-labelledby="menuModal1Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="menuModal1Label">Table Booking</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex flex-column flex-md-row gap-4 align-items-center">
+                <img src="Assets/images/table-arrangement-luxury-restaurant.jpg" alt="Chicken Rice" class="img-fluid rounded" style="max-width: 300px;">
+                <div class="flex-grow-1 w-100">
+                    <form>
+                        <div class="mb-3 ">
+                            <label for="fullName" class="form-label custom-label ">Full Name</label>
+                            <input type="text" class="form-control custom-form" id="fullName" placeholder="Enter your name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phoneNumber" class="form-label custom-label">Phone Number</label>
+                            <input type="tel" class="form-control custom-form" id="phoneNumber" placeholder="07XXXXXXXX" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bookingDate" class="form-label custom-label ">Date</label>
+                            <input type="date" class="form-control custom-form" id="bookingDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bookingTime" class="form-label custom-label">Time</label>
+                            <input type="time" class="form-control custom-form" id="bookingTime" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="guests" class="form-label custom-label">Number of Guests</label>
+                            <input type="number" class="form-control custom-form" id="guests" placeholder="e.g. 2" required min="1">
+                        </div>
+                        <button type="submit" class="btn btn-primary custom-button">Submit booking</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <footer class="text-white text-center text-lg-start" style="background:linear-gradient(#0b2231, #1c4e6f,#b4642f);">
     <div class="container py-5">
