@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Golden Spoon Restaurant Booking details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="Assets/lib/fontawasome/fontawesome-free-6.7.2-web/css/all.css">
@@ -22,6 +23,9 @@
             <ul class="navbar-nav ms-auto me-3">
                 <li class="nav-item">
                     <a class="nav-link" href="index.html" id="naveHome">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="menu-button" href="menu.html">Our Menu</a>
                 </li>
             </ul>
         </div>
@@ -63,7 +67,7 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-between align-items-center bg-white py-2">
-                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#menuModal1">submit booking </button>
+                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#bookingModel1">submit booking </button>
                     </div>
                 </div>
             </div>
@@ -79,7 +83,7 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-between align-items-center bg-white py-2">
-                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#menuModal2">submit booking </button>
+                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#bookingModel2">submit booking </button>
                     </div>
                 </div>
             </div>
@@ -95,7 +99,7 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-between align-items-center bg-white py-2">
-                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#menuModal2">submit booking </button>
+                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#buffetModal">submit booking </button>
                     </div>
                 </div>
             </div>
@@ -104,44 +108,164 @@
     </div>
 </section>
 
-<div class="modal fade" id="menuModal1" tabindex="-1" aria-labelledby="menuModal1Label" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal fade" id="bookingModel1" tabindex="-1" aria-labelledby="bookingModelLabel1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="menuModal1Label">Table Booking</h5>
+                <h5 class="modal-title fw-bold" id="bookingModelLabel1">Table Booking</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body d-flex flex-column flex-md-row gap-4 align-items-center">
-                <img src="Assets/images/table-arrangement-luxury-restaurant.jpg" alt="Chicken Rice" class="img-fluid rounded" style="max-width: 300px;">
+            <div class="modal-body d-flex flex-column flex-md-row gap-4 align-items-start">
+                <img src="Assets/images/table-arrangement-luxury-restaurant.jpg" alt="Chicken Rice" class="img-fluid rounded custom-image">
                 <div class="flex-grow-1 w-100">
                     <form>
-                        <div class="mb-3 ">
-                            <label for="fullName" class="form-label custom-label ">Full Name</label>
-                            <input type="text" class="form-control custom-form" id="fullName" placeholder="Enter your name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="phoneNumber" class="form-label custom-label">Phone Number</label>
-                            <input type="tel" class="form-control custom-form" id="phoneNumber" placeholder="07XXXXXXXX" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="bookingDate" class="form-label custom-label ">Date</label>
-                            <input type="date" class="form-control custom-form" id="bookingDate" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="bookingTime" class="form-label custom-label">Time</label>
-                            <input type="time" class="form-control custom-form" id="bookingTime" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="guests" class="form-label custom-label">Number of Guests</label>
-                            <input type="number" class="form-control custom-form" id="guests" placeholder="e.g. 2" required min="1">
-                        </div>
-                        <button type="submit" class="btn btn-primary custom-button">Submit booking</button>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="fullName" class="form-label custom-label ">Full Name</label>
+                                <input type="text" class="form-control custom-form" id="fullName" placeholder="Enter your name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="phoneNumber" class="form-label custom-label">Phone Number</label>
+                                <input type="tel" class="form-control custom-form" id="phoneNumber" placeholder="07XXXXXXXX" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="bookingDate" class="form-label custom-label ">Date</label>
+                                <input type="date" class="form-control custom-form" id="bookingDate" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="bookingTime" class="form-label custom-label">Time</label>
+                                <input type="time" class="form-control custom-form" id="bookingTime" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="guests" class="form-label custom-label">Number of Guests</label>
+                                <input type="number" class="form-control custom-form" id="guests" placeholder="e.g. 2" required min="1">
+                            </div>
+                           </div>
+                        <button type="submit" class="btn btn-success">Book Event</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="bookingModel2" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered"> <!-- XL for extra width -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="eventModalLabel">Event Booking</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex flex-column flex-md-row gap-4 align-items-start">
+                <!-- Enlarged Image -->
+                <img src="Assets/images/decorated-wedding-hall-with-candles-round-tables-centerpieces.jpg" alt="Event" class="img-fluid rounded custom-image">
+
+                <!-- Two-column Form -->
+                <div class="flex-grow-1 w-100">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="eventName" class="form-label">Full Name</label>
+                                <input type="text" class="form-control custom-form" id="eventName" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="eventPhone" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control custom-form" id="eventPhone" placeholder="07XXXXXXXX" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="eventType" class="form-label">Event Type</label>
+                                <select class="form-select custom-form" id="eventType" required>
+                                    <option value="">Select event type</option>
+                                    <option>Birthday</option>
+                                    <option>Official</option>
+                                    <option>Corporate</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="eventDate" class="form-label">Event Date</label>
+                                <input type="date" class="form-control custom-form" id="eventDate" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="eventTime" class="form-label">Start Time</label>
+                                <input type="time" class="form-control custom-form" id="eventTime" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="guestCount" class="form-label">Number of Guests</label>
+                                <input type="number" class="form-control custom-form" id="guestCount" placeholder="e.g. 50" required min="1">
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="eventNotes" class="form-label">Special Requests</label>
+                                <textarea class="form-control custom-form" id="eventNotes" rows="3" placeholder="Add any notes..."></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success">Book Event</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="buffetModal" tabindex="-1" aria-labelledby="buffetModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="buffetModalLabel">Buffet Booking</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex flex-column flex-md-row gap-4 align-items-start">
+                <!-- Buffet Image -->
+                <img src="Assets/images/people-ramadan-celebration.jpg" alt="Buffet" class="img-fluid rounded" style="width: 380px; max-width: 100%;">
+
+                <!-- Buffet Booking Form -->
+                <div class="flex-grow-1 w-100">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="buffetName" class="form-label">Full Name</label>
+                                <input type="text" class="form-control custom-form" id="buffetName" placeholder="Enter your name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="buffetPhone" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control custom-form" id="buffetPhone" placeholder="07XXXXXXXX" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="buffetDate" class="form-label">Date</label>
+                                <input type="date" class="form-control custom-form" id="buffetDate" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="buffetTime" class="form-label">Time</label>
+                                <input type="time" class="form-control custom-form" id="buffetTime" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="buffetType" class="form-label">Buffet Type</label>
+                                <select class="form-select custom-form" id="buffetType" required>
+                                    <option value="">Select type</option>
+                                    <option>Breakfast</option>
+                                    <option>Lunch</option>
+                                    <option>Dinner</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="buffetGuests" class="form-label">Number of Guests</label>
+                                <input type="number" class="form-control custom-form" id="buffetGuests" placeholder="e.g. 4" min="1" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="buffetNotes" class="form-label">Special Requests</label>
+                                <textarea class="form-control custom-form" id="buffetNotes" rows="3" placeholder="Add any special requests..."></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Book Buffet</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 
 <footer class="text-white text-center text-lg-start" style="background:linear-gradient(#0b2231, #1c4e6f,#b4642f);">
@@ -154,9 +278,6 @@
                     Experience the harmony of flavor and wellness. We blend luxury dining with total relaxation in one place.
                 </p>
             </div>
-
-            <!-- Links Column -->
-
 
             <!-- Contact Column -->
             <div class="col-lg-4 mb-4">
