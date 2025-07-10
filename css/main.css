@@ -34,6 +34,10 @@
     transition-duration: 0.4s;
 }
 
+#home p{
+    font-size: 1.25rem;
+}
+
 #home a:hover{
     transform: scale(1.1);
     border: 2px solid black;
@@ -112,4 +116,22 @@
 
 .custom-btn:hover{
     transform: scale(1.05);
+}
+
+@media all and (min-width: 300px) and (max-width: 430px) {
+    #home h1{
+        font-size: 25px;
+        max-width: 1000px;
+    }
+    #home p{
+        font-size: 15px;
+
+    }
+
+    #home a{
+        font-size: 16px;
+        width: 250px;
+        height:auto;
+    }
+
 }
