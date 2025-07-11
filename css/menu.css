@@ -18,6 +18,7 @@
 
 .custom-navbar{
     background: #d35400;
+    display: flex;
 }
 
 .show-all{
@@ -56,7 +57,7 @@
     transform: scale(1.1);
 }
 
-#comment-btn{
+.comment-btn{
     text-align: center;
     border: 2px solid #d35400;
     background-color: #e67e22;
@@ -66,7 +67,7 @@
 
 }
 
-#comment-btn:hover{
+.comment-btn:hover{
     background: linear-gradient(#d35400, #FFD43B , #ffd6ad);
     color: black;
 }
