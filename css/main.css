@@ -44,6 +44,12 @@
     background-color: #d35400;
 }
 
+#home h1{
+    font-family: "Oleo Script", system-ui;
+    font-weight: 700;
+    font-style: normal;
+}
+
 #menu-btn{
     border-radius: 30px 30px 30px 30px;
 }

@@ -23,17 +23,30 @@
 
 .show-all{
     transition-duration: 800ms;
+    font-family: "Oleo Script", system-ui;
+    font-weight: 700;
+    font-style: normal;
 }
 
 .show-breakfast{
     transition-duration: 800ms;
+    font-family: "Oleo Script", system-ui;
+    font-weight: 700;
+    font-style: normal;
+
 }
 .lunch{
     transition-duration: 800ms;
+    font-family: "Oleo Script", system-ui;
+    font-weight: 700;
+    font-style: normal;
 }
 
 .dinner{
     transition-duration: 800ms;
+    font-family: "Oleo Script", system-ui;
+    font-weight: 700;
+    font-style: normal;
 }
 
 .show-all:hover{
