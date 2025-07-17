@@ -12,37 +12,74 @@
 </head>
 <body style="position: relative">
 
-<nav class="navbar navbar-expand-lg custom-navbar">
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #f4511e;">
     <div class="container-fluid">
-        <a class="navbar-brand fw-bold text-orange" href="#">
-            <i class="fas fa-utensils me-2"></i>Golden Spoon Restaurant
+        <a class="navbar-brand text-white fw-bold" href="#">
+            <i class="fas fa-utensils me-2"></i>
+            Golden Spoon
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
+
+        <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.html" style="font-size: 20px">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="booking.html" style="font-size: 20px">Bookings</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" style="font-size: 20px" >Contact</a>
-                </li>
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-3">
+                <li class="nav-item"><a class="nav-link text-white" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#">booking</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#">contact</a></li>
             </ul>
 
-            <form class="d-flex" role="search" style="min-width: 450px;">
-                <input class="form-control me-2" type="search" placeholder="Search Menus" aria-label="Search" style="border: 2px solid black;">
-                <button class="btn" type="submit" style="background-color: #d35400; border: 2px solid black">Search</button>
+            <form class="d-flex me-3 w-50 position-relative" id="search-form">
+                <input class="form-control me-2" type="search" placeholder="Search in Foods" id="search-input" autocomplete="off">
+                <button class="btn btn-light" type="submit"><i class="fas fa-search"></i></button>
+                <div id="search-suggestions" class="list-group position-absolute w-100" style="z-index: 2000; top: 100%; left: 0; display: none;"></div>
             </form>
+
+            <div class="d-flex align-items-center">
+                <a href="#" class="text-white fs-5 me-3"><i class="fas fa-heart"></i></a>
+                <a href="#" class="text-white fs-5 position-relative" data-bs-toggle="modal" data-bs-target="#cartModal"><i class="fas fa-shopping-cart"></i><span id="cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:0.7em;">0</span></a>
+            </div>
         </div>
     </div>
 </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold" id="cartModalLabel">Your Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="text-end fw-bold fs-6">
+                    Total: <span class="text-primary"></span>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary rounded-pill px-4">Close</button>
+                <button type="button" class="btn btn-warning text-white fw-bold rounded-pill px-4">Checkout</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <section id="menu" class="py-4" style="height: auto; position: relative ">
 
@@ -66,8 +103,6 @@
                     <i class="fas fa-utensils me-2" style="color: #e67e22;"></i>
                     <span class="fw-bold">Lovely <br>Dinner</span>
                 </div>
-
-
             </div>
         </div>
 
