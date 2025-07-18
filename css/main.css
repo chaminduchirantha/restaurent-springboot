@@ -1,16 +1,4 @@
-.navbar-custom {
-    background-color: #d35400;
-    position: fixed;
-    z-index: 1000 ;
-    width: 100%;/* dark orange */
-}
-.navbar-custom .nav-link,
-.navbar-custom .navbar-brand {
-    color: white;
-}
-.navbar-custom .nav-link:hover {
-    color: #ffd6ad; /* lighter orange */
-}
+
 
 #home{
     width: 100vw;
@@ -26,6 +14,13 @@
     color: white;
     text-align: center;
 }
+
+.navbar-nav .nav-link {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
 
 #home a{
     color: white;

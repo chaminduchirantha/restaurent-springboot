@@ -16,9 +16,8 @@
     object-fit: cover;
 }
 
-.custom-navbar{
-    background: #d35400;
-    display: flex;
+#navbarContent ul li{
+    font-size: 18px;
 }
 
 .show-all{
