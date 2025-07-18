@@ -16,42 +16,36 @@
 
 </head>
 <body style="overflow-x: hidden;">
-<nav class="navbar navbar-expand-lg navbar-custom">
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #f4511e;">
     <div class="container-fluid">
-        <a class="navbar-brand fw-bold text-orange" href="#">
+        <a class="navbar-brand text-dark fw-bold" href="#">
             <i class="fas fa-utensils me-2"></i>
             Golden Spoon
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon bg-light rounded"></span>
+        <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto me-3">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#about">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#services">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="menu-button" href="menu.html">Our Menu</a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link " href="booking.html">Booking</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact Us</a>
-                </li>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav mx-auto text-center">
+                <li class="nav-item"><a class="nav-link text-dark" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#about">About Us</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#services">Services</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="menu.html">Our Menu</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="booking.html">Our Bookings</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#contact">Contact Us</a></li>
             </ul>
-            <a href="signUpPage.html"><button class="btn btn-login" id="logOutButton" style="background-color: #e67e22">Sign Up</button></a>
+
+            <div class="d-flex">
+                <a href="signUpPage.html">
+                    <button class="btn btn-login" style="background-color: #e67e22; color: white;">Sign Up</button>
+                </a>
+            </div>
         </div>
     </div>
 </nav>
+
 
 <section id="home" style="position: relative; height: 100vh; overflow: hidden;">
 
@@ -206,57 +200,57 @@
     </div>
 </section>
 
-<!--<section id="contact" class="py-5" style="background-color: #fff3e0; height: auto">-->
-<!--    <div class="container">-->
-<!--        <h2 class="text-center text-dark mb-5">Contact Us</h2>-->
-<!--        <div class="row justify-content-center">-->
+<section id="contact" class="py-5" style="background-color: #fff3e0; height: auto">
+    <div class="container">
+        <h2 class="text-center text-dark mb-5">Contact Us</h2>
+        <div class="row justify-content-center">
 
-<!--            &lt;!&ndash; Contact Info &ndash;&gt;-->
-<!--            <div class="col-md-5 mb-4">-->
-<!--                <div class="bg-white p-4 rounded shadow-sm"  style="height: 450px">-->
-<!--                    <h5 class="text-dark">Get In Touch</h5>-->
-<!--                    <p style="color: #5a3e1b;">-->
-<!--                        We’d love to hear from you! Whether you're making a reservation, planning an event, or just have a question — reach out to us below.-->
-<!--                    </p>-->
-<!--                    <ul class="list-unstyled">-->
-<!--                        <li class="mb-2"><strong>Phone:</strong> <a href="tel:+0773352204" style="color: #d35400;">0773352204</a></li>-->
-<!--                        <li class="mb-2"><strong>Email:</strong> <a href="mailto:chaminduchirantha73@gmail.com" style="color: #d35400;">chaminduchirantha73@gmail.com</a></li>-->
-<!--                        <li class="mb-2"><strong>Address:</strong> No 73/1 A Horana Road Gonapala</li>-->
-<!--                    </ul>-->
+            <!-- Contact Info -->
+            <div class="col-md-5 mb-4">
+                <div class="bg-white p-4 rounded shadow-sm"  style="height: 450px">
+                    <h5 class="text-dark">Get In Touch</h5>
+                    <p style="color: #5a3e1b;">
+                        We’d love to hear from you! Whether you're making a reservation, planning an event, or just have a question — reach out to us below.
+                    </p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><strong>Phone:</strong> <a href="tel:+0773352204" style="color: #d35400;">0773352204</a></li>
+                        <li class="mb-2"><strong>Email:</strong> <a href="mailto:chaminduchirantha73@gmail.com" style="color: #d35400;">chaminduchirantha73@gmail.com</a></li>
+                        <li class="mb-2"><strong>Address:</strong> No 73/1 A Horana Road Gonapala</li>
+                    </ul>
 
-<!--                    &lt;!&ndash; Social Media Links &ndash;&gt;-->
-<!--                    <div class="mt-4">-->
-<!--                        <h6 class="text-dark">Follow Us</h6>-->
-<!--                        <a href="https://facebook.com" target="_blank" style="color: black; font-size: 30px; margin-right: 20px;"><i class="fa-brands fa-facebook-f"></i></a>-->
-<!--                        <a href="https://linkedin.com" target="_blank" style="color: black; font-size: 30px; margin-right: 20px;"><i class="fa-brands fa-linkedin-in"></i></a>-->
-<!--                        <a href="https://twitter.com" target="_blank" style="color: black; font-size: 30px" ><i class="fa-brands fa-twitter"></i></a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+                    <!-- Social Media Links -->
+                    <div class="mt-4">
+                        <h6 class="text-dark">Follow Us</h6>
+                        <a href="https://facebook.com" target="_blank" style="color: black; font-size: 30px; margin-right: 20px;"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://linkedin.com" target="_blank" style="color: black; font-size: 30px; margin-right: 20px;"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://twitter.com" target="_blank" style="color: black; font-size: 30px" ><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
 
-<!--            &lt;!&ndash; Contact Form &ndash;&gt;-->
-<!--            <div class="col-md-7">-->
-<!--                <div class="bg-white p-4 rounded shadow-sm "style="height: 450px">-->
-<!--                    <form>-->
-<!--                        <div class="mb-3">-->
-<!--                            <label for="name" class="form-label text-dark">Your Name</label>-->
-<!--                            <input type="text" class="form-control" id="name" placeholder="Enter your name">-->
-<!--                        </div>-->
-<!--                        <div class="mb-3">-->
-<!--                            <label for="email" class="form-label text-dark">Email Address</label>-->
-<!--                            <input type="email" class="form-control" id="email" placeholder="Enter your email">-->
-<!--                        </div>-->
-<!--                        <div class="mb-3">-->
-<!--                            <label for="message" class="form-label text-dark">Message</label>-->
-<!--                            <textarea class="form-control" id="message" rows="4" placeholder="Your message"></textarea>-->
-<!--                        </div>-->
-<!--                        <button type="submit" class="btn" style="background-color: #d35400; color: white;">Send Message</button>-->
-<!--                    </form>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
+            <!-- Contact Form -->
+            <div class="col-md-7">
+                <div class="bg-white p-4 rounded shadow-sm "style="height: 450px">
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label text-dark">Your Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label text-dark">Email Address</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label text-dark">Message</label>
+                            <textarea class="form-control" id="message" rows="4" placeholder="Your message"></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="background-color: #d35400; color: white;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 <footer class="text-white text-center text-lg-start" style="background:linear-gradient(#0b2231, #1c4e6f,#b4642f);">
