@@ -7,54 +7,106 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="Assets/lib/fontawasome/fontawesome-free-6.7.2-web/css/all.css">
     <link rel="stylesheet" href="Assets/lib/normalize.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oleo+Script:wght@400;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
 
     <style>
 
         body {
-            background: url('Assets/images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg') no-repeat center center fixed;
-            background-size: cover;
             margin: 0;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Poppins', sans-serif;
             height: 100vh;
+            background: url('Assets/images/drinks-glasses-new-year-eve-celebration.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
-            overflow: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: -2;
         }
 
         .auth-container {
             position: relative;
             z-index: 1;
-            background: rgba(245, 222, 179, 0.62); /* White with 85% opacity */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
             padding: 2rem;
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            max-width: 420px;
             width: 100%;
-            max-width: 400px;
-            backdrop-filter: blur(5px); /* Optional: subtle blur behind */
+            color: #fff; /* Optional: subtle blur behind */
         }
 
-        .btn-login{
-            background-color: #d35400;
-            color: white;
-            transition: background-color 0.3s ease;
+        .auth-container h3 {
+            font-family: "Oleo Script", system-ui;
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        .form-label {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 10px;
+            padding: 10px 15px;
+        }
+
+        .btn-login {
+            background-color: #e67e22;
+            border: none;
+            padding: 10px;
+            border-radius: 20px;
+            color: #fff;
+            font-weight: 600;
+            transition: all 0.3s ease-in-out;
         }
 
         .btn-login:hover {
-            background-color: #e67e22;
+            background-color: #ff922b;
+            transform: scale(1.05);
         }
 
-        .social-login a{
-            background-color: #d35400;
-            width: 43px;
-            height: auto;
-            border-radius: 50%;
-            color: black;
-            font-size: 28px;
-            text-align: center;
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-login a {
+            width: 45px;
+            height: 45px;
+            background-color: #e67e22;
+            color: white;
+            display: flex;
             justify-content: center;
             align-items: center;
+            border-radius: 50%;
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+
+        .social-login a:hover {
+            transform: scale(1.2);
+            background-color: #f4511e;
+        }
+
+        a {
+            color: #ffe0b2;
+            text-decoration: underline;
         }
 
 
@@ -63,7 +115,7 @@
 <body>
 <section class="auth-container">
     <div id="signupForm">
-        <h3 class="text-center mb-4 text-dark">Create an Account</h3>
+        <h3 class="text-center mb-4 ">Create an Account</h3>
         <form>
             <div class="mb-3">
                 <label for="signupName" class="form-label">Full Name</label>
