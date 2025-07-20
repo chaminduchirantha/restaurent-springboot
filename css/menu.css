@@ -16,8 +16,22 @@
     object-fit: cover;
 }
 
-#navbarContent ul li{
+.navbar-nav .nav-link {
     font-size: 18px;
+    /*font-weight: 600;*/
+}
+
+.navbar-nav .nav-link:hover {
+    color: white !important;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+#home a{
+    color: white;
+    background-color: #e67e22;
+    margin: 5px;
+    transition-duration: 0.4s;
 }
 
 .show-all{
