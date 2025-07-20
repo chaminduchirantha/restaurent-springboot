@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .sidebar {
+            height: 100vh;
+            background-color: #212529;
+            padding-top: 30px;
+            position: fixed;
+        }
+        .sidebar a {
+            color: #ffffff;
+            display: block;
+            padding: 15px 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .sidebar a:hover,
+        .sidebar a.active {
+            background-color: #fd7e14;
+            color: #fff;
+        }
+        .content {
+            margin-left: 16.67%; /* 2 columns out of 12 */
+            padding: 40px;
+        }
+        .dashboard-header {
+            padding-bottom: 20px;
+            border-bottom: 2px solid #dee2e6;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body style="overflow: hidden;">
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav class="col-2 sidebar">
+            <h4 class="text-center text-white mb-4">Dashboard</h4>
+            <a href="customer.html" target="mainContent">Customers</a>
+            <a href="menuAdminView.html" target="mainContent">Manage Menus</a>
+            <a href="order.html" target="mainContent">Manage Orders</a>
+            <a href="feedback.html" target="mainContent">Manage Feedback</a>
+            <a href="addtocart.html" target="mainContent">Add to Cart Table</a>
+            <a class="nav-link dropdown-toggle" href="" id="">Manage Bookings</a>
+            <ul aria-labelledby="navbarDropdown">
+                <li><a href="tableBookings.html" target="mainContent">Table Bookings</a></li>
+                <li><a href="funtionHallBookings.html" target="mainContent">Event/Function Hall Bookings</a></li>
+                <li><a href="buffetBookings.html" target="mainContent">Buffet Bookings</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="col-10 offset-2 content">
+            <div class="dashboard-header">
+                <h1 class="display-5 fw-bold text-dark">Welcome to Admin Dashboard</h1>
+                <p class="text-muted">Use the sidebar to manage your content.</p>
+            </div>
+
+            <iframe name="mainContent" src="customer.html" frameborder="0" style="width: 100%; height: 90vh;"></iframe>
+            <iframe name="mainContent" src="menuAdminView.html" frameborder="0" style="width: 100%; height: 90vh;"></iframe>
+
+        </main>
+    </div>
+</div>
+
+</body>
+</html>
