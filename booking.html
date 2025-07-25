@@ -42,7 +42,7 @@
                         <li><a class="dropdown-item custom-dropdown-item" href="#table">Table Booking</a></li>
                         <li><a class="dropdown-item custom-dropdown-item" href="#event">Function Booking</a></li>
 <!--                        <li><a class="dropdown-item custom-dropdown-item" href="#">Buffet Booking</a></li>-->
-                        <li><a class="dropdown-item custom-dropdown-item" href="#">Catering Service</a></li>
+                        <li><a class="dropdown-item custom-dropdown-item" href="#catering">Catering Service</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a class="nav-link text-dark" href="#contact"><i class="fa-solid fa-phone"></i> Contact Us</a></li>
@@ -338,62 +338,109 @@
     </div>
 </section>
 
-<div class="modal fade" id="buffetModal" tabindex="-1" aria-labelledby="buffetModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="buffetModalLabel">Buffet Booking</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body d-flex flex-column flex-md-row gap-4 align-items-start">
-                <!-- Buffet Image -->
-                <img src="Assets/images/people-ramadan-celebration.jpg" alt="Buffet" class="img-fluid rounded" style="width: 380px; max-width: 100%;">
+<!--<div class="modal fade" id="buffetModal" tabindex="-1" aria-labelledby="buffetModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog modal-xl modal-dialog-centered">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title fw-bold" id="buffetModalLabel">Buffet Booking</h5>-->
+<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--            </div>-->
+<!--            <div class="modal-body d-flex flex-column flex-md-row gap-4 align-items-start">-->
+<!--                &lt;!&ndash; Buffet Image &ndash;&gt;-->
+<!--                <img src="Assets/images/people-ramadan-celebration.jpg" alt="Buffet" class="img-fluid rounded" style="width: 380px; max-width: 100%;">-->
 
-                <!-- Buffet Booking Form -->
-                <div class="flex-grow-1 w-100">
-                    <form>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="buffetName" class="form-label">Full Name</label>
-                                <input type="text" class="form-control custom-form" id="buffetName" placeholder="Enter your name" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="buffetPhone" class="form-label">Phone Number</label>
-                                <input type="tel" class="form-control custom-form" id="buffetPhone" placeholder="07XXXXXXXX" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="buffetDate" class="form-label">Date</label>
-                                <input type="date" class="form-control custom-form" id="buffetDate" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="buffetTime" class="form-label">Time</label>
-                                <input type="time" class="form-control custom-form" id="buffetTime" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="buffetType" class="form-label">Buffet Type</label>
-                                <select class="form-select custom-form" id="buffetType" required>
-                                    <option value="">Select type</option>
-                                    <option>Breakfast</option>
-                                    <option>Lunch</option>
-                                    <option>Dinner</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="buffetGuests" class="form-label">Number of Guests</label>
-                                <input type="number" class="form-control custom-form" id="buffetGuests" placeholder="e.g. 4" min="1" required>
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label for="buffetNotes" class="form-label">Special Requests</label>
-                                <textarea class="form-control custom-form" id="buffetNotes" rows="3" placeholder="Add any special requests..."></textarea>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Book Buffet</button>
-                    </form>
+<!--                &lt;!&ndash; Buffet Booking Form &ndash;&gt;-->
+<!--                <div class="flex-grow-1 w-100">-->
+<!--                    <form>-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-6 mb-3">-->
+<!--                                <label for="buffetName" class="form-label">Full Name</label>-->
+<!--                                <input type="text" class="form-control custom-form" id="buffetName" placeholder="Enter your name" required>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6 mb-3">-->
+<!--                                <label for="buffetPhone" class="form-label">Phone Number</label>-->
+<!--                                <input type="tel" class="form-control custom-form" id="buffetPhone" placeholder="07XXXXXXXX" required>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6 mb-3">-->
+<!--                                <label for="buffetDate" class="form-label">Date</label>-->
+<!--                                <input type="date" class="form-control custom-form" id="buffetDate" required>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6 mb-3">-->
+<!--                                <label for="buffetTime" class="form-label">Time</label>-->
+<!--                                <input type="time" class="form-control custom-form" id="buffetTime" required>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6 mb-3">-->
+<!--                                <label for="buffetType" class="form-label">Buffet Type</label>-->
+<!--                                <select class="form-select custom-form" id="buffetType" required>-->
+<!--                                    <option value="">Select type</option>-->
+<!--                                    <option>Breakfast</option>-->
+<!--                                    <option>Lunch</option>-->
+<!--                                    <option>Dinner</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6 mb-3">-->
+<!--                                <label for="buffetGuests" class="form-label">Number of Guests</label>-->
+<!--                                <input type="number" class="form-control custom-form" id="buffetGuests" placeholder="e.g. 4" min="1" required>-->
+<!--                            </div>-->
+<!--                            <div class="col-12 mb-3">-->
+<!--                                <label for="buffetNotes" class="form-label">Special Requests</label>-->
+<!--                                <textarea class="form-control custom-form" id="buffetNotes" rows="3" placeholder="Add any special requests..."></textarea>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <button type="submit" class="btn btn-primary">Book Buffet</button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<hr>
+
+
+<section id="catering" class="position-relative bg-white py-5 px-3 px-lg-5 overflow-hidden">
+    <!-- Heading -->
+    <div class="container text-center mb-5">
+        <h2 class="fw-bold display-5 text-dark">Catering Reservation</h2>
+        <p class="lead text-muted mt-3">This test verifies that a user can successfully reserve a table by providing valid inputs such as name, phone number, number of guests, reservation date, and time. </p>
+    </div>
+
+
+    <!-- Form -->
+    <div class="container">
+        <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" style="max-width: 700px;" action="#" method="POST">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="first-name" class="form-label fw-semibold">First name</label>
+                    <input type="text" class="form-control" id="first-name" name="first-name" autocomplete="given-name">
+                </div>
+                <div class="col-md-6">
+                    <label for="last-name" class="form-label fw-semibold">Last name</label>
+                    <input type="text" class="form-control" id="last-name" name="last-name" autocomplete="family-name">
+                </div>
+                <div class="col-md-6">
+                    <label for="phoneNumber" class="form-label fw-semibold">phone number</label>
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" autocomplete="organization">
+                </div>
+                <div class="col-md-6">
+                    <label for="date" class="form-label fw-semibold">Date</label>
+                    <input type="date" class="form-control" id="date" name="date" autocomplete="organization">
+                </div>
+                <div class="col-md-6">
+                    <label for="time" class="form-label fw-semibold">Time</label>
+                    <input type="time" class="form-control" id="time" name="time" autocomplete="time">
+                </div>
+                <div class="col-md-6">
+                    <label for="guest" class="form-label fw-semibold">No of Guest</label>
+                    <input type="number" class="form-control" id="guest" name="guest" autocomplete="guest">
                 </div>
             </div>
-        </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-warning w-100 py-2">Book Now</button>
+            </div>
+        </form>
     </div>
-</div>
+</section>
 
 
 <section id="contact" class="py-5">
@@ -426,9 +473,6 @@
         </div>
     </div>
 </section>
-
-
-
 
 
 
