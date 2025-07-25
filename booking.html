@@ -40,7 +40,7 @@
                     </a>
                     <ul class="dropdown-menu shadow-lg rounded" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item custom-dropdown-item" href="#table">Table Booking</a></li>
-                        <li><a class="dropdown-item custom-dropdown-item" href="#">Function Booking</a></li>
+                        <li><a class="dropdown-item custom-dropdown-item" href="#event">Function Booking</a></li>
                         <li><a class="dropdown-item custom-dropdown-item" href="#">Buffet Booking</a></li>
                         <li><a class="dropdown-item custom-dropdown-item" href="#">Catering Service</a></li>
                     </ul>
@@ -206,7 +206,7 @@
     <!-- Heading -->
     <div class="container text-center mb-5">
         <h2 class="fw-bold display-5 text-dark">Table Reservation</h2>
-        <p class="lead text-muted mt-3">This test verifies that a user can successfully reserve a table by providing valid inputs such as name, phone number, number of guests, reservation date, and time. </p>
+        <p class="lead text-muted mt-3">This test verifies that a user can successfully reserve a spot for an event by providing valid details such as name, contact number, selected event, number of seats, date, and time. </p>
     </div>
 
     <hr>
@@ -248,63 +248,110 @@
 </section>
 
 
-<div class="modal fade" id="bookingModel2" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered"> <!-- XL for extra width -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="eventModalLabel">Event Booking</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body d-flex flex-column flex-md-row gap-4 align-items-start">
-                <!-- Enlarged Image -->
-                <img src="Assets/images/decorated-wedding-hall-with-candles-round-tables-centerpieces.jpg" alt="Event" class="img-fluid rounded custom-image">
+<!--<div class="modal fade" id="bookingModel2" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog modal-xl modal-dialog-centered"> &lt;!&ndash; XL for extra width &ndash;&gt;-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title fw-bold" id="eventModalLabel">Event Booking</h5>-->
+<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--            </div>-->
+<!--            <div class="modal-body d-flex flex-column flex-md-row gap-4 align-items-start">-->
+<!--                &lt;!&ndash; Enlarged Image &ndash;&gt;-->
+<!--                <img src="Assets/images/decorated-wedding-hall-with-candles-round-tables-centerpieces.jpg" alt="Event" class="img-fluid rounded custom-image">-->
 
-                <!-- Two-column Form -->
-                <div class="flex-grow-1 w-100">
-                    <form>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="eventName" class="form-label">Full Name</label>
-                                <input type="text" class="form-control custom-form" id="eventName" placeholder="Enter your full name" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="eventPhone" class="form-label">Phone Number</label>
-                                <input type="tel" class="form-control custom-form" id="eventPhone" placeholder="07XXXXXXXX" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="eventType" class="form-label">Event Type</label>
-                                <select class="form-select custom-form" id="eventType" required>
-                                    <option value="">Select event type</option>
-                                    <option>Birthday</option>
-                                    <option>Official</option>
-                                    <option>Corporate</option>
-                                    <option>Other</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="eventDate" class="form-label">Event Date</label>
-                                <input type="date" class="form-control custom-form" id="eventDate" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="eventTime" class="form-label">Start Time</label>
-                                <input type="time" class="form-control custom-form" id="eventTime" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="guestCount" class="form-label">Number of Guests</label>
-                                <input type="number" class="form-control custom-form" id="guestCount" placeholder="e.g. 50" required min="1">
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label for="eventNotes" class="form-label">Special Requests</label>
-                                <textarea class="form-control custom-form" id="eventNotes" rows="3" placeholder="Add any notes..."></textarea>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-success">Book Event</button>
-                    </form>
+<!--                &lt;!&ndash; Two-column Form &ndash;&gt;-->
+<!--                <div class="flex-grow-1 w-100">-->
+<!--                    <form>-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-6 mb-3">-->
+<!--                                <label for="eventName" class="form-label">Full Name</label>-->
+<!--                                <input type="text" class="form-control custom-form" id="eventName" placeholder="Enter your full name" required>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6 mb-3">-->
+<!--                                <label for="eventPhone" class="form-label">Phone Number</label>-->
+<!--                                <input type="tel" class="form-control custom-form" id="eventPhone" placeholder="07XXXXXXXX" required>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6 mb-3">-->
+<!--                                <label for="eventType" class="form-label">Event Type</label>-->
+<!--                                <select class="form-select custom-form" id="eventType" required>-->
+<!--                                    <option value="">Select event type</option>-->
+<!--                                    <option>Birthday</option>-->
+<!--                                    <option>Official</option>-->
+<!--                                    <option>Corporate</option>-->
+<!--                                    <option>Other</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6 mb-3">-->
+<!--                                <label for="eventDate" class="form-label">Event Date</label>-->
+<!--                                <input type="date" class="form-control custom-form" id="eventDate" required>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6 mb-3">-->
+<!--                                <label for="eventTime" class="form-label">Start Time</label>-->
+<!--                                <input type="time" class="form-control custom-form" id="eventTime" required>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6 mb-3">-->
+<!--                                <label for="guestCount" class="form-label">Number of Guests</label>-->
+<!--                                <input type="number" class="form-control custom-form" id="guestCount" placeholder="e.g. 50" required min="1">-->
+<!--                            </div>-->
+<!--                            <div class="col-12 mb-3">-->
+<!--                                <label for="eventNotes" class="form-label">Special Requests</label>-->
+<!--                                <textarea class="form-control custom-form" id="eventNotes" rows="3" placeholder="Add any notes..."></textarea>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <button type="submit" class="btn btn-success">Book Event</button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<hr>
+
+<section id="event" class="position-relative bg-white py-5 px-3 px-lg-5 overflow-hidden">
+    <!-- Heading -->
+    <div class="container text-center mb-5">
+        <h2 class="fw-bold display-5 text-dark">Event Reservation</h2>
+        <p class="lead text-muted mt-3">This test verifies that a user can successfully reserve a table by providing valid inputs such as name, phone number, number of guests, reservation date, and time. </p>
+    </div>
+
+
+    <!-- Form -->
+    <div class="container">
+        <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" style="max-width: 700px;" action="#" method="POST">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="first-name" class="form-label fw-semibold">First name</label>
+                    <input type="text" class="form-control" id="first-name" name="first-name" autocomplete="given-name">
+                </div>
+                <div class="col-md-6">
+                    <label for="last-name" class="form-label fw-semibold">Last name</label>
+                    <input type="text" class="form-control" id="last-name" name="last-name" autocomplete="family-name">
+                </div>
+                <div class="col-md-6">
+                    <label for="phoneNumber" class="form-label fw-semibold">phone number</label>
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" autocomplete="organization">
+                </div>
+                <div class="col-md-6">
+                    <label for="date" class="form-label fw-semibold">Date</label>
+                    <input type="date" class="form-control" id="date" name="date" autocomplete="organization">
+                </div>
+                <div class="col-md-6">
+                    <label for="time" class="form-label fw-semibold">Time</label>
+                    <input type="time" class="form-control" id="time" name="time" autocomplete="time">
+                </div>
+                <div class="col-md-6">
+                    <label for="guest" class="form-label fw-semibold">No of Guest</label>
+                    <input type="number" class="form-control" id="guest" name="guest" autocomplete="guest">
                 </div>
             </div>
-        </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-warning w-100 py-2">Book Now</button>
+            </div>
+        </form>
     </div>
-</div>
+</section>
 
 <div class="modal fade" id="buffetModal" tabindex="-1" aria-labelledby="buffetModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
