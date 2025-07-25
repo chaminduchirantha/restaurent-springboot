@@ -32,7 +32,19 @@
             <ul class="navbar-nav mx-auto text-center">
                 <li class="nav-item"><a class="nav-link text-dark" href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
                 <li class="nav-item"><a class="nav-link text-dark" href="menu.html"><i class="fa-solid fa-burger"></i> Our Menu</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="booking.html"><i class="fa-solid fa-bookmark"></i> Our Bookings</a></li>
+                <!-- Navigation Item: Bookings Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-dark  px-3" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false" href="booking.html">
+                        <i class="fa-solid fa-bookmark me-2"></i>Our Bookings
+                    </a>
+                    <ul class="dropdown-menu shadow-lg rounded" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item custom-dropdown-item" href="#">Table Booking</a></li>
+                        <li><a class="dropdown-item custom-dropdown-item" href="#">Function Booking</a></li>
+                        <li><a class="dropdown-item custom-dropdown-item" href="#">Buffet Booking</a></li>
+                        <li><a class="dropdown-item custom-dropdown-item" href="#">Catering Service</a></li>
+                    </ul>
+                </li>
                 <li class="nav-item"><a class="nav-link text-dark" href="#contact"><i class="fa-solid fa-phone"></i> Contact Us</a></li>
             </ul>
 
@@ -73,7 +85,7 @@
     <div class="container">
         <h2 class="text-center mb-5 text-dark" style="font-size: 40px">Our Bookings</h2>
         <div class="row g-4">
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-3">
                 <div class="card h-100 border-0 shadow-sm custom-card">
                     <img src="Assets/images/table-arrangement-luxury-restaurant.jpg" class="card-img-top" alt="Live Cooking">
                     <div class="card-body">
@@ -89,7 +101,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-3">
                 <div class="card h-100 border-0 shadow-sm custom-card">
                     <img src="Assets/images/decorated-wedding-hall-with-candles-round-tables-centerpieces.jpg" class="card-img-top" alt="Live Cooking">
                     <div class="card-body">
@@ -105,7 +117,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-3">
                 <div class="card h-100 border-0 shadow-sm custom-card">
                     <img src="Assets/images/closed-metal-pots.jpg" class="card-img-top" alt="Live Cooking">
                     <div class="card-body">
@@ -117,6 +129,22 @@
 
                     <div class="card-footer d-flex justify-content-between align-items-center bg-white py-2">
                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#buffetModal">submit booking </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm custom-card">
+                    <img src="Assets/images/img_13.png" class="card-img-top" alt="Live Cooking" style="height: 205px;">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark">Catering Services</h5>
+                        <p class="card-text" style="color: #5a3e1b;">
+                            Reservation & Booking Services let customers book tables or events in advance via phone, website, or app for a smooth dining experience.
+                        </p>
+                    </div>
+
+                    <div class="card-footer d-flex justify-content-between align-items-center bg-white py-2">
+                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#bookingModel1">submit booking </button>
                     </div>
                 </div>
             </div>
@@ -346,7 +374,7 @@
 
         <hr class="my-4 border-light">
 
-        <div class="text-center"style="font-size: 18px;">
+        <div class="text-center" style="font-size: 18px;">
             &copy; 2025 Saffron Serenity. Designed with by chamindu chirantha
         </div>
     </div>
@@ -356,6 +384,5 @@
     AOS.init();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>
