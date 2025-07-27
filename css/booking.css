@@ -12,6 +12,21 @@ body{
     font-size: 18px;
     /*font-weight: 600;*/
 }
+/* Stylish Dropdown Item Hover Effect */
+.custom-dropdown-item {
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+
+.custom-dropdown-item:hover {
+    background-color: #ffedd5;
+    color: #d35400;
+    font-weight: 600;
+    padding-left: 18px;
+    border-left: 3px solid #d35400;
+}
+
 
 .navbar-nav .nav-link:hover {
     color: white !important;
@@ -19,11 +34,12 @@ body{
     padding: 5px 10px;
 }
 
-#home a{
+#booking a{
     color: white;
     background-color: #e67e22;
     margin: 5px;
     transition-duration: 0.4s;
+    font-size: 16px;
 }
 
 #booking{
@@ -57,28 +73,26 @@ body{
     font-size: 18px;
 }
 
-#booking a{
-    font-size: 18px;
-    color: white;
-    background-color: #e67e22;
-    margin: 5px;
-    transition-duration: 0.4s;
-}
-
-#booking a:hover{
-    transform: scale(1.1);
-    background-color: #d35400;
-}
-
 #booking-btn{
-    border-radius:0 30px 30px 0;
-    font-size: 20px;
+    border-radius: 30px 0px 0px 30px;
+    transition-duration: 800ms;
 }
 
+#booking-btn:hover{
+    background-color: #d35400;
+    transform: translateY(-10px);
+    border: 2px solid #e67e22;
+}
 #menu-btn{
-    border-radius:30px 0 0 30px;
+    border-radius: 0px  30px 30px 0px;
 
 }
+#menu-btn:hover{
+    background-color: #d35400;
+    transform: translateY(-10px);
+    border: 2px solid #e67e22;
+}
+
 
 
 #navbarContent ul li {
@@ -92,8 +106,19 @@ body{
 }
 
 .custom-form{
-    border: 2px solid #d35400;
-    border-radius: 15px;
+    border-top:2px solid white ;
+    border-left:2px solid white ;
+    border-right:2px solid white ;
+    border-bottom: 2px solid #d35400;
+    border-radius: 5px;
+}
+
+hr{
+    color: white;
+}
+
+.custom-form:focus{
+    outline: none;
 }
 
 .custom-label{
