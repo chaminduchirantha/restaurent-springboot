@@ -193,28 +193,38 @@
         <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" style="max-width: 700px;" action="#" method="POST">
             <div class="row g-3">
                 <div class="col-md-6">
-                    <label for="first-name" class="form-label fw-semibold">First name</label>
-                    <input type="text" class="form-control" id="first-name" name="first-name" autocomplete="given-name">
+                    <label for="eventName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control custom-form" id="eventName" placeholder="Enter your full name" required>
                 </div>
                 <div class="col-md-6">
-                    <label for="last-name" class="form-label fw-semibold">Last name</label>
-                    <input type="text" class="form-control" id="last-name" name="last-name" autocomplete="family-name">
+                    <label for="eventPhone" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control custom-form" id="eventPhone" placeholder="07XXXXXXXX" required>
                 </div>
                 <div class="col-md-6">
-                    <label for="phoneNumber" class="form-label fw-semibold">phone number</label>
-                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" autocomplete="organization">
+                    <label for="eventType" class="form-label">Event Type</label>
+                    <select class="form-select custom-form" id="eventType" required>
+                        <option value="">Select event type</option>
+                        <option>Birthday</option>
+                        <option>Official</option>
+                        <option>Corporate</option>
+                        <option>Other</option>
+                    </select>
                 </div>
                 <div class="col-md-6">
-                    <label for="date" class="form-label fw-semibold">Date</label>
-                    <input type="date" class="form-control" id="date" name="date" autocomplete="organization">
+                    <label for="eventDate" class="form-label">Event Date</label>
+                    <input type="date" class="form-control custom-form" id="eventDate" required>
                 </div>
                 <div class="col-md-6">
-                    <label for="time" class="form-label fw-semibold">Time</label>
-                    <input type="time" class="form-control" id="time" name="time" autocomplete="time">
+                    <label for="eventTime" class="form-label">Start Time</label>
+                    <input type="time" class="form-control custom-form" id="eventTime" required>
                 </div>
                 <div class="col-md-6">
-                    <label for="guest" class="form-label fw-semibold">No of Guest</label>
-                    <input type="number" class="form-control" id="guest" name="guest" autocomplete="guest">
+                    <label for="guestCount" class="form-label">Number of Guests</label>
+                    <input type="number" class="form-control custom-form" id="guestCount" placeholder="e.g. 50" required min="1">
+                </div>
+                <div class="col-12 mb-3">
+                    <label for="eventNotes" class="form-label">Special Requests</label>
+                    <textarea class="form-control custom-form" id="eventNotes" rows="3" placeholder="Add any notes..."></textarea>
                 </div>
             </div>
 
@@ -240,29 +250,39 @@
     <div class="container">
         <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" style="max-width: 700px;" action="#" method="POST">
             <div class="row g-3">
-                <div class="col-md-6">
-                    <label for="first-name" class="form-label fw-semibold">First name</label>
-                    <input type="text" class="form-control" id="first-name" name="first-name" autocomplete="given-name">
+                <div class="col-md-6 mb-3">
+                    <label for="cateringName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control custom-form" id="cateringName" placeholder="Enter your name" required>
                 </div>
-                <div class="col-md-6">
-                    <label for="last-name" class="form-label fw-semibold">Last name</label>
-                    <input type="text" class="form-control" id="last-name" name="last-name" autocomplete="family-name">
+                <div class="col-md-6 mb-3">
+                    <label for="cateringPhone" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control custom-form" id="cateringPhone" placeholder="07XXXXXXXX" required>
                 </div>
-                <div class="col-md-6">
-                    <label for="phoneNumber" class="form-label fw-semibold">phone number</label>
-                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" autocomplete="organization">
+                <div class="col-md-6 mb-3">
+                    <label for="cateringDate" class="form-label">Date</label>
+                    <input type="date" class="form-control custom-form" id="cateringDate" required>
                 </div>
-                <div class="col-md-6">
-                    <label for="date" class="form-label fw-semibold">Date</label>
-                    <input type="date" class="form-control" id="date" name="date" autocomplete="organization">
+                <div class="col-md-6 mb-3">
+                    <label for="cateringTime" class="form-label">Time</label>
+                    <input type="time" class="form-control custom-form" id="cateringTime" required>
                 </div>
-                <div class="col-md-6">
-                    <label for="time" class="form-label fw-semibold">Time</label>
-                    <input type="time" class="form-control" id="time" name="time" autocomplete="time">
+                <div class="col-md-6 mb-3">
+                    <label for="cateringType" class="form-label">Catering Type</label>
+                    <select class="form-select custom-form" id="cateringType" required>
+                        <option value="">Select type</option>
+                        <option>Function Caterings</option>
+                        <option>Buffet Caterings</option>
+                        <option>Industrial Caterings</option>
+                        <option>Corporate Caterings</option>
+                    </select>
                 </div>
-                <div class="col-md-6">
-                    <label for="guest" class="form-label fw-semibold">No of Guest</label>
-                    <input type="number" class="form-control" id="guest" name="guest" autocomplete="guest">
+                <div class="col-md-6 mb-3">
+                    <label for="buffetGuests" class="form-label">Number of Guests</label>
+                    <input type="number" class="form-control custom-form" id="buffetGuests" placeholder="e.g. 4" min="1" required>
+                </div>
+                <div class="col-12 mb-3">
+                    <label for="buffetNotes" class="form-label">Special Requests</label>
+                    <textarea class="form-control custom-form" id="buffetNotes" rows="3" placeholder="Add any special requests..."></textarea>
                 </div>
             </div>
 
