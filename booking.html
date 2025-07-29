@@ -15,9 +15,9 @@
 
 
 </head>
-<body style="overflow: hidden">
+<body style="overflow-x: hidden">
 
-<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #f4511e;">
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: rgba(244,81,30,0.87);">
     <div class="container-fluid ">
         <a class="navbar-brand text-dark fw-bold" href="index.html">
             <i class="fas fa-utensils me-2"></i>
@@ -47,7 +47,7 @@
         </div>
     </div>
 </nav>
-<section id="booking" style="position: relative; height: 110vh;">
+<section id="booking" style="position: relative; height: 100vh;">
     <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
@@ -62,9 +62,9 @@
                 <img src="Assets/images/restaurant-hall-with-lots-table.jpg" class="d-block w-100 h-100 object-fit-cover" alt="...">
                 <div class="overlay position-absolute top-0 start-0 w-100 h-100"></div>
                 <div class="carousel-caption d-flex flex-column justify-content-center align-items-center text-center h-100">
-                    <h1 class="display-4 text-white">Welcome to Our </h1>
-                    <h1 class="display-4 text-white">Golden Spoon Restaurant</h1>
-                    <p class="lead text-white">Enjoy an unforgettable dining experience.</p>
+                    <h1 class="display-4 ">Welcome to Our </h1>
+                    <h1 class="display-4 ">Golden Spoon Restaurant</h1>
+                    <p class="lead">Enjoy an unforgettable dining experience.</p>
                 </div>
             </div>
 
@@ -73,8 +73,8 @@
                 <img src="Assets/images/decorated-wedding-hall-with-candles-round-tables-centerpieces.jpg" class="d-block w-100 h-100 object-fit-cover" alt="...">
                 <div class="overlay position-absolute top-0 start-0 w-100 h-100"></div>
                 <div class="carousel-caption d-flex flex-column justify-content-center align-items-center text-center h-100">
-                    <h1 class="display-4 text-white">Perfect for Your Special Day</h1>
-                    <p class="lead text-white">Elegant settings and premium service.</p>
+                    <h1 class="display-4">Perfect for Your Special Day</h1>
+                    <p class="lead">Elegant settings and premium service.</p>
                 </div>
             </div>
 
@@ -83,8 +83,8 @@
                 <img src="Assets/images/closed-metal-pots.jpg" class="d-block w-100 h-100 object-fit-cover" alt="...">
                 <div class="overlay position-absolute top-0 start-0 w-100 h-100"></div>
                 <div class="carousel-caption d-flex flex-column justify-content-center align-items-center text-center h-100">
-                    <h1 class="display-4 text-white">Book Your Event Today</h1>
-                    <p class="lead text-white">Reserve your spot now for unforgettable memories.</p>
+                    <h1 class="display-4">Book Your Event Today</h1>
+                    <p class="lead">Reserve your spot now for unforgettable memories.</p>
                 </div>
             </div>
         </div>
@@ -407,7 +407,7 @@
         $('#table-container').css('display', 'none');
         $('#event-container').css('display', 'none');
         $('#catering-container').css('display', 'none');
-        $('#footer-container').css('display', 'none');
+        $('#footer-container').css('display', 'block');
         $('#contact-container').css('display', 'none');
 
     });
@@ -464,7 +464,7 @@
         $('#event-container').css('display', 'none');
         $('#catering-container').css('display', 'none');
         $('#booking-container').css('display', 'none');
-        $('#footer-container').css('display', 'none');
+        $('#footer-container').css('display', 'block');
         $('#contact-container').css('display', 'none');
     });
 </script>
