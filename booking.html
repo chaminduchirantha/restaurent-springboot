@@ -17,7 +17,7 @@
 </head>
 <body style="overflow-x: hidden">
 
-<nav class="navbar navbar-expand-lg fixed-top" style="background-color: rgba(244,81,30,0.87);">
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color:#fd7e14">
     <div class="container-fluid ">
         <a class="navbar-brand text-dark fw-bold" href="index.html">
             <i class="fas fa-utensils me-2"></i>
@@ -99,10 +99,6 @@
         </button>
     </div>
 </section>
-<div>
-    <hr id="">
-</div>
-
 <section id="booking-container" class="py-5" style="background-color: #fffaf0; height: auto">
     <div class="container text-center">
         <h2 class="fw-bold display-5 text-dark mt-5">Our Bookings</h2>
@@ -153,9 +149,6 @@
     </div>
 </section>
 
-<div>
-    <hr id="table">
-</div>
 
 <section id="table-container" class="position-relative bg-white py-5 px-3 px-lg-5 overflow-hidden">
     <!-- Heading -->
@@ -203,10 +196,6 @@
         </form>
     </div>
 </section>
-
-<div>
-    <hr id="event">
-</div>
 
 <section id="event-container" class="position-relative bg-white py-5 px-3 px-lg-5 overflow-hidden">
     <!-- Heading -->
@@ -261,9 +250,6 @@
     </div>
 </section>
 
-<div>
-    <hr id="catering">
-</div>
 <section id="catering-container"  class="position-relative bg-white py-5 px-3 px-lg-5 overflow-hidden" style="height: 100vh">
     <!-- Heading -->
     <div class="container text-center">
@@ -360,7 +346,7 @@
 
 
 
-<footer id="footer-container" class="text-white text-center text-lg-start" style="background:linear-gradient(#0b2231, #1c4e6f,#b4642f);">
+<footer id="footer-container" class="text-white text-center text-lg-start" style="background:linear-gradient(#0b2231, #1c4e6f,#b4642f);" >
     <div class="container py-5">
         <div class="row justify-content-center">
             <!-- Brand Column -->
@@ -407,13 +393,14 @@
         $('#table-container').css('display', 'none');
         $('#event-container').css('display', 'none');
         $('#catering-container').css('display', 'none');
-        $('#footer-container').css('display', 'block');
+        $('#footer-container').css('display', 'none');
         $('#contact-container').css('display', 'none');
 
     });
 
     $('#table-button').on('click', function() {
         $('#table-container').css('display', 'block');
+        $('#footer-container').css('display', 'block');
         $('#booking-container').css('display', 'none');
         $('#booking').css('display', 'none');
         $('#event-container').css('display', 'none');
@@ -424,6 +411,7 @@
     $('#event-button').on('click', function() {
         $('#event-container').css('display', 'block');
         $('#booking-container').css('display', 'none');
+        $('#footer-container').css('display', 'block');
         $('#booking').css('display', 'none');
         $('#table-container').css('display', 'none');
         $('#catering-container').css('display', 'none');
@@ -432,6 +420,7 @@
 
     $('#catering-button').on('click', function() {
         $('#catering-container').css('display', 'block');
+        $('#footer-container').css('display', 'none');
         $('#booking-container').css('display', 'none');
         $('#booking').css('display', 'none');
         $('#table-container').css('display', 'none');
@@ -441,6 +430,7 @@
 
     $('#contact-button').on('click', function() {
         $('#contact-container').css('display', 'block');
+        $('#footer-container').css('display', 'block');
         $('#booking-container').css('display', 'none');
         $('#booking').css('display', 'none');
         $('#table-container').css('display', 'none');
@@ -451,6 +441,7 @@
 
     $('#booking-s-btn').on('click', function() {
         $('#booking-container').css('display', 'block');
+        $('#footer-container').css('display', 'block');
         $('#catering-container').css('display', 'none');
         $('#booking').css('display', 'none');
         $('#table-container').css('display', 'none');
@@ -464,7 +455,7 @@
         $('#event-container').css('display', 'none');
         $('#catering-container').css('display', 'none');
         $('#booking-container').css('display', 'none');
-        $('#footer-container').css('display', 'block');
+        $('#footer-container').css('display', 'none');
         $('#contact-container').css('display', 'none');
     });
 </script>
