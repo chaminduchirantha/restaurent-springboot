@@ -309,14 +309,14 @@
 
 <section class="py-5" id="contact-container">
     <div class="container">
-        <div class="container text-center">
+        <div class="container text-center" style="margin-top: 50px">
             <h2 class="fw-bold display-6 text-dark ">Contact With Us</h2>
-            <p class="lead text-muted mx-auto" style="max-width: 800px;">
-                This test verifies that a user can successfully reserve a spot for an event by providing valid details such as name,
-                contact number, selected event, number of seats, date, and time.
-            </p>
+<!--            <p class="lead text-muted mx-auto" style="max-width: 800px;">-->
+<!--                This test verifies that a user can successfully reserve a spot for an event by providing valid details such as name,-->
+<!--                contact number, selected event, number of seats, date, and time.-->
+<!--            </p>-->
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" style="margin-top: 30px">
 
             <!-- Contact Info -->
             <div class="col-lg-12 mb-4 text-center">
@@ -430,7 +430,7 @@
 
     $('#contact-button').on('click', function() {
         $('#contact-container').css('display', 'block');
-        $('#footer-container').css('display', 'block');
+        $('#footer-container').css('display', 'none');
         $('#booking-container').css('display', 'none');
         $('#booking').css('display', 'none');
         $('#table-container').css('display', 'none');
