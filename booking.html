@@ -36,6 +36,7 @@
                 <li class="nav-item"><a class="nav-link text-dark" href="#table-container" id="table-button"><i class="fa-solid fa-table"></i> Table Reservation</a></li>
                 <li class="nav-item"><a class="nav-link text-dark" href="#event-container" id="event-button"><i class="fa-solid fa-calendar-days"></i> Event bookings</a></li>
                 <li class="nav-item"><a class="nav-link text-dark" href="#catering-container" id="catering-button"><i class="fa-solid fa-bucket"></i> catering service</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#catering-container" id="contact-button"><i class="fa-solid fa-phone"></i> Contact us</a></li>
             </ul>
 
             <div class="d-flex">
@@ -105,9 +106,8 @@
 <section id="booking-container" class="py-5" style="background-color: #fffaf0; height: auto">
     <div class="container text-center">
         <h2 class="fw-bold display-5 text-dark mt-5">Our Bookings</h2>
-        <p class="lead text-muted  mx-auto" style="max-width: 800px;">
-            This test verifies that a user can successfully reserve a spot for an event by providing valid details such as name,
-            contact number, selected event, number of seats, date, and time.
+        <p class="lead text-muted  mx-auto" style="max-width: 950px;">
+            Whether you're planning a romantic dinner, a family gathering, or a corporate event, our booking system makes it simple to secure your spot. Just choose your preferred date, time, and service, and we'll take care of the rest.
         </p>
     </div>
     <div class="container">
@@ -321,36 +321,42 @@
 <!--    <hr id="contact">-->
 <!--</div>-->
 
-<!--<section class="py-5">-->
-<!--    <div class="container">-->
-<!--        <h2 class="fw-bold display-5 text-dark text-center">Contact Us</h2>-->
-<!--        <div class="row justify-content-center">-->
+<section class="py-5" id="contact-container">
+    <div class="container">
+        <div class="container text-center">
+            <h2 class="fw-bold display-6 text-dark ">Contact With Us</h2>
+            <p class="lead text-muted mx-auto" style="max-width: 800px;">
+                This test verifies that a user can successfully reserve a spot for an event by providing valid details such as name,
+                contact number, selected event, number of seats, date, and time.
+            </p>
+        </div>
+        <div class="row justify-content-center">
 
-<!--            &lt;!&ndash; Contact Info &ndash;&gt;-->
-<!--            <div class="col-lg-12 mb-4 text-center">-->
-<!--                <div class="bg-white p-4 rounded shadow-sm h-100 border-top border-primary  border-bottom border-danger">-->
-<!--                    <h5 class="text-dark">Get In Touch</h5>-->
-<!--                    <p style="color: #5a3e1b;">-->
-<!--                        We’d love to hear from you! Whether you're making a reservation, planning an event, or just have a question — reach out to us below.-->
-<!--                    </p>-->
-<!--                    <ul class="list-unstyled">-->
-<!--                        <li class="mb-2"><strong>Phone:</strong> <a href="tel:0773352204" style="color: #d35400;">0773352204</a></li>-->
-<!--                        <li class="mb-2"><strong>Email:</strong> <a href="mailto:chaminduchirantha73@gmail.com" style="color: #d35400;">chaminduchirantha73@gmail.com</a></li>-->
-<!--                        <li class="mb-2"><strong>Address:</strong>73/1 A Horana Road, Gonapal</li>-->
-<!--                    </ul>-->
+            <!-- Contact Info -->
+            <div class="col-lg-12 mb-4 text-center">
+                <div class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white">
+                    <h5 class="text-dark">Get In Touch</h5>
+                    <p style="color: #5a3e1b;">
+                        We’d love to hear from you! Whether you're making a reservation, planning an event, or just have a question — reach out to us below.
+                    </p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><strong>Phone:</strong> <a href="tel:0773352204" style="color: #d35400;">0773352204</a></li>
+                        <li class="mb-2"><strong>Email:</strong> <a href="mailto:chaminduchirantha73@gmail.com" style="color: #d35400;">chaminduchirantha73@gmail.com</a></li>
+                        <li class="mb-2"><strong>Address:</strong>73/1 A Horana Road, Gonapal</li>
+                    </ul>
 
-<!--                    &lt;!&ndash; Social Media Links &ndash;&gt;-->
-<!--                    <div class="mt-4">-->
-<!--                        <h6 class="text-dark">Follow Us</h6>-->
-<!--                        <a href="https://facebook.com" target="_blank" style="color: black; font-size: 30px; margin-right: 20px;"><i class="fa-brands fa-facebook-f"></i></a>-->
-<!--                        <a href="https://linkedin.com" target="_blank" style="color: black; font-size: 30px; margin-right: 20px;"><i class="fa-brands fa-linkedin-in"></i></a>-->
-<!--                        <a href="https://twitter.com" target="_blank" style="color: black; font-size: 30px" ><i class="fa-brands fa-twitter"></i></a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
+                    <!-- Social Media Links -->
+                    <div class="mt-4">
+                        <h6 class="text-dark">Follow Us</h6>
+                        <a href="https://facebook.com" target="_blank" style="color: black; font-size: 30px; margin-right: 20px;"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://linkedin.com" target="_blank" style="color: black; font-size: 30px; margin-right: 20px;"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://twitter.com" target="_blank" style="color: black; font-size: 30px" ><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 
@@ -402,6 +408,7 @@
         $('#event-container').css('display', 'none');
         $('#catering-container').css('display', 'none');
         $('#footer-container').css('display', 'none');
+        $('#contact-container').css('display', 'none');
 
     });
 
@@ -412,6 +419,7 @@
         $('#booking').css('display', 'none');
         $('#event-container').css('display', 'none');
         $('#catering-container').css('display', 'none');
+        $('#contact-container').css('display', 'none');
     });
 
     $('#event-button').on('click', function() {
@@ -421,6 +429,7 @@
         $('#booking').css('display', 'none');
         $('#table-container').css('display', 'none');
         $('#catering-container').css('display', 'none');
+        $('#contact-container').css('display', 'none');
     });
 
     $('#catering-button').on('click', function() {
@@ -429,6 +438,16 @@
         $('#booking').css('display', 'none');
         $('#table-container').css('display', 'none');
         $('#event-container').css('display', 'none');
+        $('#contact-container').css('display', 'none');
+    });
+
+    $('#contact-button').on('click', function() {
+        $('#contact-container').css('display', 'block');
+        $('#booking-container').css('display', 'none');
+        $('#booking').css('display', 'none');
+        $('#table-container').css('display', 'none');
+        $('#event-container').css('display', 'none');
+        $('#catering-container').css('display', 'none');
     });
 
 
@@ -439,6 +458,7 @@
         $('#booking').css('display', 'none');
         $('#table-container').css('display', 'none');
         $('#event-container').css('display', 'none');
+        $('#contact-container').css('display', 'none');
     });
 
     $(document).ready(function () {
@@ -448,6 +468,7 @@
         $('#catering-container').css('display', 'none');
         $('#booking-container').css('display', 'none');
         $('#footer-container').css('display', 'none');
+        $('#contact-container').css('display', 'none');
     });
 </script>
 </body>
