@@ -15,7 +15,7 @@
 
 
 </head>
-<body style="overflow-x: hidden">
+<body style="overflow: hidden">
 
 <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #f4511e;">
     <div class="container-fluid ">
@@ -32,7 +32,7 @@
             <ul class="navbar-nav mx-auto text-center">
                 <li class="nav-item"><a class="nav-link text-dark" href="#booking" id="home-button"><i class="fa-solid fa-house" ></i> Home</a></li>
                 <li class="nav-item"><a class="nav-link text-dark" href="menu.html" ><i class="fa-solid fa-burger"></i> Our Menu</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="" id="booking-s-btn" ><i class="fa-solid fa-"></i> Our Bookings</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#booking-container" id="booking-s-btn" ><i class="fa-solid fa-"></i> Our Bookings</a></li>
                 <li class="nav-item"><a class="nav-link text-dark" href="#table-container" id="table-button"><i class="fa-solid fa-"></i> Table Reservation</a></li>
                 <li class="nav-item"><a class="nav-link text-dark" href="#event-container" id="event-button"><i class="fa-solid fa-"></i>Event bookings</a></li>
                 <li class="nav-item"><a class="nav-link text-dark" href="#catering-container" id="catering-button"><i class="fa-solid fa-"></i>catering service</a></li>
@@ -46,7 +46,7 @@
         </div>
     </div>
 </nav>
-<section id="booking" style="position: relative; height: 100vh; overflow-y: hidden;">
+<section id="booking" style="position: relative; height: 110vh;">
     <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
@@ -103,8 +103,14 @@
 </div>
 
 <section id="booking-container" class="py-5" style="background-color: #fffaf0; height: auto">
+    <div class="container text-center">
+        <h2 class="fw-bold display-5 text-dark mt-5">Our Bookings</h2>
+        <p class="lead text-muted  mx-auto" style="max-width: 800px;">
+            This test verifies that a user can successfully reserve a spot for an event by providing valid details such as name,
+            contact number, selected event, number of seats, date, and time.
+        </p>
+    </div>
     <div class="container">
-        <h2 class="text-center mb-5 text-dark" style="font-size: 40px">Our Bookings</h2>
         <div class="row g-4">
             <div class="col-md-6 col-lg-4">
                 <div class="card h-100 border-0 shadow-sm custom-card">
@@ -153,15 +159,17 @@
 
 <section id="table-container" class="position-relative bg-white py-5 px-3 px-lg-5 overflow-hidden">
     <!-- Heading -->
-    <div class="container text-center mb-5">
-        <h2 class="fw-bold display-5 text-dark">Table Reservation</h2>
-        <p class="lead text-muted mt-3">This test verifies that a user can successfully reserve a spot for an event by providing valid details such as name, contact number, selected event, number of seats, date, and time. </p>
+    <div class="container text-center">
+        <h2 class="fw-bold display-5 text-dark mt-5">Table Reservation</h2>
+        <p class="lead text-muted  mx-auto" style="max-width: 800px;">
+            This test verifies that a user can successfully reserve a spot for an event by providing valid details such as name,
+            contact number, selected event, number of seats, date, and time.
+        </p>
     </div>
-
-<!--    <hr>-->
+    <!--    <hr>-->
     <!-- Form -->
     <div class="container">
-        <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" style="max-width: 700px;" action="#" method="POST">
+        <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" style="max-width: 900px;" action="#" method="POST">
             <div class="row g-3">
                 <div class="col-md-6">
                     <label for="first-name" class="form-label fw-semibold">First name</label>
@@ -202,15 +210,17 @@
 
 <section id="event-container" class="position-relative bg-white py-5 px-3 px-lg-5 overflow-hidden">
     <!-- Heading -->
-    <div class="container text-center mb-5">
-        <h2 class="fw-bold display-5 text-dark">Event Reservation</h2>
-        <p class="lead text-muted mt-3">This test verifies that a user can successfully reserve a table by providing valid inputs such as name, phone number, number of guests, reservation date, and time. </p>
+    <div class="container text-center">
+        <h2 class="fw-bold display-5 text-dark mt-5">Event Reservation</h2>
+        <p class="lead text-muted mx-auto" style="max-width: 800px;">
+            This test verifies that a user can successfully reserve a spot for an event by providing valid details such as name,
+            contact number, selected event, number of seats, date, and time.
+        </p>
     </div>
-
 
     <!-- Form -->
     <div class="container">
-        <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" style="max-width: 700px;" action="#" method="POST">
+        <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" style="max-width: 900px;" action="#" method="POST">
             <div class="row g-3">
                 <div class="col-md-6">
                     <label for="eventName" class="form-label">Full Name</label>
@@ -242,10 +252,6 @@
                     <label for="guestCount" class="form-label">Number of Guests</label>
                     <input type="number" class="form-control custom-form" id="guestCount" placeholder="e.g. 50" required min="1">
                 </div>
-                <div class="col-12 mb-3">
-                    <label for="eventNotes" class="form-label">Special Requests</label>
-                    <textarea class="form-control custom-form" id="eventNotes" rows="3" placeholder="Add any notes..."></textarea>
-                </div>
             </div>
 
             <div class="mt-4">
@@ -258,17 +264,19 @@
 <div>
     <hr id="catering">
 </div>
-<section id="catering-container"  class="position-relative bg-white py-5 px-3 px-lg-5 overflow-hidden">
+<section id="catering-container"  class="position-relative bg-white py-5 px-3 px-lg-5 overflow-hidden" style="height: 100vh">
     <!-- Heading -->
-    <div class="container text-center mb-5">
-        <h2 class="fw-bold display-5 text-dark">Catering Reservation</h2>
-        <p class="lead text-muted mt-3">This test verifies that a user can successfully reserve a table by providing valid inputs such as name, phone number, number of guests, reservation date, and time. </p>
+    <div class="container text-center">
+        <h2 class="fw-bold display-6 text-dark mt-5">Catering Service</h2>
+        <p class="lead text-muted mx-auto" style="max-width: 800px;">
+            This test verifies that a user can successfully reserve a spot for an event by providing valid details such as name,
+            contact number, selected event, number of seats, date, and time.
+        </p>
     </div>
-
 
     <!-- Form -->
     <div class="container">
-        <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" style="max-width: 700px;" action="#" method="POST">
+        <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" style="max-width: 900px;" action="#" method="POST">
             <div class="row g-3">
                 <div class="col-md-6 mb-3">
                     <label for="cateringName" class="form-label">Full Name</label>
@@ -299,10 +307,6 @@
                 <div class="col-md-6 mb-3">
                     <label for="buffetGuests" class="form-label">Number of Guests</label>
                     <input type="number" class="form-control custom-form" id="buffetGuests" placeholder="e.g. 4" min="1" required>
-                </div>
-                <div class="col-12 mb-3">
-                    <label for="buffetNotes" class="form-label">Special Requests</label>
-                    <textarea class="form-control custom-form" id="buffetNotes" rows="3" placeholder="Add any special requests..."></textarea>
                 </div>
             </div>
 
