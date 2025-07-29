@@ -30,20 +30,12 @@
 
         <div class="collapse navbar-collapse" id="navbarContent">
             <ul class="navbar-nav mx-auto text-center">
-                <li class="nav-item"><a class="nav-link text-dark" href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="menu.html"><i class="fa-solid fa-burger"></i> Our Menu</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-dark  px-3" id="navbarDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false" href="#booking">
-                        <i class="fa-solid fa-bookmark me-2"></i>Our Bookings
-                    </a>
-                    <ul class="dropdown-menu shadow-lg rounded" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item custom-dropdown-item" href="#table">Table Booking</a></li>
-                        <li><a class="dropdown-item custom-dropdown-item" href="#event">Function Booking</a></li>
-                        <li><a class="dropdown-item custom-dropdown-item" href="#catering">Catering Service</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item"><a class="nav-link text-dark" href="#contact"><i class="fa-solid fa-phone"></i> Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#booking" id="home-button"><i class="fa-solid fa-house" ></i> Home</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="menu.html" ><i class="fa-solid fa-burger"></i> Our Menu</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="" id="booking-s-btn" ><i class="fa-solid fa-"></i> Our Bookings</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#table-container" id="table-button"><i class="fa-solid fa-"></i> Table Reservation</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#event-container" id="event-button"><i class="fa-solid fa-"></i>Event bookings</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#catering-container" id="catering-button"><i class="fa-solid fa-"></i>catering service</a></li>
             </ul>
 
             <div class="d-flex">
@@ -54,35 +46,63 @@
         </div>
     </div>
 </nav>
-<section id="booking" style="position: relative; height: 100vh; overflow: hidden;">
+<section id="booking" style="position: relative; height: 100vh; overflow-y: hidden;">
+    <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
 
-    <div class="slideshow-container"></div>
+        <div class="carousel-inner h-100">
+            <!-- Slide 1 -->
+            <div class="carousel-item active h-100 position-relative">
+                <img src="Assets/images/restaurant-hall-with-lots-table.jpg" class="d-block w-100 h-100 object-fit-cover" alt="...">
+                <div class="overlay position-absolute top-0 start-0 w-100 h-100"></div>
+                <div class="carousel-caption d-flex flex-column justify-content-center align-items-center text-center h-100">
+                    <h1 class="display-4 text-white">Welcome to Our </h1>
+                    <h1 class="display-4 text-white">Golden Spoon Restaurant</h1>
+                    <p class="lead text-white">Enjoy an unforgettable dining experience.</p>
+                </div>
+            </div>
 
-    <div style="
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background-color: rgba(0, 0, 0, 0.6);
-        z-index: 1;">
-    </div>
+            <!-- Slide 2 -->
+            <div class="carousel-item h-100 position-relative">
+                <img src="Assets/images/decorated-wedding-hall-with-candles-round-tables-centerpieces.jpg" class="d-block w-100 h-100 object-fit-cover" alt="...">
+                <div class="overlay position-absolute top-0 start-0 w-100 h-100"></div>
+                <div class="carousel-caption d-flex flex-column justify-content-center align-items-center text-center h-100">
+                    <h1 class="display-4 text-white">Perfect for Your Special Day</h1>
+                    <p class="lead text-white">Elegant settings and premium service.</p>
+                </div>
+            </div>
 
-    <div style="position: relative; z-index: 2; max-width: 800px; padding: 20px; color: wheat;" data-aos="fade-up">
-        <h1 class="display-4 fw-bold" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1500">
-            Welcome to golden spoon
-        </h1>
-        <h1 class="display-4 fw-bold" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1500">
-           booking System
-        </h1>
-        <p data-aos="fade-left" data-aos-delay="400" data-aos-duration="1800">
-            The Restaurant Booking System allows customers to reserve tables or halls online for dining or special events. It supports selecting dates, guest count, and occasion types.    </p>
-        <a href="#bookings" class="btn btn-lg  mt-3" id="booking-btn" data-aos="zoom-out-left" data-aos-delay="800" >Explore our Bookings</a>
-        <a href="menu.html" class="btn btn-lg  mt-3" id="menu-btn" data-aos="zoom-out-left" data-aos-delay="800" >Explore our Menus</a>
+            <!-- Slide 3 -->
+            <div class="carousel-item h-100 position-relative">
+                <img src="Assets/images/closed-metal-pots.jpg" class="d-block w-100 h-100 object-fit-cover" alt="...">
+                <div class="overlay position-absolute top-0 start-0 w-100 h-100"></div>
+                <div class="carousel-caption d-flex flex-column justify-content-center align-items-center text-center h-100">
+                    <h1 class="display-4 text-white">Book Your Event Today</h1>
+                    <p class="lead text-white">Reserve your spot now for unforgettable memories.</p>
+                </div>
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 </section>
 <div>
-    <hr id="bookings">
+    <hr id="">
 </div>
 
-<section  class="py-5" style="background-color: #fffaf0; height: auto">
+<section id="booking-container" class="py-5" style="background-color: #fffaf0; height: auto">
     <div class="container">
         <h2 class="text-center mb-5 text-dark" style="font-size: 40px">Our Bookings</h2>
         <div class="row g-4">
@@ -131,7 +151,7 @@
     <hr id="table">
 </div>
 
-<section  class="position-relative bg-white py-5 px-3 px-lg-5 overflow-hidden">
+<section id="table-container" class="position-relative bg-white py-5 px-3 px-lg-5 overflow-hidden">
     <!-- Heading -->
     <div class="container text-center mb-5">
         <h2 class="fw-bold display-5 text-dark">Table Reservation</h2>
@@ -180,7 +200,7 @@
     <hr id="event">
 </div>
 
-<section id="" class="position-relative bg-white py-5 px-3 px-lg-5 overflow-hidden">
+<section id="event-container" class="position-relative bg-white py-5 px-3 px-lg-5 overflow-hidden">
     <!-- Heading -->
     <div class="container text-center mb-5">
         <h2 class="fw-bold display-5 text-dark">Event Reservation</h2>
@@ -238,7 +258,7 @@
 <div>
     <hr id="catering">
 </div>
-<section  class="position-relative bg-white py-5 px-3 px-lg-5 overflow-hidden">
+<section id="catering-container"  class="position-relative bg-white py-5 px-3 px-lg-5 overflow-hidden">
     <!-- Heading -->
     <div class="container text-center mb-5">
         <h2 class="fw-bold display-5 text-dark">Catering Reservation</h2>
@@ -293,44 +313,44 @@
     </div>
 </section>
 
-<div>
-    <hr id="contact">
-</div>
+<!--<div>-->
+<!--    <hr id="contact">-->
+<!--</div>-->
 
-<section class="py-5">
-    <div class="container">
-        <h2 class="fw-bold display-5 text-dark text-center">Contact Us</h2>
-        <div class="row justify-content-center">
+<!--<section class="py-5">-->
+<!--    <div class="container">-->
+<!--        <h2 class="fw-bold display-5 text-dark text-center">Contact Us</h2>-->
+<!--        <div class="row justify-content-center">-->
 
-            <!-- Contact Info -->
-            <div class="col-lg-12 mb-4 text-center">
-                <div class="bg-white p-4 rounded shadow-sm h-100 border-top border-primary  border-bottom border-danger">
-                    <h5 class="text-dark">Get In Touch</h5>
-                    <p style="color: #5a3e1b;">
-                        We’d love to hear from you! Whether you're making a reservation, planning an event, or just have a question — reach out to us below.
-                    </p>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><strong>Phone:</strong> <a href="tel:0773352204" style="color: #d35400;">0773352204</a></li>
-                        <li class="mb-2"><strong>Email:</strong> <a href="mailto:chaminduchirantha73@gmail.com" style="color: #d35400;">chaminduchirantha73@gmail.com</a></li>
-                        <li class="mb-2"><strong>Address:</strong>73/1 A Horana Road, Gonapal</li>
-                    </ul>
+<!--            &lt;!&ndash; Contact Info &ndash;&gt;-->
+<!--            <div class="col-lg-12 mb-4 text-center">-->
+<!--                <div class="bg-white p-4 rounded shadow-sm h-100 border-top border-primary  border-bottom border-danger">-->
+<!--                    <h5 class="text-dark">Get In Touch</h5>-->
+<!--                    <p style="color: #5a3e1b;">-->
+<!--                        We’d love to hear from you! Whether you're making a reservation, planning an event, or just have a question — reach out to us below.-->
+<!--                    </p>-->
+<!--                    <ul class="list-unstyled">-->
+<!--                        <li class="mb-2"><strong>Phone:</strong> <a href="tel:0773352204" style="color: #d35400;">0773352204</a></li>-->
+<!--                        <li class="mb-2"><strong>Email:</strong> <a href="mailto:chaminduchirantha73@gmail.com" style="color: #d35400;">chaminduchirantha73@gmail.com</a></li>-->
+<!--                        <li class="mb-2"><strong>Address:</strong>73/1 A Horana Road, Gonapal</li>-->
+<!--                    </ul>-->
 
-                    <!-- Social Media Links -->
-                    <div class="mt-4">
-                        <h6 class="text-dark">Follow Us</h6>
-                        <a href="https://facebook.com" target="_blank" style="color: black; font-size: 30px; margin-right: 20px;"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="https://linkedin.com" target="_blank" style="color: black; font-size: 30px; margin-right: 20px;"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="https://twitter.com" target="_blank" style="color: black; font-size: 30px" ><i class="fa-brands fa-twitter"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<!--                    &lt;!&ndash; Social Media Links &ndash;&gt;-->
+<!--                    <div class="mt-4">-->
+<!--                        <h6 class="text-dark">Follow Us</h6>-->
+<!--                        <a href="https://facebook.com" target="_blank" style="color: black; font-size: 30px; margin-right: 20px;"><i class="fa-brands fa-facebook-f"></i></a>-->
+<!--                        <a href="https://linkedin.com" target="_blank" style="color: black; font-size: 30px; margin-right: 20px;"><i class="fa-brands fa-linkedin-in"></i></a>-->
+<!--                        <a href="https://twitter.com" target="_blank" style="color: black; font-size: 30px" ><i class="fa-brands fa-twitter"></i></a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
 
 
 
-<footer class="text-white text-center text-lg-start" style="background:linear-gradient(#0b2231, #1c4e6f,#b4642f);">
+<footer id="footer-container" class="text-white text-center text-lg-start" style="background:linear-gradient(#0b2231, #1c4e6f,#b4642f);">
     <div class="container py-5">
         <div class="row justify-content-center">
             <!-- Brand Column -->
@@ -367,6 +387,64 @@
 <script>
     AOS.init();
 </script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $('#home-button').on('click', function() {
+        $('#booking').css('display', 'block');
+        $('#booking-container').css('display', 'none');
+        $('#table-container').css('display', 'none');
+        $('#event-container').css('display', 'none');
+        $('#catering-container').css('display', 'none');
+        $('#footer-container').css('display', 'none');
+
+    });
+
+    $('#table-button').on('click', function() {
+        $('#table-container').css('display', 'block');
+        $('#footer-container').css('display', 'block');
+        $('#booking-container').css('display', 'none');
+        $('#booking').css('display', 'none');
+        $('#event-container').css('display', 'none');
+        $('#catering-container').css('display', 'none');
+    });
+
+    $('#event-button').on('click', function() {
+        $('#event-container').css('display', 'block');
+        $('#footer-container').css('display', 'block');
+        $('#booking-container').css('display', 'none');
+        $('#booking').css('display', 'none');
+        $('#table-container').css('display', 'none');
+        $('#catering-container').css('display', 'none');
+    });
+
+    $('#catering-button').on('click', function() {
+        $('#catering-container').css('display', 'block');
+        $('#booking-container').css('display', 'none');
+        $('#booking').css('display', 'none');
+        $('#table-container').css('display', 'none');
+        $('#event-container').css('display', 'none');
+    });
+
+
+    $('#booking-s-btn').on('click', function() {
+        $('#booking-container').css('display', 'block');
+        $('#footer-container').css('display', 'block');
+        $('#catering-container').css('display', 'none');
+        $('#booking').css('display', 'none');
+        $('#table-container').css('display', 'none');
+        $('#event-container').css('display', 'none');
+    });
+
+    $(document).ready(function () {
+        $('#home-container').css('display', 'block');
+        $('#table-container').css('display', 'none');
+        $('#event-container').css('display', 'none');
+        $('#catering-container').css('display', 'none');
+        $('#booking-container').css('display', 'none');
+        $('#footer-container').css('display', 'none');
+    });
+</script>
 </body>
 </html>
