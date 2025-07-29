@@ -23,7 +23,7 @@ body{
 }
 
 .overlay {
-    background-color: rgba(0, 0, 0, 0.4); /* adjust alpha (0.4 = 40% dark) */
+    background-color: rgba(0, 0, 0, 0.7); /* adjust alpha (0.4 = 40% dark) */
     z-index: 1;
 }
 
@@ -35,15 +35,6 @@ body{
     object-fit: cover;
     overflow-y: hidden;
     height: 100vh;
-}
-
-
-.custom-dropdown-item:hover {
-    background-color: #ffedd5;
-    color: #d35400;
-    font-weight: 600;
-    padding-left: 18px;
-    border-left: 3px solid #d35400;
 }
 
 
@@ -59,6 +50,19 @@ body{
     margin: 5px;
     transition-duration: 0.4s;
     font-size: 16px;
+}
+
+#booking h1{
+    font-family: "Oleo Script", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    color: wheat;
+}
+
+#booking p{
+    font-weight: 500;
+    font-style: normal;
+    color: wheat;
 }
 
 /*#booking{*/
