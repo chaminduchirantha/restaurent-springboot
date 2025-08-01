@@ -159,7 +159,7 @@
 <section id="table-container" class="position-relative bg-white py-5 px-3 px-lg-5 overflow-hidden">
     <!-- Heading -->
     <div class="container text-center">
-        <h2 class="fw-bold display-5 text-dark mt-5">Table Reservation</h2>
+        <h2 class="fw-bold display-5 text-dark mt-5"><i class="fas fa-chair me-2"></i> Table Reservation</h2>
         <p class="lead text-muted  mx-auto" style="max-width: 800px;">
             This test verifies that a user can successfully reserve a spot for an event by providing valid details such as name,
             contact number, selected event, number of seats, date, and time.
@@ -167,37 +167,107 @@
     </div>
     <!--    <hr>-->
     <!-- Form -->
-    <div class="container">
+    <div class="container col-md-8">
         <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" style="max-width: 900px;" action="#" method="POST">
             <div class="row g-3">
                 <div class="col-md-6">
-                    <label for="first-name" class="form-label fw-semibold">First name</label>
-                    <input type="text" class="form-control" id="first-name" name="first-name" autocomplete="given-name">
-                </div>
-                <div class="col-md-6">
-                    <label for="last-name" class="form-label fw-semibold">Last name</label>
-                    <input type="text" class="form-control" id="last-name" name="last-name" autocomplete="family-name">
+                    <label for="fullName" class="form-label fw-semibold">Full name</label>
+                    <input type="text" class="form-control" id="fullName" name="first-name" autocomplete="given-name" placeholder="full name " required>
                 </div>
                 <div class="col-md-6">
                     <label for="phoneNumber" class="form-label fw-semibold">phone number</label>
-                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" autocomplete="organization">
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" autocomplete="organization" placeholder="phone number" required>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label for="date" class="form-label fw-semibold">Date</label>
                     <input type="date" class="form-control" id="date" name="date" autocomplete="organization">
                 </div>
-                <div class="col-md-6">
-                    <label for="time" class="form-label fw-semibold">Time</label>
-                    <input type="time" class="form-control" id="time" name="time" autocomplete="time">
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Time</label>
+                    <select class="form-select" required>
+                        <option value="">Select Time</option>
+                        <option value="17:00">5:00 PM</option>
+                        <option value="17:30">5:30 PM</option>
+                        <option value="18:00">6:00 PM</option>
+                        <option value="18:30">6:30 PM</option>
+                        <option value="19:00">7:00 PM</option>
+                        <option value="19:30">7:30 PM</option>
+                        <option value="20:00">8:00 PM</option>
+                        <option value="20:30">8:30 PM</option>
+                        <option value="21:00">9:00 PM</option>
+                    </select>
                 </div>
-                <div class="col-md-6">
-                    <label for="guest" class="form-label fw-semibold">No of Guest</label>
-                    <input type="number" class="form-control" id="guest" name="guest" autocomplete="guest">
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Guests</label>
+                    <select class="form-select" required>
+                        <option value="">Number of Guests</option>
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                        <option value="5">5 Guests</option>
+                        <option value="6">6 Guests</option>
+                        <option value="8">8 Guests</option>
+                        <option value="10">10+ Guests</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Select Table (Optional)</label>
+                    <div class="table-layout">
+                        <div class="table-item" data-table="1">
+                            <i class="fas fa-chair"></i><br>
+                            Table 1<br>
+                            <small>2 seats</small>
+                        </div>
+                        <div class="table-item" data-table="2">
+                            <i class="fas fa-chair"></i><br>
+                            Table 2<br>
+                            <small>4 seats</small>
+                        </div>
+                        <div class="table-item occupied" data-table="3">
+                            <i class="fas fa-chair"></i><br>
+                            Table 3<br>
+                            <small>6 seats</small>
+                        </div>
+                        <div class="table-item" data-table="4">
+                            <i class="fas fa-chair"></i><br>
+                            Table 4<br>
+                            <small>4 seats</small>
+                        </div>
+                        <div class="table-item" data-table="5">
+                            <i class="fas fa-chair"></i><br>
+                            Table 5<br>
+                            <small>8 seats</small>
+                        </div>
+                        <div class="table-item" data-table="6">
+                            <i class="fas fa-chair"></i><br>
+                            Table 6<br>
+                            <small>2 seats</small>
+                        </div>
+                        <div class="table-item" data-table="7">
+                            <i class="fas fa-chair"></i><br>
+                            Table 7<br>
+                            <small>12 seats</small>
+                        </div>
+                        <div class="table-item" data-table="8">
+                            <i class="fas fa-chair"></i><br>
+                            Table 8<br>
+                            <small>8 seats</small>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <label class="form-label">Special Requests</label>
+                        <textarea class="form-control" rows="5" placeholder="Any special requirements or dietary restrictions..."></textarea>
+                    </div>
                 </div>
             </div>
 
             <div class="mt-4">
-                <button type="submit" class="btn btn-warning w-100 py-2">Book Now</button>
+                <button type="submit" class="btn btn-warning btn-lg w-100">
+                    <i class="fas fa-calendar-check me-2"></i>Reserve Table
+                </button>
             </div>
         </form>
     </div>
@@ -259,7 +329,7 @@
 <section id="catering-container"  class="position-relative bg-white py-5 px-3 px-lg-5 overflow-hidden">
     <!-- Heading -->
     <div class="container text-center">
-        <h2 class="fw-bold display-6 text-dark mt-5">Catering Service</h2>
+        <h2 class="fw-bold display-5 text-dark mt-5">Catering Service</h2>
         <p class="lead text-muted mx-auto" style="max-width: 800px;">
             This test verifies that a user can successfully reserve a spot for an event by providing valid details such as name,
             contact number, selected event, number of seats, date, and time.
@@ -426,7 +496,7 @@
 
     $('#catering-button').on('click', function() {
         $('#catering-container').css('display', 'block');
-        $('#footer-container').css('display', 'none');
+        $('#footer-container').css('display', 'block');
         $('#booking-container').css('display', 'none');
         $('#booking').css('display', 'none');
         $('#table-container').css('display', 'none');
