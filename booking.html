@@ -276,7 +276,7 @@
 <section id="event-container" class="position-relative bg-white py-5 px-3 px-lg-5 overflow-hidden">
     <!-- Heading -->
     <div class="container text-center">
-        <h2 class="fw-bold display-5 text-dark mt-5">Event Reservation</h2>
+        <h2 class="fw-bold display-5 text-dark mt-5"><i class="fas fa-calendar-plus me-2"></i> Event Reservation</h2>
         <p class="lead text-muted mx-auto" style="max-width: 800px;">
             This test verifies that a user can successfully reserve a spot for an event by providing valid details such as name,
             contact number, selected event, number of seats, date, and time.
@@ -296,32 +296,55 @@
                     <input type="tel" class="form-control custom-form" id="eventPhone" placeholder="07XXXXXXXX" required>
                 </div>
                 <div class="col-md-6">
-                    <label for="eventType" class="form-label">Event Type</label>
-                    <select class="form-select custom-form" id="eventType" required>
-                        <option value="">Select event type</option>
-                        <option>Birthday</option>
-                        <option>Official</option>
-                        <option>Corporate</option>
-                        <option>Other</option>
+                    <label for="eventPhone" class="form-label">Email</label>
+                    <input type="tel" class="form-control custom-form" id="emial" placeholder="exaple@gmail.com" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Event Type</label>
+                    <select class="form-select" required>
+                        <option value="">Select Event Type</option>
+                        <option value="birthday">Birthday Party</option>
+                        <option value="anniversary">Anniversary</option>
+                        <option value="corporate">Corporate Event</option>
+                        <option value="wedding">Wedding Reception</option>
+                        <option value="meeting">Business Meeting</option>
+                        <option value="other">Other</option>
                     </select>
                 </div>
-                <div class="col-md-6">
-                    <label for="eventDate" class="form-label">Event Date</label>
-                    <input type="date" class="form-control custom-form" id="eventDate" required>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Event Date</label>
+                    <input type="date" class="form-control" required>
                 </div>
-                <div class="col-md-6">
-                    <label for="eventTime" class="form-label">Start Time</label>
-                    <input type="time" class="form-control custom-form" id="eventTime" required>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Start Time</label>
+                    <input type="time" class="form-control" required>
                 </div>
-                <div class="col-md-6">
-                    <label for="guestCount" class="form-label">Number of Guests</label>
-                    <input type="number" class="form-control custom-form" id="guestCount" placeholder="e.g. 50" required min="1">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Duration (hours)</label>
+                    <select class="form-select" required>
+                        <option value="">Select Duration</option>
+                        <option value="2">2 hours</option>
+                        <option value="3">3 hours</option>
+                        <option value="4">4 hours</option>
+                        <option value="5">5 hours</option>
+                        <option value="6">6+ hours</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Services</label>
+                    <select class="form-select" required>
+                        <option value="">Select Service</option>
+                        <option value="2">Decoration</option>
+                        <option value="3">Photography</option>
+                        <option value="4">DJ Service</option>
+                        <option value="5">Custom Cake </option>
+                    </select>
                 </div>
             </div>
 
-            <div class="mt-4">
-                <button type="submit" class="btn btn-warning w-100 py-2">Book Now</button>
-            </div>
+            <button type="submit" class="btn btn-warning btn-lg w-100" style="margin-top: 20px">
+                <i class="fas fa-calendar-plus me-2"></i>Book Event
+            </button>
         </form>
     </div>
 </section>
@@ -372,7 +395,7 @@
                 </div>
             </div>
 
-            <div class="mt-4">
+            <div class="mb-2">
                 <button type="submit" class="btn btn-warning w-100 py-2">Book Now</button>
             </div>
         </form>
