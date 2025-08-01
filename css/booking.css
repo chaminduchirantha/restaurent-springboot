@@ -150,7 +150,76 @@ hr{
     max-width: 100%;
 }
 
-@media all and (min-width: 300px) and (max-width: 450px){
+/*:root {*/
+/*    --primary-color: #d4a574;*/
+/*    --secondary-color: #2c3e50;*/
+/*    --accent-color: #e74c3c;*/
+/*    --light-bg: #f8f9fa;*/
+/*}*/
+
+
+.form-control, .form-select {
+    border-radius: 8px;
+    border: 2px solid #e9ecef;
+    /*padding: 12px 15px;*/
+    transition: all 1.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #d35400;
+    box-shadow: 0 0 0 0.2rem rgba(212, 165, 116, 0.25);
+}
+
+.service-icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+
+.table-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.table-item {
+    background: white;
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.booking-summary{
+    border-radius: 10px;
+    border: 1px solid #d35400;
+}
+
+.table-item:hover {
+    border-color: #d35400;
+    background: #f8f9fa;
+}
+
+.table-item.occupied {
+    background: #e67e22;
+    color: white;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0;
+    }
+
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+}
+
+@media all and (min-width: 300px) and (max-width: 1000px){
     #booking h1{
         font-size: 25px;
     }
