@@ -34,6 +34,41 @@
     transition-duration: 0.4s;
 }
 
+#menu h1{
+    font-family: "Oleo Script", system-ui;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.filter-btn {
+    /*border: none;*/
+    padding: 5px 20px;
+    border-radius: 10px;
+    /*font-weight: 600;*/
+    color: black;
+    background: #fff;
+    border: 2px solid #ff922b;
+    transition: all 600ms ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    font-family: "Oleo Script", system-ui;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.filter-btn:hover {
+    background: #e67e22;
+    color: black;
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(220,53,69,0.4);
+}
+
+.filter-btn.active {
+    background: #e67e22;
+    color: black;
+    border: none;
+    box-shadow: 0 4px 12px rgba(220,53,69,0.5);
+}
+
 .show-all{
     transition-duration: 800ms;
     font-family: "Oleo Script", system-ui;
