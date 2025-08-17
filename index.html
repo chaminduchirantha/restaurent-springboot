@@ -267,54 +267,80 @@
 </section>
 
 
-<footer class="text-white text-center text-lg-start" style="background:linear-gradient(#0b2231, #1c4e6f,#b4642f);">
+<footer class="text-white text-center text-lg-start"
+        style="background: linear-gradient(135deg, #0b2231, #1c4e6f);">
     <div class="container py-5">
-        <div class="row justify-content-center">
+        <div class="row text-center text-lg-start g-4">
 
-            <div class="col-lg-3 mb-4" style="display: inline; font-size: 17px">
-                <h6 class="fw-bold" style="font-size: 22px;">Explore</h6>
-                <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3">
-                    <a href="#home" class="text-white text-decoration-none">Home</a>
-                    <a href="#about" class="text-white text-decoration-none">About</a>
-                    <a href="#services" class="text-white text-decoration-none">Services</a>
-                    <a href="#contact" class="text-white text-decoration-none">Contact</a>
+            <!-- Explore Links -->
+            <div class="col-lg-3">
+                <h6 class="fw-bold mb-3" style="font-size: 22px;">Explore</h6>
+                <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                    <a href="#home" class="text-white text-decoration-none hover-link">Home</a>
+                    <a href="#about" class="text-white text-decoration-none hover-link">About</a>
+                    <a href="#services" class="text-white text-decoration-none hover-link">Services</a>
+                    <a href="#contact" class="text-white text-decoration-none hover-link">Contact</a>
                 </div>
-
             </div>
 
             <!-- Brand Column -->
-            <div class="col-lg-4 mb-4">
-                <h4 class="fw-bold">Golden Spoon</h4>
-                <p style="font-size: 17px; width: 100%">
-                    Experience the harmony of flavor and wellness. We blend luxury dining with total relaxation in one place.
+            <div class="col-lg-4">
+                <h4 class="fw-bold mb-3">Golden Spoon</h4>
+                <p style="font-size: 17px;">
+                    Experience the harmony of flavor and wellness. We blend luxury dining
+                    with total relaxation in one place.
                 </p>
             </div>
 
-            <!-- Links Column -->
-
-
-            <!-- Contact Column -->
-            <div class="col-lg-4 mb-4">
-                <h6 class="fw-bold"  style="font-size: 22px;">Get in Touch</h6>
-                <p class=" mb-1" style="font-size: 17px;"><i class="fas fa-phone-alt me-2" style="color: #d35400"></i>077 335 2204</p>
-                <p class=" mb-1" style="font-size: 17px;"><i class="fas fa-envelope me-2" style="color: #d35400"></i>chaminduchirantha73@gmail.com</p>
-                <p style="font-size: 17px;"><i class="fas fa-map-marker-alt me-2" style="color: #d35400"></i>73/1 A Horana Road, Gonapala</p>
+            <!-- Contact Info -->
+            <div class="col-lg-4">
+                <h6 class="fw-bold mb-3" style="font-size: 22px;">Get in Touch</h6>
+                <p class="mb-2" style="font-size: 17px;">
+                    <i class="fas fa-phone-alt me-2 text-warning"></i> 077 335 2204
+                </p>
+                <p class="mb-2" style="font-size: 17px;">
+                    <i class="fas fa-envelope me-2 text-warning"></i> chaminduchirantha73@gmail.com
+                </p>
+                <p style="font-size: 17px;">
+                    <i class="fas fa-map-marker-alt me-2 text-warning"></i> 73/1 A Horana Road, Gonapala
+                </p>
             </div>
         </div>
 
+        <!-- Social Icons -->
         <div class="mt-4 d-flex justify-content-center gap-4">
-            <a href="https://facebook.com" class="text-white fs-5" ><i class="fab fa-facebook-f" style="font-size: 30px; color: #d35400" ></i></a>
-            <a href="https://linkedin.com" class="text-white fs-5"><i class="fab fa-linkedin-in" style="font-size: 30px;  color: #d35400"></i></a>
-            <a href="https://twitter.com" class="text-white fs-5"><i class="fab fa-twitter" style="font-size: 30px;  color: #d35400"></i></a>
+            <a href="https://facebook.com" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://linkedin.com" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://twitter.com" class="social-link"><i class="fab fa-twitter"></i></a>
         </div>
 
         <hr class="my-4 border-light">
 
-        <div class="text-center" style="font-size: 18px;">
-            &copy; 2025 Golden Spoon. Designed with by chamindu chirantha
+        <!-- Footer Bottom -->
+        <div class="text-center" style="font-size: 16px;">
+            &copy; 2025 <strong>Golden Spoon</strong>. Designed with ❤️ by Chamindu Chirantha
         </div>
     </div>
+
+    <!-- Extra CSS -->
+    <style>
+        .hover-link:hover {
+            color: #d35400 !important;
+            text-decoration: underline;
+            transition: 0.3s;
+        }
+        .social-link i {
+            font-size: 30px;
+            color: #d35400;
+            transition: transform 0.3s, color 0.3s;
+        }
+        .social-link i:hover {
+            transform: scale(1.2);
+            color: #ff8c42;
+        }
+    </style>
 </footer>
+
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
