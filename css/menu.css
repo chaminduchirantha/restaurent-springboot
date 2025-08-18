@@ -55,6 +55,11 @@
     font-style: normal;
 }
 
+.menu-items {
+    row-gap: 10px;   /* vertical gap */
+    /*column-gap: 10px; !* horizontal gap *!*/
+}
+
 .filter-btn:hover {
     background: #e67e22;
     color: black;
