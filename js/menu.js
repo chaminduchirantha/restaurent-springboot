@@ -10,17 +10,24 @@ $(document).ready(function () {
         });
     }
 
-
-    $('#filter-breakfast').on('click', function () {
-        filterCards('breakfast');
+    $('#rice').on('click', function () {
+        filterCards('rice');
     });
 
-    $('#filter-lunch').on('click', function () {
-        filterCards('lunch');
+    $('#kottu').on('click', function () {
+        filterCards('kottu');
     });
 
-    $('#filter-dinner').on('click', function () {
-        filterCards('dinner');
+    $('#indianfoods').on('click', function () {
+        filterCards('indianfoods');
+    });
+
+    $('#bakery').on('click', function () {
+        filterCards('bakery');
+    });
+
+    $('#baverages').on('click', function () {
+        filterCards('baverages');
     });
 
     $('#all').on('click', function () {
@@ -28,7 +35,9 @@ $(document).ready(function () {
     });
 
 
-    let viewCounts = JSON.parse(localStorage.getItem('viewCounts')) || {};
+
+
+let viewCounts = JSON.parse(localStorage.getItem('viewCounts')) || {};
 
     $(document).ready(function () {
         $('.view-details-btn').click(function () {
