@@ -23,5 +23,5 @@ public class CateringService {
     private String guests;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Customer user;
+    private Customer customer;
 }

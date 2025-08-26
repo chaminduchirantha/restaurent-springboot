@@ -26,5 +26,5 @@ public class EventBooking {
     private String requests;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Customer user;
+    private Customer customer;
 }

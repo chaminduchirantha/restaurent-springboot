@@ -20,8 +20,8 @@ public class Order {
     private Long orderId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Customer user;
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     private String orderType;
     private Date orderDatetime;

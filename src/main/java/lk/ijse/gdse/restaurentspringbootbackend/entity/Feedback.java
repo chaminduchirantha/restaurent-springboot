@@ -22,5 +22,5 @@ public class Feedback {
     private String message;
 
     @OneToOne (cascade = CascadeType.ALL)
-    private Customer user;
+    private Customer customer;
 }
