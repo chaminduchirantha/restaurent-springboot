@@ -2,15 +2,16 @@ package lk.ijse.gdse.restaurentspringbootbackend.service.impl;
 
 import lk.ijse.gdse.restaurentspringbootbackend.dto.CustomerDto;
 import lk.ijse.gdse.restaurentspringbootbackend.entity.Customer;
+import lk.ijse.gdse.restaurentspringbootbackend.entity.Role;
 import lk.ijse.gdse.restaurentspringbootbackend.repo.CustomerRepo;
 import lk.ijse.gdse.restaurentspringbootbackend.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +19,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final ModelMapper modelMapper;
     private final CustomerRepo customerRepo;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<CustomerDto> getAllCustomer() {
@@ -31,4 +33,45 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return customerDtos;
     }
+
+    @Override
+    public CustomerDto saveCustomer(CustomerDto customerDto) {
+        customerDto.setPassword(passwordEncoder.encode(customerDto.getPassword()));
+
+        Customer customer = modelMapper.map(customerDto, Customer.class);
+
+        Customer saved = customerRepo.save(customer);
+        CustomerDto response = modelMapper.map(saved, CustomerDto.class);
+        response.setPassword("********"); // hide password in response
+        return response;
+    }
+
+    @Override
+    public CustomerDto updateCustomer(Long id, CustomerDto customerDto) {
+        Customer existing = customerRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Customer not found with ID " + id));
+
+        existing.setUsername(customerDto.getUsername());
+        existing.setEmail(customerDto.getEmail());
+        existing.setRole(Role.valueOf(customerDto.getRole()));
+
+        if (customerDto.getPassword() != null && !customerDto.getPassword().isBlank()) {
+            existing.setPassword(passwordEncoder.encode(customerDto.getPassword()));
+        }
+
+        Customer updated = customerRepo.save(existing);
+
+        CustomerDto response = modelMapper.map(updated, CustomerDto.class);
+        response.setPassword("********"); // hide password in response
+        return response;
+    }
+
+    @Override
+    public void deleteCustomer(Long id) {
+        // Check if customer exists
+        Customer customer = customerRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
+        customerRepo.delete(customer);
+    }
+
 }

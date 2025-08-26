@@ -25,8 +25,35 @@ public class CustomerController {
         return ResponseEntity.ok(
                 new ApiResponseDto(200, "OK", staffList)
         );
-
     }
+
+    @PostMapping("/save")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponseDto> saveCustomer(@RequestBody CustomerDto customerDto) {
+        CustomerDto savedCustomer = customerService.saveCustomer(customerDto);
+        return ResponseEntity.ok(
+                new ApiResponseDto(201, "Customer Saved Successfully", savedCustomer)
+        );
+    }
+
+    @PutMapping("/update/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponseDto> updateCustomer(@PathVariable Long id,
+                                                         @RequestBody CustomerDto customerDto) {
+        CustomerDto updatedCustomer = customerService.updateCustomer(id, customerDto);
+        return ResponseEntity.ok(
+                new ApiResponseDto(200, "Customer Updated Successfully", updatedCustomer)
+        );
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")  // Only admin can delete
+    public ResponseEntity<ApiResponseDto> deleteCustomer(@PathVariable Long id) {
+        customerService.deleteCustomer(id);
+        return ResponseEntity.ok(new ApiResponseDto(200, "Customer deleted successfully", null));
+    }
+
+
 
     @GetMapping("/dashboard")
     @PreAuthorize("hasRole('USER')")
