@@ -63,4 +63,20 @@ public class CustomerController {
                 new ApiResponseDto(200, "OK", "Welcome to the Staff Dashboard")
         );
     }
+
+    @GetMapping("/paginated")
+    public ResponseEntity<ApiResponseDto> getPaginated(
+            @RequestParam int page,
+            @RequestParam int size
+    ) {
+        List<CustomerDto> customers = customerService.getCustomersByPage(page, size);
+        return ResponseEntity.ok(new ApiResponseDto(200, "OK", customers));
+    }
+
+    @GetMapping("/total-pages")
+    public ResponseEntity<Integer> getTotalPages(@RequestParam int size) {
+        int totalPages = customerService.getTotalPages(size);
+        return ResponseEntity.ok(totalPages);
+    }
+
 }

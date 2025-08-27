@@ -9,4 +9,6 @@ public interface CustomerService {
     CustomerDto saveCustomer(CustomerDto customerDto);
     CustomerDto updateCustomer(Long id, CustomerDto customerDto);
     void deleteCustomer(Long id);
+    List<CustomerDto> getCustomersByPage(int page, int size);
+    int getTotalPages(int size);
 }

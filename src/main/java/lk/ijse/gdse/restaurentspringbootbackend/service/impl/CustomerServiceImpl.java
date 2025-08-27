@@ -7,6 +7,7 @@ import lk.ijse.gdse.restaurentspringbootbackend.repo.CustomerRepo;
 import lk.ijse.gdse.restaurentspringbootbackend.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -73,5 +74,20 @@ public class CustomerServiceImpl implements CustomerService {
                 .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
         customerRepo.delete(customer);
     }
+
+    @Override
+    public List<CustomerDto> getCustomersByPage(int page, int size) {
+        int offset = page * size;
+        List<Customer> customers = customerRepo.findCustomerPaginated(size, offset);
+        return modelMapper.map(customers, new TypeToken<List<CustomerDto>>() {}.getType());
+    }
+
+
+    @Override
+    public int getTotalPages(int size) {
+        long totalCustomers = customerRepo.getTotalCustomerCount();
+        return (int) Math.ceil((double) totalCustomers / size);
+    }
+
 
 }
