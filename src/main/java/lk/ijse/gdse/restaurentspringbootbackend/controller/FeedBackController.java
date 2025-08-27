@@ -15,10 +15,11 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/feedback")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:63342")
 public class FeedBackController {
     private final FeedBackService feedBackService;
 
-    @PostMapping("/feedback")
+    @PostMapping("/save")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<ApiResponseDto> submitFeedback(@RequestBody FeedBackDto feedbackDto, Authentication authentication) {
 

@@ -712,7 +712,7 @@
     </div>
 
     <div class="container col-md-8">
-        <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" style="max-width: 900px;" action="#" method="POST">
+        <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" id="addFeedbackForm" style="max-width: 900px;" >
             <div class="row g-3">
                 <div class="col-md-6 mb-3">
                     <label for="fullName" class="form-label">Full Name</label>
@@ -741,11 +741,11 @@
                     <label class="form-label">Rate Your Experience</label>
                     <select class="form-select" id="ratings" required>
                         <option value="">Choose...</option>
-                        <option>⭐⭐⭐⭐⭐ - Excellent</option>
-                        <option>⭐⭐⭐⭐ - Very Good</option>
-                        <option>⭐⭐⭐ - Good</option>
-                        <option>⭐⭐ - Average</option>
-                        <option>⭐ - Poor</option>
+                        <option>Excellent</option>
+                        <option>Very Good</option>
+                        <option>Good</option>
+                        <option>Average</option>
+                        <option>Poor</option>
                     </select>
                 </div>
 
@@ -757,7 +757,7 @@
 
                 <!-- Submit Button -->
                 <div class=" text-center">
-                    <button type="submit" class="btn btn-warning px-4">Submit Feedback</button>
+                    <button type="button" id="submitFeedback" class="btn btn-warning px-4">Submit Feedback</button>
                 </div>
             </div>
         </form>
@@ -803,6 +803,56 @@
 <!--<script>-->
 <!--    AOS.init();-->
 <!--</script>-->
+<script>
+    const token = localStorage.getItem('token');
+    function authHeaders() {
+        return {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
+        };
+    }
+
+    $('#submitFeedback').on('click', function (e) {
+        e.preventDefault();
+
+        if (!token) {
+            alert("Please login first to submit feedback.");
+            window.location.href = "signInPage.html"; // redirect to login page
+            return;
+        }
+
+        let feedBackData = {
+            fullname: $('#fullName').val(),
+            email: $('#email').val(),
+            services: $('#service').val(),
+            ratings: $('#ratings').val(),
+            massage: $('#message').val()
+        };
+
+        console.log("Sending feedback data:", feedBackData);
+
+        $.ajax({
+            url: "http://localhost:8080/api/v1/feedback/save",
+            type: "POST",
+            headers: authHeaders(),
+            data: JSON.stringify(feedBackData),
+            success: function (response) {
+                alert("Feedback submitted successfully!");
+                $('#addFeedbackForm')[0].reset();
+            },
+            error: function (xhr) {
+                if (xhr.status === 403) {
+                    alert("You are not authorized. Please login.");
+                    window.location.href = "signInPage.html"; // redirect
+                } else {
+                    console.error("Error saving Feedback:", xhr.responseText);
+                    alert("Error: " + xhr.responseText);
+                }
+            }
+        });
+    });
+
+</script>
 
 </body>
 </html>
