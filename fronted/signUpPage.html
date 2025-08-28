@@ -149,46 +149,7 @@
 </section>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script>
-    $('#signUp').on('click', function () {
-        var username = $('#signupName').val();
-        var email = $('#signupEmail').val();
-        var password = $('#signupPassword').val();
-
-        if (username && email && password) {
-            $.ajax({
-                type: 'POST',
-                url: 'http://localhost:8080/auth/register',
-                data: JSON.stringify({
-                    username: username,
-                    email: email,
-                    password: password,
-                    role: "USER"
-                }),
-                contentType: 'application/json',
-                success: function (response) {
-                    alert(response.message); // Optional
-                    window.location.href = 'signInPage.html';
-                },
-                error: function (xhr) {
-                    let errorMessage = xhr.responseJSON?.message || 'Error occurred';
-                    alert(errorMessage);
-                }
-            });
-        } else {
-            alert('Please fill in all fields');
-        }
-    });
-
-    $('#showPasswordCheck').on('change', function() {
-        let passwordField = $('#signupPassword');
-        if ($(this).is(':checked')) {
-            passwordField.attr('type', 'text');
-        } else {
-            passwordField.attr('type', 'password');
-        }
-    });
-
-</script>
+<script src="js/signUp.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
