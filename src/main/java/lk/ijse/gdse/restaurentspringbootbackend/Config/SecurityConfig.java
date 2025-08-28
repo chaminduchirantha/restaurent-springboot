@@ -40,7 +40,9 @@ public class SecurityConfig {
                                 "api/v1/user/paginated",
                                 "api/v1/user/total-pages",
                                 "api/v1/feedback/all",
-                                "api/v1/feedback/save"
+                                "api/v1/feedback/save",
+                                "api/v1/feedback/paginated",
+                                "api/v1/feedback/total-pages"
                         ).permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(
