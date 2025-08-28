@@ -9,4 +9,6 @@ import java.util.List;
 public interface FeedBackService {
     FeedBackDto submitFeedback(FeedBackDto feedbackDto, String username);
     List<FeedBackDto> getAllFeedbacks();
+    List<FeedBackDto> getFeedbackByPage(int page, int size);
+    int getTotalPages(int size);
 }

@@ -9,6 +9,7 @@ import lk.ijse.gdse.restaurentspringbootbackend.repo.FeedBackRepo;
 import lk.ijse.gdse.restaurentspringbootbackend.service.FeedBackService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -51,5 +52,17 @@ public class FeedBackServiceImpl implements FeedBackService {
 
         }
         return feedBackDtos;
+    }
+
+    @Override
+    public List<FeedBackDto> getFeedbackByPage(int page, int size) {
+        int offset = page * size;
+        List<Feedback> feedbacks = feedBackRepo.findFeedbackPaginated(size, offset);
+        return modelMapper.map(feedbacks, new TypeToken<List<FeedBackDto>>() {}.getType());    }
+
+    @Override
+    public int getTotalPages(int size) {
+        int feedbackCount = feedBackRepo.getTotalFeedbackCount();
+        return (int) Math.ceil((double) feedbackCount / size);
     }
 }

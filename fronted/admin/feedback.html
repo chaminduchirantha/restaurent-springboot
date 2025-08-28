@@ -41,13 +41,35 @@
         </table>
     </div>
 </section>
+
+<nav aria-label="...">
+    <div class="d-flex justify-content-center align-items-center mb-3">
+        <ul class="pagination pagination-md">
+            <li class="page-item active" aria-current="page">
+                <span class="page-link">1</span>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item"><a class="page-link" href="#">6</a></li>
+            <li class="page-item"><a class="page-link" href="#">7</a></li>
+            <li class="page-item"><a class="page-link" href="#">8</a></li>
+            <li class="page-item"><a class="page-link" href="#">9</a></li>
+            <li class="page-item"><a class="page-link" href="#">10</a></li>
+        </ul>
+    </div>
+</nav>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 
+    let currentPage = 0;
+    const pageSize = 5;
+
     const token = localStorage.getItem('token');
     $(document).ready(function () {
-        loadCustomers();
+        loadFeeBack();
     });
 
     function authHeaders() {
@@ -56,36 +78,63 @@
             'Content-Type': 'application/json'
         };
     }
-    function loadCustomers() {
+    function loadFeeBack() {
         $.ajax({
-            url: `http://localhost:8080/api/v1/feedback/all`,
+            url: `http://localhost:8080/api/v1/feedback/paginated?page=${currentPage}&size=${pageSize}`,
             type: 'GET',
             headers: authHeaders(),
             success: function (res) {
-                const feedback = res.data || []; // <-- important
+                const feedback = res || []; // backend returns raw array
                 let rows = "";
-                feedback.forEach(feedback => {
-                    rows +=
-                        `<tr>
-                     <td>${feedback.fullname}</td>
-                     <td>${feedback.email}</td>
-                     <td>${feedback.services}</td>
-                     <td>${feedback.ratings}</td>
-                     <td>${feedback.message}</td>
-                     <td>
-                         <button class="btn btn-warning me-2">Edit</button>
-                         <button class="btn btn-sm btn-danger">Delete</button>
-                     </td>
-                  </tr>`;
+                feedback.forEach(fb => {
+                    rows += `
+                    <tr>
+                        <td>${fb.email}</td>
+                        <td>${fb.fullname}</td>
+                        <td>${fb.services}</td>
+                        <td>${fb.ratings}</td>
+                        <td>${fb.message}</td>
+                        <td>
+                            <button class="btn btn-warning me-2">Edit</button>
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </td>
+                    </tr>`;
                 });
                 $('#feedbackTableBody').html(rows);
-                loadPagination(); // make sure pagination is called here
+                loadPagination();
             },
+
             error: function(err){
                 console.log(err);
                 alert("Failed to load Feedback");
             }
         });
+    }
+
+    function loadPagination() {
+        $.ajax({
+            url: `http://localhost:8080/api/v1/feedback/total-pages?size=${pageSize}`,
+            method: "GET",
+            success: function (totalPages) {
+                let paginationHTML = "";
+                for (let i = 0; i < totalPages; i++) {
+                    paginationHTML += `
+                    <li class="page-item ${i === currentPage ? 'active' : ''}">
+                        <a class="page-link" href="#" onclick="goToPage(${i})">${i + 1}</a>
+                    </li>
+                `;
+                }
+                $('.pagination').html(paginationHTML);
+            },
+            error: function (xhr) {
+                console.error("Error loading pagination:", xhr.responseText);
+            }
+        });
+    }
+
+    function goToPage(page) {
+        currentPage = page;
+        loadFeeBack();
     }
 </script>
 </body>

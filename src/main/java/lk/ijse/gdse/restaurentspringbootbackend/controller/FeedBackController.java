@@ -38,4 +38,14 @@ public class FeedBackController {
                 new ApiResponseDto(200, "OK", feedbackList)
         );
     }
+
+    @GetMapping("paginated")
+    public List<FeedBackDto> getPaginatedJobs(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+        return feedBackService.getFeedbackByPage(page, size);
+    }
+
+    @GetMapping("total-pages")
+    public int getTotalPages(@RequestParam(defaultValue = "5") int size) {
+        return feedBackService.getTotalPages(size);
+    }
 }
