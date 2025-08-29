@@ -9,23 +9,36 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MenuServiceImpl implements MenuService {
     private final ModelMapper modelMapper;
     private final MenuRepo menuRepo;
 
+
     @Override
-    public int addMenu(MenuDto menuDto) {
+    public int addItem(MenuDto menuDto) {
         if(menuRepo.existsByName(menuDto.getName())) {
             return VarList.Not_Acceptable;
-        } else {
+        }else {
             try {
                 menuRepo.save(modelMapper.map(menuDto, Menus.class));
                 return VarList.Created;
-            } catch (Exception e) {
+            }catch (Exception e) {
                 return VarList.Bad_Gateway;
             }
         }
     }
+
+    @Override
+    public List<MenuDto> getAllMenu() {
+        List<Menus> menus = menuRepo.findAll();
+        return menus.stream()
+                .map(traditionalItem -> modelMapper.map(traditionalItem, MenuDto.class))
+                .toList();
+    }
 }
+
