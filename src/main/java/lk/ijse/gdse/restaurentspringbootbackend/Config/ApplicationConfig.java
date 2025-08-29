@@ -9,12 +9,16 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
-public class ApplicationConfig {
+public class ApplicationConfig implements WebMvcConfigurer {
     private final CustomerRepo userRepo;
 
     @Bean
@@ -32,5 +36,14 @@ public class ApplicationConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        Path uploadDir = Paths.get("uploads");
+        String uploadPath = uploadDir.toFile().getAbsolutePath();
+
+        registry.addResourceHandler("/uploads/")
+                .addResourceLocations("file:" + uploadPath+"/");
     }
 }
