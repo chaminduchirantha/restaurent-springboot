@@ -18,14 +18,18 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Configuration
 @EnableMethodSecurity
 @RequiredArgsConstructor
 
-public class SecurityConfig {
+public class SecurityConfig{
     private final UserDetailsService userDetailsService;
     private final JwtAuthFilter jwtAuthFilter;
     private final PasswordEncoder passwordEncoder;
@@ -42,7 +46,9 @@ public class SecurityConfig {
                                 "api/v1/feedback/all",
                                 "api/v1/feedback/save",
                                 "api/v1/feedback/paginated",
-                                "api/v1/feedback/total-pages"
+                                "api/v1/feedback/total-pages",
+                                "api/v1/menu/addItem",
+                                "api/v1/menu/getAllMenus"
                         ).permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(
@@ -58,7 +64,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(List.of("http://localhost:63343"));  // your frontend origin
+        config.setAllowedOrigins(List.of("http://localhost:63342"));  // your frontend origin
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
@@ -75,4 +81,7 @@ public class SecurityConfig {
         provider.setPasswordEncoder(passwordEncoder);
         return provider;
     }
+
+
+
 }
