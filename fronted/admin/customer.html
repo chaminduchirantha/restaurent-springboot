@@ -85,6 +85,54 @@
   </div>
 </div>
 
+
+
+<div class="modal fade" id="editCustomerModal" tabindex="-1" aria-labelledby="editCustomerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content rounded-4 shadow-lg border-0">
+
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title fw-bold" id="editCustomerModalLabel">Edit Customer</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body p-4">
+        <div class="modal-body">
+          <form id="editCustomerForm">
+            <div class="mb-3">
+              <input type="hidden" id="editUserId">
+
+              <label>Username</label>
+              <input type="text" class="form-control" id="editUsername" placeholder="enter user name" required>
+            </div>
+            <div class="mb-3">
+              <label>Password</label>
+              <input type="password" class="form-control" id="editPassword" placeholder="enter password" required>
+            </div>
+            <div class="mb-3">
+              <label>Email</label>
+              <input type="email" class="form-control" id="editEmail" placeholder="enter email" required>
+            </div>
+            <div class="mb-3">
+              <label>Role</label>
+              <select class="form-control" id="editRole" required>
+                <option >select role</option>
+                <option value="USER">USER</option>
+                <option value="ADMIN">ADMIN</option>
+              </select>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" id="updateCustomerBtn" class="btn btn-primary">Edit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <nav aria-label="..." style="position: relative; top:50px;" >
   <div class="d-flex justify-content-center align-items-center mb-3">
     <ul class="pagination pagination-md">
@@ -140,7 +188,7 @@
                      <td>${customer.password}</td>
                      <td>${customer.role}</td>
                      <td>
-                         <button class="btn btn-warning me-2">Edit</button>
+                         <button class="btn btn-warning me-2" onclick="openEditModal('${customer.id}','${customer.username}', '${customer.email}', '${customer.password}', '${customer.role}')">Edit</button>
                          <button class="btn btn-sm btn-danger">Delete</button>
                      </td>
                   </tr>`;
@@ -212,6 +260,55 @@
   function goToPage(page) {
     currentPage = page;
     loadCustomers();
+  }
+
+  $('#updateCustomerBtn').on('click', function(event){
+    updateCustomer(event);
+  });
+
+  function openEditModal(id, username, email, password, role) {
+    $('#editUserId').val(id);
+    $('#editUsername').val(username);
+    $('#editEmail').val(email);
+    $('#editPassword').val(password);
+    $('#editRole').val(role);
+    new bootstrap.Modal(document.getElementById('editCustomerModal')).show();
+  }
+
+  function updateCustomer(event) {
+    event.preventDefault();
+
+    const userId = $('#editUserId').val();
+    const username = $('#editUsername').val();
+    const userEmail = $('#editEmail').val();
+    const userPassword = $('#editPassword').val();
+    const userRole = $('#editRole').val();
+
+    const customerData = {
+      id: userId,
+      email: userEmail,
+      password: userPassword,
+      role: userRole,
+      username: username,
+    };
+
+    $.ajax({
+      url: "http://localhost:8080/api/v1/user/update",
+      type: "PUT",
+      headers: authHeaders(),
+      data: JSON.stringify(customerData),
+      success: function () {
+        alert("Customer updated successfully!");
+        const modalEl = document.getElementById('editCustomerModal');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        modal.hide(); // modal close karanne me widiyata
+
+        loadCustomers(currentPage);
+      },
+      error: function (xhr) {
+        alert("Error updating Customer: " + xhr.responseText);
+      }
+    });
   }
 
 </script>
