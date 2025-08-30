@@ -48,9 +48,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto updateCustomer(Long id, CustomerDto customerDto) {
-        Customer existing = customerRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found with ID " + id));
+    public CustomerDto updateCustomer(CustomerDto customerDto) {
+        Customer existing = customerRepo.findById(customerDto.getId())
+                .orElseThrow(() -> new RuntimeException("Customer not found with ID "));
 
         existing.setUsername(customerDto.getUsername());
         existing.setEmail(customerDto.getEmail());
