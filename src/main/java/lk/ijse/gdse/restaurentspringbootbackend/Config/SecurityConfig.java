@@ -41,6 +41,8 @@ public class SecurityConfig{
                                 "/auth/**" ,
                                 "role/api/user-info" ,
                                 "api/v1/user/save",
+                                "api/v1/user/update",
+                                "api/v1/user/delete/{id}",
                                 "api/v1/user/paginated",
                                 "api/v1/user/total-pages",
                                 "api/v1/feedback/all",
