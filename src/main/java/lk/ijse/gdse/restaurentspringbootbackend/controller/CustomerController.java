@@ -37,11 +37,10 @@ public class CustomerController {
         );
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("update")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ApiResponseDto> updateCustomer(@PathVariable Long id,
-                                                         @RequestBody CustomerDto customerDto) {
-        CustomerDto updatedCustomer = customerService.updateCustomer(id, customerDto);
+    public ResponseEntity<ApiResponseDto> updateCustomer(@RequestBody CustomerDto customerDto) {
+        CustomerDto updatedCustomer = customerService.updateCustomer(customerDto);
         return ResponseEntity.ok(
                 new ApiResponseDto(200, "Customer Updated Successfully", updatedCustomer)
         );
