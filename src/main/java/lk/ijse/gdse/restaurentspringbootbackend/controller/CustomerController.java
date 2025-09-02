@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("api/v1/user")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:63342")
+
 public class CustomerController {
     private final CustomerServiceImpl customerService;
     private final CustomerRepo userRepo;
