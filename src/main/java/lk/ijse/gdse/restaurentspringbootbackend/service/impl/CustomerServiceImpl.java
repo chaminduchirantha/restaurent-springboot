@@ -3,6 +3,7 @@ package lk.ijse.gdse.restaurentspringbootbackend.service.impl;
 import lk.ijse.gdse.restaurentspringbootbackend.dto.CustomerDto;
 import lk.ijse.gdse.restaurentspringbootbackend.entity.Customer;
 import lk.ijse.gdse.restaurentspringbootbackend.entity.Role;
+import lk.ijse.gdse.restaurentspringbootbackend.exception.ResourceNotFoundException;
 import lk.ijse.gdse.restaurentspringbootbackend.repo.CustomerRepo;
 import lk.ijse.gdse.restaurentspringbootbackend.service.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,9 @@ public class CustomerServiceImpl implements CustomerService {
         List<Customer> customers = customerRepo.findAll();
 
         List<CustomerDto>customerDtos = new ArrayList<>();
+        if (customers.isEmpty()) {
+            throw new ResourceNotFoundException("No customer Found");
+        }
         for (Customer customer : customers) {
             customerDtos.add(modelMapper.map(customer, CustomerDto.class));
 
@@ -49,18 +53,18 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDto updateCustomer(CustomerDto customerDto) {
-        Customer existing = customerRepo.findById(customerDto.getId())
+        Customer customer = customerRepo.findById(customerDto.getId())
                 .orElseThrow(() -> new RuntimeException("Customer not found with ID "));
 
-        existing.setUsername(customerDto.getUsername());
-        existing.setEmail(customerDto.getEmail());
-        existing.setRole(Role.valueOf(customerDto.getRole()));
+        customer.setUsername(customerDto.getUsername());
+        customer.setEmail(customerDto.getEmail());
+        customer.setRole(Role.valueOf(customerDto.getRole()));
 
         if (customerDto.getPassword() != null && !customerDto.getPassword().isBlank()) {
-            existing.setPassword(passwordEncoder.encode(customerDto.getPassword()));
+            customer.setPassword(passwordEncoder.encode(customerDto.getPassword()));
         }
 
-        Customer updated = customerRepo.save(existing);
+        Customer updated = customerRepo.save(customer);
 
         CustomerDto response = modelMapper.map(updated, CustomerDto.class);
         response.setPassword("********"); // hide password in response
