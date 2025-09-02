@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,6 +16,6 @@ public class MenuDto {
     private String name;
     private String category;
     private String description;
-    private String imageUrl;
+    private List<String> imageUrls;
     private double price;
 }
