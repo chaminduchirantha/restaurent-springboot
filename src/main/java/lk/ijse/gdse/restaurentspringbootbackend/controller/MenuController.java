@@ -41,7 +41,7 @@ public class MenuController {
                     Files.write(filePath, multipartFile.getBytes());
                     fileNames.add(fileName);
                 }
-                menuDto.setImageUrl(fileNames.toString());
+                menuDto.setImageUrls(fileNames);
 
                 int response = menuService.addItem(menuDto);
                 if (response == VarList.Created) {
@@ -69,6 +69,42 @@ public class MenuController {
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponseDto(VarList.Internal_Server_Error, e.getMessage(), null));
+        }
+    }
+
+    @PutMapping(value = "/updateItem", consumes = {"multipart/form-data"})
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponseDto> updateItem(@RequestPart("item") MenuDto menuDto,
+                                                     @RequestPart(value = "file", required = false) MultipartFile[] multipartFiles) {
+        try {
+            if (multipartFiles != null && multipartFiles.length > 0) {
+                List<String> fileNames = new ArrayList<>();
+                Path uploadDir = Paths.get("uploads/");
+                Files.createDirectories(uploadDir);
+
+                for (MultipartFile multipartFile : multipartFiles) {
+                    String fileName = System.currentTimeMillis() + "_" + multipartFile.getOriginalFilename();
+                    Path filePath = uploadDir.resolve(fileName);
+                    Files.write(filePath, multipartFile.getBytes());
+                    fileNames.add(fileName);
+                }
+                menuDto.setImageUrls(fileNames); // new image(s)
+            }
+
+            int response = menuService.updateItem(menuDto);
+            if (response == VarList.Created) {
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(new ApiResponseDto(VarList.OK, "Menu updated successfully", menuDto));
+            } else if (response == VarList.Not_Found) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new ApiResponseDto(VarList.Not_Found, "Menu not found", null));
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
+                        .body(new ApiResponseDto(VarList.Bad_Gateway, "Error while updating", null));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponseDto(VarList.Internal_Server_Error, "Update failed: " + e.getMessage(), null));
         }
     }
 
