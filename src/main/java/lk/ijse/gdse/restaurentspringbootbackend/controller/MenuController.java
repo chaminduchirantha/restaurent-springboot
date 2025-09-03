@@ -6,6 +6,7 @@ import lk.ijse.gdse.restaurentspringbootbackend.dto.MenuDto;
 import lk.ijse.gdse.restaurentspringbootbackend.service.MenuService;
 import lk.ijse.gdse.restaurentspringbootbackend.util.VarList;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -29,6 +31,8 @@ import java.util.UUID;
 public class MenuController {
 
     private final MenuService menuService;
+    private final String uploadDir = "uploads/";
+
 
     @PostMapping(value = "/addItem", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PreAuthorize("hasRole('ADMIN')")
@@ -125,5 +129,21 @@ public class MenuController {
         menuService.deleteCustomer(id);
         return ResponseEntity.ok(new ApiResponseDto(200, "Menu deleted successfully", null));
     }
+
+    @GetMapping("/paginated")
+    public ResponseEntity<ApiResponseDto> getPaginated(
+            @RequestParam int page,
+            @RequestParam int size
+    ) {
+        List<MenuDto> customers = menuService.getMenuByPage(page, size);
+        return ResponseEntity.ok(new ApiResponseDto(200, "OK", customers));
+    }
+
+    @GetMapping("/total-pages")
+    public ResponseEntity<Integer> getTotalPages(@RequestParam int size) {
+        int totalPages = menuService.getTotalPages(size);
+        return ResponseEntity.ok(totalPages);
+    }
+
 }
 

@@ -1,16 +1,21 @@
 package lk.ijse.gdse.restaurentspringbootbackend.service.impl;
 
+import lk.ijse.gdse.restaurentspringbootbackend.dto.CustomerDto;
 import lk.ijse.gdse.restaurentspringbootbackend.dto.MenuDto;
 import lk.ijse.gdse.restaurentspringbootbackend.entity.Customer;
 import lk.ijse.gdse.restaurentspringbootbackend.entity.Menus;
 import lk.ijse.gdse.restaurentspringbootbackend.repo.MenuRepo;
 import lk.ijse.gdse.restaurentspringbootbackend.service.MenuService;
-import lk.ijse.gdse.restaurentspringbootbackend.util.VarList;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+
+import org.modelmapper.TypeToken;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,5 +80,19 @@ public class MenuServiceImpl implements MenuService {
                 .orElseThrow(() -> new RuntimeException("Menu not found with id: " + id));
         menuRepo.delete(menus);
     }
+
+    @Override
+    public int getTotalPages(int size) {
+        long totalMenus = menuRepo.getTotalMenuCount();
+        return (int) Math.ceil((double) totalMenus / size);
+    }
+
+    @Override
+    public List<MenuDto> getMenuByPage(int page, int size) {
+        int offset = page * size;
+        List<Menus> menus = menuRepo.findMenuPaginated(size, offset);
+        return modelMapper.map(menus, new TypeToken<List<MenuDto>>() {}.getType());
+    }
+
 }
 

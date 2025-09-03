@@ -131,11 +131,33 @@
   </div>
 </div>
 
+<nav aria-label="..." style="position: relative; top:20px;" >
+  <div class="d-flex justify-content-center align-items-center mb-1" style="margin-left: 20px">
+    <ul class="pagination pagination-md" style="gap: 10px;" >
+      <li class="page-item active" aria-current="page">
+        <span class="page-link">1</span>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">4</a></li>
+      <li class="page-item"><a class="page-link" href="#">5</a></li>
+      <li class="page-item"><a class="page-link" href="#">6</a></li>
+      <li class="page-item"><a class="page-link" href="#">7</a></li>
+      <li class="page-item"><a class="page-link" href="#">8</a></li>
+      <li class="page-item"><a class="page-link" href="#">9</a></li>
+      <li class="page-item"><a class="page-link" href="#">10</a></li>
+    </ul>
+  </div>
+</nav>
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+  let currentPage = 0;
+  const pageSize = 3;
+
   const token = localStorage.getItem('token');
   let currentMenuId = null;
   const menuModal = new bootstrap.Modal(document.getElementById('menuModal'));
@@ -187,9 +209,19 @@
     };
   }
 
+  function escapeString(str) {
+    if (!str) return '';
+    return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+  }
+
   function loadMenus() {
     $.ajax({
-      url: "http://localhost:8080/api/v1/menu/all",
+      url: `http://localhost:8080/api/v1/menu/paginated?page=${currentPage}&size=${pageSize}`,
       type: "GET",
       headers: authHeaders(),
       success: function (res) {
@@ -200,29 +232,37 @@
             let card = `
                 <div class="col-md-4 mb-4">
                   <div class="card shadow-sm rounded-4 h-100">
-                    <img src="http://localhost:8080/uploads/${menu.imageUrl}"
+                    <img src="http://localhost:8080/uploads/${escapeString(menu.imageUrl)}"
                          class="card-img-top"
-                         alt="${menu.name}"
+                         alt="${escapeString(menu.name)}"
                          onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_17ecc4b4a5d%20text%20%7B%20fill%3A%23999%3Bfont-weight%3Anormal%3Bfont-family%3Avar(--bs-font-sans-serif)%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_17ecc4b4a5d%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23373940%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22106.3984375%22%20y%3D%2296.6%22%3EImage%20not%20found%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E'">
                     <div class="action-buttons">
-                      <button class="btn btn-sm btn-primary me-1" onclick="editMenuItem(${menu.menuid}, '${escapeString(menu.name)}', '${escapeString(menu.description)}', '${escapeString(menu.category)}', ${menu.price}, '${escapeString(menu.imageUrl)}')">
-                        <i class="fas fa-edit"></i>
+                        <button class="btn btn-sm btn-primary me-1 edit-btn"
+                                data-id="${menu.menuid}"
+                                data-name="${escapeString(menu.name)}"
+                                data-desc="${escapeString(menu.description)}"
+                                data-cat="${escapeString(menu.category)}"
+                                data-price="${menu.price}"
+                                data-img="${escapeString(menu.imageUrl)}">
+                          <i class="fas fa-edit"></i>
+                        </button>
                       </button>
                       <button class="btn btn-sm btn-danger" onclick="deleteMenuItem(${menu.menuid})">
                         <i class="fas fa-trash"></i>
                       </button>
                     </div>
                     <div class="card-body">
-                      <h5 class="card-title">${menu.name}</h5>
-                      <p class="card-text text-muted">${menu.description}</p>
+                      <h5 class="card-title">${escapeString(menu.name)}</h5>
+                      <p class="card-text text-muted">${escapeString(menu.description)}</p>
                       <p class="fw-bold">Rs. ${menu.price.toFixed(2)}</p>
-                      <span class="badge bg-info">${menu.category}</span>
+                      <span class="badge bg-info">${escapeString(menu.category)}</span>
                     </div>
                   </div>
                 </div>
               `;
             $("#itemContainer").append(card);
           });
+          loadPagination()
         } else {
           $("#emptyState").show();
         }
@@ -245,9 +285,44 @@
     });
   }
 
-  function escapeString(str) {
-    return str ? str.replace(/'/g, "\\'").replace(/"/g, '\\"') : '';
+  function loadPagination() {
+    $.ajax({
+      url: `http://localhost:8080/api/v1/menu/total-pages?size=${pageSize}`,
+      method: "GET",
+      success: function (totalPages) {
+        let paginationHTML = "";
+        for (let i = 0; i < totalPages; i++) {
+          paginationHTML += `
+                    <li class="page-item ${i === currentPage ? 'active' : ''}">
+                        <a class="page-link" href="#" onclick="goToPage(${i})">${i + 1}</a>
+                    </li>
+                `;
+        }
+        $('.pagination').html(paginationHTML);
+      },
+      error: function (xhr) {
+        console.error("Error loading pagination:", xhr.responseText);
+      }
+    });
   }
+
+  function goToPage(page) {
+    currentPage = page;
+    loadMenus();
+  }
+
+  $(document).on('click', '.edit-btn', function() {
+    const btn = $(this);
+    editMenuItem(
+            btn.data('id'),
+            btn.data('name'),
+            btn.data('desc'),
+            btn.data('cat'),
+            btn.data('price'),
+            btn.data('img')
+    );
+  });
+
 
   function saveMenuItem() {
     // Validate form
@@ -330,9 +405,9 @@
     // Show current image
     $('#imagePreview').html(`
       <div class="alert alert-info mt-2">
-        <i class="fas fa-info-circle me-2"></i>Current image: ${imageUrl}
+        <i class="fas fa-info-circle me-2"></i>Current image: ${escapeString(imageUrl)}
       </div>
-      <img src="http://localhost:8080/uploads/${imageUrl}"
+      <img src="http://localhost:8080/uploads/${escapeString(imageUrl)}"
            class="img-thumbnail mt-2" style="max-height: 200px;"
            onerror="this.style.display='none'">
     `);
