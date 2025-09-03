@@ -13,10 +13,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MenuDto {
-    private Long id;
+    private Long menuid;
     private String name;
     private String category;
     private String description;
-    private String imageUrls;
+    private String imageUrl;
     private double price;
 }
