@@ -5,6 +5,8 @@ import lk.ijse.gdse.restaurentspringbootbackend.dto.MenuDto;
 import java.util.List;
 
 public interface MenuService{
-    int addItem(MenuDto menuDto);
-    List<MenuDto> getAllMenu();
+    void saveMenu(MenuDto menuDto);
+    void updateMenu(MenuDto menuDto);
+    List<MenuDto> getAllCustomer();
+    void deleteCustomer(Long id);
 }

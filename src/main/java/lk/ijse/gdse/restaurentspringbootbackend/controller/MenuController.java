@@ -1,6 +1,7 @@
 package lk.ijse.gdse.restaurentspringbootbackend.controller;
 
 import lk.ijse.gdse.restaurentspringbootbackend.dto.ApiResponseDto;
+import lk.ijse.gdse.restaurentspringbootbackend.dto.CustomerDto;
 import lk.ijse.gdse.restaurentspringbootbackend.dto.MenuDto;
 import lk.ijse.gdse.restaurentspringbootbackend.service.MenuService;
 import lk.ijse.gdse.restaurentspringbootbackend.util.VarList;
@@ -27,88 +28,8 @@ import java.util.UUID;
 @CrossOrigin(origins = "http://localhost:63342", allowCredentials="true")
 public class MenuController {
 
-        private final MenuService menuService;
-//        @PostMapping(value = "/addItem", consumes = {"multipart/form-data"})
-//        @PreAuthorize("hasRole('ADMIN')")
-//        public ResponseEntity<ApiResponseDto> saveItem(@RequestPart("item") MenuDto menuDto,
-//                                                    @RequestPart("file") MultipartFile[] multipartFiles) throws IOException {
-//            try {
-//                List<String> fileNames = new ArrayList<>();
-//                Path uploadDir = Paths.get("uploads/");
-//                Files.createDirectories(uploadDir);
-//
-//                for (MultipartFile multipartFile : multipartFiles) {
-//                    String fileName = System.currentTimeMillis() + "_" + multipartFile.getOriginalFilename();
-//                    Path filePath = uploadDir.resolve(fileName);
-//                    Files.write(filePath, multipartFile.getBytes());
-//                    fileNames.add(fileName);
-//                }
-//                menuDto.setImageUrls(fileNames);
-//
-//                int response = menuService.addItem(menuDto);
-//                if (response == VarList.Created) {
-//                    return ResponseEntity.status(HttpStatus.CREATED)
-//                            .body(new ApiResponseDto(VarList.Created, "Menu saved", menuDto));
-//                } else {
-//                    return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
-//                            .body(new ApiResponseDto(VarList.Bad_Gateway, "Error While Saving", null));
-//                }
-//            } catch (Exception e) {
-//                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                        .body(new ApiResponseDto(VarList.Internal_Server_Error, "file Upload Failed" + e.getMessage(), null));
-//
-//
-//            }
-//        }
-//
-//    @GetMapping("/getAllMenus")
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public ResponseEntity<ApiResponseDto> getAllItems(){
-//        try{
-//            List<MenuDto> menus = menuService.getAllMenu();
-//            return ResponseEntity.status(HttpStatus.OK)
-//                    .body(new ApiResponseDto(VarList.OK,"suceess", menus));
-//        }catch (Exception e){
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body(new ApiResponseDto(VarList.Internal_Server_Error, e.getMessage(), null));
-//        }
-//    }
-//
-//    @PutMapping(value = "/updateItem", consumes = {"multipart/form-data"})
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public ResponseEntity<ApiResponseDto> updateItem(@RequestPart("item") MenuDto menuDto,
-//                                                     @RequestPart(value = "file", required = false) MultipartFile[] multipartFiles) {
-//        try {
-//            if (multipartFiles != null && multipartFiles.length > 0) {
-//                List<String> fileNames = new ArrayList<>();
-//                Path uploadDir = Paths.get("uploads/");
-//                Files.createDirectories(uploadDir);
-//
-//                for (MultipartFile multipartFile : multipartFiles) {
-//                    String fileName = System.currentTimeMillis() + "_" + multipartFile.getOriginalFilename();
-//                    Path filePath = uploadDir.resolve(fileName);
-//                    Files.write(filePath, multipartFile.getBytes());
-//                    fileNames.add(fileName);
-//                }
-//                menuDto.setImageUrls(fileNames); // new image(s)
-//            }
-//
-//            int response = menuService.updateItem(menuDto);
-//            if (response == VarList.Created) {
-//                return ResponseEntity.status(HttpStatus.OK)
-//                        .body(new ApiResponseDto(VarList.OK, "Menu updated successfully", menuDto));
-//            } else if (response == VarList.Not_Found) {
-//                return ResponseEntity.status(HttpStatus.NOT_FOUND)
-//                        .body(new ApiResponseDto(VarList.Not_Found, "Menu not found", null));
-//            } else {
-//                return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
-//                        .body(new ApiResponseDto(VarList.Bad_Gateway, "Error while updating", null));
-//            }
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body(new ApiResponseDto(VarList.Internal_Server_Error, "Update failed: " + e.getMessage(), null));
-//        }
-//    }
+    private final MenuService menuService;
+
     @PostMapping(value = "/addItem", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> addMenuItem(
@@ -119,25 +40,19 @@ public class MenuController {
             @RequestParam("file") MultipartFile file // single image
     ) {
         try {
-            // Define upload directory
             String uploadDir = "uploads/";
-            // Generate a unique file name
             String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
             Path filePath = Paths.get(uploadDir, fileName);
-            // Create directories if not exist
             Files.createDirectories(filePath.getParent());
-            // Save file to disk
             Files.write(filePath, file.getBytes());
 
-            // Map to DTO
             MenuDto menuDto = new MenuDto();
             menuDto.setName(name);
             menuDto.setCategory(category);
             menuDto.setDescription(description);
             menuDto.setPrice(price);
-            menuDto.setImageUrls(fileName); // Save only file name
+            menuDto.setImageUrl(fileName);
 
-            // Call your service to save
             menuService.saveMenu(menuDto);
 
             return ResponseEntity.status(201).body("Menu item saved successfully");
@@ -146,18 +61,69 @@ public class MenuController {
             return ResponseEntity.status(500).body("Failed to save image: " + e.getMessage());
         }
     }
+
+    @PutMapping(value = "/updateItem", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<String> upsertMenuItem(
+            @RequestParam(value = "id", required = false) Long menuid, // optional
+            @RequestParam("name") String name,
+            @RequestParam("category") String category,
+            @RequestParam("description") String description,
+            @RequestParam("price") double price,
+            @RequestParam(value = "file", required = false) MultipartFile file // optional image
+    ) {
+        try {
+            MenuDto menuDto=new MenuDto();
+
+            if (menuid != null) {
+               menuDto.setMenuid(menuid);
+                if (menuDto == null) {
+                    menuDto = new MenuDto();
+                }
+            } else {
+                menuDto = new MenuDto();
+            }
+
+            menuDto.setName(name);
+            menuDto.setCategory(category);
+            menuDto.setDescription(description);
+            menuDto.setPrice(price);
+
+            if (file != null && !file.isEmpty()) {
+                String uploadDir = "uploads/";
+                String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+                Path filePath = Paths.get(uploadDir, fileName);
+                Files.createDirectories(filePath.getParent());
+                Files.write(filePath, file.getBytes());
+
+                menuDto.setImageUrl(fileName);
+            }
+
+            menuService.updateMenu(menuDto);
+
+            return ResponseEntity.status(200).body("Menu item saved successfully");
+
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body("Failed to save image: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Operation failed: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/all")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    public ResponseEntity<ApiResponseDto> getAllMenu() {
+        List<MenuDto> menus = menuService.getAllCustomer();
+        return ResponseEntity.ok(
+                new ApiResponseDto(200, "OK", menus)
+        );
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")  // Only admin can delete
+    public ResponseEntity<ApiResponseDto> deleteMenu(@PathVariable Long id) {
+        menuService.deleteCustomer(id);
+        return ResponseEntity.ok(new ApiResponseDto(200, "Menu deleted successfully", null));
+    }
 }
 
-
-
-//    @GetMapping
-//    public List<MenuItem> getAllMenuItems() {
-//        return repo.findAll();
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> deleteMenuItem(@PathVariable Long id) {
-//        repo.deleteById(id);
-//        return ResponseEntity.noContent().build();
-//    }
-//}

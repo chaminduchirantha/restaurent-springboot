@@ -1,6 +1,7 @@
 package lk.ijse.gdse.restaurentspringbootbackend.service.impl;
 
 import lk.ijse.gdse.restaurentspringbootbackend.dto.MenuDto;
+import lk.ijse.gdse.restaurentspringbootbackend.entity.Customer;
 import lk.ijse.gdse.restaurentspringbootbackend.entity.Menus;
 import lk.ijse.gdse.restaurentspringbootbackend.repo.MenuRepo;
 import lk.ijse.gdse.restaurentspringbootbackend.service.MenuService;
@@ -10,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,27 +20,60 @@ public class MenuServiceImpl implements MenuService {
     private final ModelMapper modelMapper;
     private final MenuRepo menuRepo;
 
-
     @Override
-    public int addItem(MenuDto menuDto) {
-        if(menuRepo.existsByName(menuDto.getName())) {
-            return VarList.Not_Acceptable;
-        }else {
-            try {
-                menuRepo.save(modelMapper.map(menuDto, Menus.class));
-                return VarList.Created;
-            }catch (Exception e) {
-                return VarList.Bad_Gateway;
-            }
+    public void saveMenu(MenuDto menuDto) {
+        Menus menu;
+
+        if (menuDto.getMenuid() != null) {
+            menu = menuRepo.findById(menuDto.getMenuid())
+                    .orElse(new Menus());
+        } else {
+            menu = new Menus();
         }
+
+        menu.setName(menuDto.getName());
+        menu.setCategory(menuDto.getCategory());
+        menu.setDescription(menuDto.getDescription());
+        menu.setPrice(menuDto.getPrice());
+        menu.setImageUrl(menuDto.getImageUrl());
+
+        menuRepo.save(menu);
     }
 
     @Override
-    public List<MenuDto> getAllMenu() {
-        List<Menus> menus = menuRepo.findAll();
-        return menus.stream()
-                .map(traditionalItem -> modelMapper.map(traditionalItem, MenuDto.class))
-                .toList();
+    public void updateMenu(MenuDto menuDto) {
+        if (menuDto.getMenuid() == null) {
+            saveMenu(menuDto);
+            return;
+        }
+
+        Menus menu = menuRepo.findById(menuDto.getMenuid())
+                .orElseThrow(() -> new RuntimeException("Menu not found with ID: " + menuDto.getMenuid()));
+
+        menu.setName(menuDto.getName());
+        menu.setCategory(menuDto.getCategory());
+        menu.setDescription(menuDto.getDescription());
+        menu.setPrice(menuDto.getPrice());
+        menu.setImageUrl(menuDto.getImageUrl());
+
+        menuRepo.save(menu);
+    }
+
+    @Override
+    public List<MenuDto> getAllCustomer() {
+        List<Menus>menus = menuRepo.findAll();
+        List<MenuDto> menuDtos = new ArrayList<>();
+        for (Menus menu : menus) {
+            menuDtos.add(modelMapper.map(menu, MenuDto.class));
+        }
+        return menuDtos;
+    }
+
+    @Override
+    public void deleteCustomer(Long id) {
+        Menus menus = menuRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Menu not found with id: " + id));
+        menuRepo.delete(menus);
     }
 }
 
