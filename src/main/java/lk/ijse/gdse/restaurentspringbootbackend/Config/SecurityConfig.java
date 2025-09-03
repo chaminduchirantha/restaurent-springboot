@@ -50,7 +50,11 @@ public class SecurityConfig{
                                 "api/v1/feedback/paginated",
                                 "api/v1/feedback/total-pages",
                                 "api/v1/menu/addItem",
-                                "api/v1/menu/getAllMenus"
+                                "api/v1/menu/all",
+                                "api/v1/menu/delete/{id}",
+                                "auth/forgot-password",
+                                "auth/verify-otp",
+                                "auth/reset-password"
                         ).permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(

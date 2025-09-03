@@ -42,6 +42,10 @@ public class FeedBackServiceImpl implements FeedBackService {
         return feedbackDto;
     }
 
+
+
+
+
     @Override
     public List<FeedBackDto> getAllFeedbacks() {
         List<Feedback> feedbacks = feedBackRepo.findAll();
@@ -64,5 +68,12 @@ public class FeedBackServiceImpl implements FeedBackService {
     public int getTotalPages(int size) {
         int feedbackCount = feedBackRepo.getTotalFeedbackCount();
         return (int) Math.ceil((double) feedbackCount / size);
+    }
+
+    @Override
+    public void deleteFeedback(Long id) {
+        Feedback feedback = feedBackRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Feedback not found with id: " + id));
+        feedBackRepo.delete(feedback);
     }
 }

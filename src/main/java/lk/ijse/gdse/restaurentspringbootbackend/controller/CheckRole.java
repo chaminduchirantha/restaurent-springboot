@@ -21,7 +21,6 @@ public class CheckRole {
     }
 
 
-
     @GetMapping("/api/user-info")
     public ResponseEntity<?> getUserInfo(Authentication authentication) {
         String username = authentication.getName();

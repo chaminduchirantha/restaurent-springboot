@@ -31,7 +31,11 @@ $('#signUp').on('click', function () {
             }
         });
     } else {
-        alert('Please fill in all fields');
+        Swal.fire({
+            icon: 'warning',
+            title: 'Missing Fields',
+            text: 'Please enter both username, password and email.'
+        });
     }
 });
 

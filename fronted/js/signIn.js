@@ -75,7 +75,7 @@ $('#signIn').on('click', function () {
                 Swal.fire({
                     icon: 'error',
                     title: 'Login Failed',
-                    text: errorMessage
+                    text: 'Please to registered'
                 });                }
         });
     } else {

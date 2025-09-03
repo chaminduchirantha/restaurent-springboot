@@ -21,23 +21,39 @@ public class FeedBackController {
 
     @PostMapping("/save")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<ApiResponseDto> submitFeedback(@RequestBody FeedBackDto feedbackDto, Authentication authentication) {
+    public ResponseEntity<ApiResponseDto> submitFeedback(
+            @RequestBody FeedBackDto feedbackDto,
+            Authentication authentication) {
 
-        String username = authentication.getName();  // Logged-in user
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new ApiResponseDto(401, "Please login first", null));
+        }
+
+        String username = authentication.getName();
         FeedBackDto savedFeedback = feedBackService.submitFeedback(feedbackDto, username);
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new ApiResponseDto(201, "Feedback Submitted Successfully", savedFeedback));
     }
 
+
     @GetMapping("/all")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<ApiResponseDto> getAllFeedbacks() {
         List<FeedBackDto> feedbackList = feedBackService.getAllFeedbacks();
         return ResponseEntity.ok(
                 new ApiResponseDto(200, "OK", feedbackList)
         );
     }
+
+    @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")  // Only admin can delete
+    public ResponseEntity<ApiResponseDto> deleteFeedback(@PathVariable Long id) {
+        feedBackService.deleteFeedback(id);
+        return ResponseEntity.ok(new ApiResponseDto(200, "Feedback deleted successfully", null));
+    }
+
 
     @GetMapping("paginated")
     public List<FeedBackDto> getPaginatedJobs(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {

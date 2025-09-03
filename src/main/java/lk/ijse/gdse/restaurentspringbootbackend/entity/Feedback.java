@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,6 +23,7 @@ public class Feedback {
     private String ratings;
     private String message;
 
-    @OneToOne (cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false) // FK column
     private Customer customer;
 }

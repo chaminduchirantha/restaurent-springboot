@@ -65,7 +65,6 @@ let viewCounts = JSON.parse(localStorage.getItem('viewCounts')) || {};
     });
 });
 
-const token = localStorage.getItem('token');
 function authHeaders() {
     return {
         'Authorization': 'Bearer ' + token,
@@ -75,6 +74,7 @@ function authHeaders() {
 
 $('#submitFeedback').on('click', function (e) {
     e.preventDefault();
+    let token = localStorage.getItem("token");
 
     if (!token) {
         Swal.fire({

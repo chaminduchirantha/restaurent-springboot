@@ -23,9 +23,9 @@ public class CustomerController {
     @GetMapping("/all")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponseDto> getAllStaff() {
-        List<CustomerDto> staffList = customerService.getAllCustomer();
+        List<CustomerDto> customer = customerService.getAllCustomer();
         return ResponseEntity.ok(
-                new ApiResponseDto(200, "OK", staffList)
+                new ApiResponseDto(200, "OK", customer)
         );
     }
 

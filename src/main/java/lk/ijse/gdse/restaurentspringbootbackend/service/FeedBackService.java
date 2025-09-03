@@ -11,4 +11,5 @@ public interface FeedBackService {
     List<FeedBackDto> getAllFeedbacks();
     List<FeedBackDto> getFeedbackByPage(int page, int size);
     int getTotalPages(int size);
+    void deleteFeedback(Long id);
 }
