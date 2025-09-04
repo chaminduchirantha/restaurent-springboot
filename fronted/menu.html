@@ -434,6 +434,88 @@
         loadMenuCard();
     });
 
+    $(document).ready(function () {
+        // Handle live search suggestions
+        $('#search-input').on('keyup', function () {
+            let keyword = $(this).val().trim();
+
+            if (keyword.length < 2) {
+                $('#search-suggestions').hide().empty();
+                return;
+            }
+
+            $.ajax({
+                url: `http://localhost:8080/api/v1/menu/search/${keyword}`,
+                type: "GET",
+                headers: authHeaders(),
+                success: function (res) {
+                    const results = res.data || [];
+                    let suggestions = "";
+
+                    if (results.length > 0) {
+                        results.forEach(menu => {
+                            suggestions += `
+                            <a href="#" class="list-group-item list-group-item-action search-item"
+                               data-id="${menu.id}">
+                                <i class="fas fa-utensils me-2"></i> ${menu.name}
+                            </a>
+                        `;
+                        });
+                    } else {
+                        suggestions = `<div class="list-group-item text-muted">No results found</div>`;
+                    }
+
+                    $('#search-suggestions').html(suggestions).show();
+                },
+                error: function () {
+                    $('#search-suggestions').hide();
+                }
+            });
+        });
+
+        // When clicking a suggestion -> load that single menu card
+        $(document).on('click', '.search-item', function (e) {
+            e.preventDefault();
+            const id = $(this).data('id');
+            const keyword = $(this).text().trim();
+
+            $('#search-input').val(keyword);
+            $('#search-suggestions').hide();
+
+            $.ajax({
+                url: `http://localhost:8080/api/v1/menu/search/${keyword}`,
+                type: "GET",
+                headers: authHeaders(),
+                success: function (res) {
+                    const menuList = res.data || [];
+                    let cards = "";
+                    menuList.forEach(menu => {
+                        cards += `
+                       <div class="col-lg-4 col-md-6 col-sm-12 mb-5">
+                            <div class="card h-100 shadow-lg border-0 rounded-4 overflow-hidden">
+                                <img src="${menu.imageUrl}" class="card-img-top" alt="${menu.name}">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <h5 class="card-title fw-bold">${menu.name}</h5>
+                                        <h5 class="text-danger fw-bold">Rs. ${menu.price.toFixed(2)}</h5>
+                                    </div>
+                                    <span class="badge bg-warning text-dark mb-2">${menu.category}</span>
+                                    <p class="card-text">${menu.description}</p>
+                                    <div class="d-flex justify-content-between">
+                                        <button class="btn btn-outline-danger btn-sm w-100 mx-1">Add to Cart</button>
+                                        <button class="btn btn-warning btn-sm w-100 mx-1">Order Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    });
+                    $('#menuContainer').html(cards);
+                }
+            });
+        });
+    });
+
 </script>
 
 </body>
