@@ -56,6 +56,7 @@ public class SecurityConfig{
                                 "api/v1/menu/total-pages",
                                 "api/v1/menu/delete/{id}",
                                 "api/v1/menu/search/{keyword}",
+                                "api/v1/menu/images/{filename}",
                                 "auth/forgot-password",
                                 "auth/verify-otp",
                                 "auth/reset-password"
