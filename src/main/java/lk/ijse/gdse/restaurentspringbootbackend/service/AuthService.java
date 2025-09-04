@@ -60,28 +60,32 @@ public class AuthService {
         return "User registered successfully";
     }
 
-    public String generateAndSendOtp(String email) {
+    public void generateAndSendOtp(String email) {
         Customer user = userRepo.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("User with this email not found."));
 
-        String otp = String.valueOf(new Random().nextInt(900000) + 100000); // 6 digit
+        String otp = String.valueOf(new Random().nextInt(900000) + 100000); // 6 digit OTP
         otpStore.put(email, otp);
-        otpExpiry.put(email, LocalDateTime.now().plusMinutes(5));
+        otpExpiry.put(email, LocalDateTime.now().plusMinutes(5)); // OTP is valid for 5 minutes
 
-        // send email
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(email);
-        message.setSubject("Password Reset OTP");
-        message.setText("Your OTP is: " + otp + " (valid for 5 minutes)");
-        mailSender.send(message);
-
-        return otp;
+        // Send email
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(email);
+            message.setSubject("Your Password Reset OTP Code");
+            message.setText("Your OTP code is: " + otp + ". This code is valid for 5 minutes.");
+            mailSender.send(message);
+        } catch (Exception e) {
+            // In a real app, you should log this error
+            throw new RuntimeException("Failed to send OTP email.");
+        }
     }
 
     public boolean verifyOtp(String email, String otp) {
-        return otpStore.containsKey(email)
-                && otpStore.get(email).equals(otp)
-                && otpExpiry.get(email).isAfter(LocalDateTime.now());
+        if (!otpStore.containsKey(email) || !otpStore.get(email).equals(otp)) {
+            return false;
+        }
+        return otpExpiry.get(email).isAfter(LocalDateTime.now());
     }
 
     public boolean resetPassword(String email, String otp, String newPassword) {
@@ -89,10 +93,10 @@ public class AuthService {
             Customer user = userRepo.findByEmail(email)
                     .orElseThrow(() -> new RuntimeException("User not found"));
 
-            // Always encode the password before saving
             user.setPassword(passwordEncoder.encode(newPassword));
             userRepo.save(user);
 
+            // Invalidate the OTP after use
             otpStore.remove(email);
             otpExpiry.remove(email);
 

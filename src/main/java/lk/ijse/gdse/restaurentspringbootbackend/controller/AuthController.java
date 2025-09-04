@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("auth")
 @RequiredArgsConstructor
@@ -62,10 +64,11 @@ public class AuthController {
     }
 
     @PostMapping("/forgot-password")
-    public ResponseEntity<ApiResponseDto> forgotPassword(@RequestParam String email) {
+    public ResponseEntity<ApiResponseDto> forgotPassword(@RequestBody Map<String, String> request) {
         try {
-            String otp = authService.generateAndSendOtp(email);
-            return ResponseEntity.ok(new ApiResponseDto(200, "OTP sent to email", null));
+            String email = request.get("email");
+            authService.generateAndSendOtp(email);
+            return ResponseEntity.ok(new ApiResponseDto(200, "OTP sent to your email.", null));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ApiResponseDto(400, e.getMessage(), null));
@@ -73,25 +76,29 @@ public class AuthController {
     }
 
     @PostMapping("/verify-otp")
-    public ResponseEntity<ApiResponseDto> verifyOtp(@RequestParam String email, @RequestParam String otp) {
+    public ResponseEntity<ApiResponseDto> verifyOtp(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        String otp = request.get("otp");
         boolean isValid = authService.verifyOtp(email, otp);
         if (isValid) {
-            return ResponseEntity.ok(new ApiResponseDto(200, "OTP verified", null));
+            return ResponseEntity.ok(new ApiResponseDto(200, "OTP verified successfully.", null));
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ApiResponseDto(400, "Invalid or expired OTP", null));
+                .body(new ApiResponseDto(400, "Invalid or expired OTP.", null));
     }
 
     @PostMapping("/reset-password")
-    public ResponseEntity<ApiResponseDto> resetPassword(@RequestParam String email,
-                                                        @RequestParam String otp,
-                                                        @RequestParam String newPassword) {
+    public ResponseEntity<ApiResponseDto> resetPassword(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        String otp = request.get("otp");
+        String newPassword = request.get("newPassword");
+
         boolean success = authService.resetPassword(email, otp, newPassword);
         if (success) {
-            return ResponseEntity.ok(new ApiResponseDto(200, "Password reset successful", null));
+            return ResponseEntity.ok(new ApiResponseDto(200, "Password has been reset successfully.", null));
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ApiResponseDto(400, "Invalid OTP or email", null));
+                .body(new ApiResponseDto(400, "Password reset failed. Please try again.", null));
     }
 
 
