@@ -250,10 +250,12 @@
           $("#emptyState").hide();
           $("#itemContainer").empty();
           res.data.forEach(menu => {
+            const imageUrl = `http://localhost:8080/api/v1/menu/images/${escapeString(menu.imageUrl)}`;
+
             let card = `
                 <div class="col-md-4 mb-4">
                   <div class="card shadow-sm rounded-4 h-100">
-                    <img src="http://localhost:8080/uploads/${escapeString(menu.imageUrl)}"
+                    <img src="${imageUrl}"
                          class="card-img-top"
                          alt="${escapeString(menu.name)}"
                          onerror="this.onerror=null; this.src='https://via.placeholder.com/286x180?text=Image+not+found';">
@@ -423,12 +425,14 @@
     $('#category').val(category);
     $('#price').val(price);
 
+    const fullImageUrl = `http://localhost:8080/api/v1/menu/images/${escapeString(imageUrl)}`;
+
     // Show current image
     $('#imagePreview').html(`
       <div class="alert alert-info mt-2">
         <i class="fas fa-info-circle me-2"></i>Current image: ${escapeString(imageUrl)}
       </div>
-      <img src="http://localhost:8080/uploads/${escapeString(imageUrl)}"
+      <img src="${fullImageUrl}"
            class="img-thumbnail mt-2" style="max-height: 200px;"
            onerror="this.style.display='none'">
     `);
@@ -500,10 +504,12 @@
           $("#itemContainer").empty();
 
           res.data.forEach(menu => {
+            const imageUrl = `http://localhost:8080/api/v1/menu/images/${escapeString(menu.imageUrl)}`;
+
             let card = `
             <div class="col-md-4 mb-4">
               <div class="card shadow-sm rounded-4 h-100">
-                <img src="http://localhost:8080/uploads/${escapeString(menu.imageUrl)}"
+                <img src="${imageUrl}"
                      class="card-img-top"
                      alt="${escapeString(menu.name)}"
                      onerror="this.onerror=null; this.src='https://via.placeholder.com/286x180?text=Image+not+found';">
