@@ -371,15 +371,15 @@
                 let cards = "";
                 menuList.forEach(menu => {
                     cards += `
-           <div class="col-lg-4 col-md-6 col-sm-12  mb-5" data-category="baverages all">
+           <div class="col-lg-4 col-md-6 col-sm-12  mb-5" data-category="${menu.category.toLowerCase()} all"">
             <div class="card h-100 shadow-lg border-0 rounded-4 overflow-hidden">
-                <img src="${menu.imageUrl}" class="card-img-top" alt="${menu.name}">
+<!--                <img src="${menu.imageUrl}" class="card-img-top" alt="${menu.name}">-->
                 <div class="card-body text-left">
                     <div class="d-flex justify-content-between mb-2">
                         <h5 class="card-title fw-bold">${menu.name}</h5>
                         <h5 class="text-danger fw-bold">Rs. ${menu.price.toFixed(2)}</h5>
                     </div>
-                    <span class="badge bg-warning text-dark mb-2">${menu.category}</span>
+                    <span class="badge text-dark ${getCategoryColor(menu.category)} mb-2">${menu.category}</span>
                     <p class="card-text">${menu.description}</p>
 
                     <!-- 3 Buttons -->
@@ -402,6 +402,24 @@
             }
         });
     }
+
+    function getCategoryColor(category) {
+        switch (category.toLowerCase()) {
+            case "rice":
+                return "bg-warning";   // Blue
+            case "kottu":
+                return "bg-success";   // Green
+            case "indianfoods":
+                return "bg-danger";    // Red
+            case "bakery":
+                return "bg-info";      // Light Blue
+            case "baverages":
+                return "bg-warning text-dark"; // Yellow
+            default:
+                return "bg-secondary"; // Gray (fallback)
+        }
+    }
+
 
     function loadPagination() {
         $.ajax({
