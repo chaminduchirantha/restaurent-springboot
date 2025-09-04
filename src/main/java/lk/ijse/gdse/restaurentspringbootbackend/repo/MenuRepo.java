@@ -20,5 +20,5 @@ public interface MenuRepo extends JpaRepository<Menus, Long> {
 
     @Query(value = "SELECT COUNT(*) FROM menuitem", nativeQuery = true)
     long getTotalMenuCount();
-
+    List<Menus> findMenuByNameContainingIgnoreCase(String keyword);
 }

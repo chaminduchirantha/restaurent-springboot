@@ -40,6 +40,9 @@
 </head>
 <body class="p-4 bg-light">
 
+
+
+
 <section class="container py-2">
   <div>
     <a href="adminDashBoard.html" style="text-decoration: none">
@@ -47,6 +50,21 @@
     </a>
   </div>
   <h1 class="text-center mb-4 mt-3">Manage Menu Items</h1>
+
+  <div class="row align-items-center g-2 mb-6">
+    <div class="col-md-6">
+      <div class="input-group">
+        <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+        <input id="menuSearch" type="text" class="form-control" placeholder="Search by name">
+        <button id="clearSearch" class="btn btn-outline-secondary" type="button" title="Clear">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-6 text-md-end">
+      <span id="resultCount" class="badge bg-secondary d-none">0 results</span>
+    </div>
+  </div>
 
   <!-- Add Menu Item Button -->
   <div class="text-end mb-4">
@@ -66,6 +84,9 @@
     </div>
   </div>
 </section>
+
+<!-- Search Bar -->
+
 
 <!-- Modal Form -->
 <div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true">
@@ -235,7 +256,7 @@
                     <img src="http://localhost:8080/uploads/${escapeString(menu.imageUrl)}"
                          class="card-img-top"
                          alt="${escapeString(menu.name)}"
-                         onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_17ecc4b4a5d%20text%20%7B%20fill%3A%23999%3Bfont-weight%3Anormal%3Bfont-family%3Avar(--bs-font-sans-serif)%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_17ecc4b4a5d%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23373940%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22106.3984375%22%20y%3D%2296.6%22%3EImage%20not%20found%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E'">
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/286x180?text=Image+not+found';">
                     <div class="action-buttons">
                         <button class="btn btn-sm btn-primary me-1 edit-btn"
                                 data-id="${menu.menuid}"
@@ -455,6 +476,87 @@
       }
     });
   }
+
+  // Search functionality
+  $('#menuSearch').on('keyup', function () {
+    let keyword = $(this).val().trim();
+
+    if (keyword.length === 0) {
+      // If empty, load paginated menus
+      currentPage = 0;
+      loadMenus();
+      $('#clearSearch').hide();
+      $('#resultCount').addClass('d-none');
+      return;
+    }
+
+    $.ajax({
+      url: `http://localhost:8080/api/v1/menu/search/${encodeURIComponent(keyword)}`,
+      type: "GET",
+      headers: authHeaders(),
+      success: function (res) {
+        if (res.status === 200 && res.data && res.data.length > 0) {
+          $("#emptyState").hide();
+          $("#itemContainer").empty();
+
+          res.data.forEach(menu => {
+            let card = `
+            <div class="col-md-4 mb-4">
+              <div class="card shadow-sm rounded-4 h-100">
+                <img src="http://localhost:8080/uploads/${escapeString(menu.imageUrl)}"
+                     class="card-img-top"
+                     alt="${escapeString(menu.name)}"
+                     onerror="this.onerror=null; this.src='https://via.placeholder.com/286x180?text=Image+not+found';">
+                <div class="action-buttons">
+                    <button class="btn btn-sm btn-primary me-1 edit-btn"
+                            data-id="${menu.menuid}"
+                            data-name="${escapeString(menu.name)}"
+                            data-desc="${escapeString(menu.description)}"
+                            data-cat="${escapeString(menu.category)}"
+                            data-price="${menu.price}"
+                            data-img="${escapeString(menu.imageUrl)}">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-sm btn-danger" onclick="deleteMenuItem(${menu.menuid})">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">${escapeString(menu.name)}</h5>
+                  <p class="card-text text-muted">${escapeString(menu.description)}</p>
+                  <p class="fw-bold">Rs. ${menu.price.toFixed(2)}</p>
+                  <span class="badge bg-info">${escapeString(menu.category)}</span>
+                </div>
+              </div>
+            </div>
+          `;
+            $("#itemContainer").append(card);
+          });
+
+          // Show result count
+          $('#resultCount').removeClass('d-none').text(`${res.data.length} results found`);
+          $('#clearSearch').show();
+        } else {
+          $("#itemContainer").empty();
+          $("#emptyState").show();
+          $('#resultCount').removeClass('d-none').text("0 results");
+        }
+      },
+      error: function () {
+        Swal.fire("Error", "Search failed!", "error");
+      }
+    });
+  });
+
+  // Clear search
+  $('#clearSearch').click(function () {
+    $('#menuSearch').val('');
+    $('#clearSearch').hide();
+    $('#resultCount').addClass('d-none');
+    currentPage = 0;
+    loadMenus();
+  });
+
 
   function resetForm() {
     currentMenuId = null;

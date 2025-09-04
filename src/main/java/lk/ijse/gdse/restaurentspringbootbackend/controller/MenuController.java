@@ -139,6 +139,19 @@ public class MenuController {
         return ResponseEntity.ok(new ApiResponseDto(200, "OK", customers));
     }
 
+    @GetMapping("search/{keyword}")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    public ResponseEntity<ApiResponseDto> searchMenus(@PathVariable("keyword") String keyword) {
+        List<MenuDto>menuDtos =  menuService.searchMenus(keyword);
+        return ResponseEntity.ok(
+                new ApiResponseDto(
+                        200,
+                        "Menu found Successfully",
+                        menuDtos
+                )
+        );
+    }
+
     @GetMapping("/total-pages")
     public ResponseEntity<Integer> getTotalPages(@RequestParam int size) {
         int totalPages = menuService.getTotalPages(size);

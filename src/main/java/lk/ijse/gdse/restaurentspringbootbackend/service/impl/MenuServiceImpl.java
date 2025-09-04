@@ -94,5 +94,11 @@ public class MenuServiceImpl implements MenuService {
         return modelMapper.map(menus, new TypeToken<List<MenuDto>>() {}.getType());
     }
 
+    @Override
+    public List<MenuDto> searchMenus(String keyword) {
+        List<Menus>list=menuRepo.findMenuByNameContainingIgnoreCase(keyword);
+
+        return modelMapper.map(list, new TypeToken<List<MenuDto>>(){}.getType());    }
+
 }
 
