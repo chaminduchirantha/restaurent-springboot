@@ -22,7 +22,7 @@ public class CustomerController {
 
     @GetMapping("/all")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ApiResponseDto> getAllStaff() {
+    public ResponseEntity<ApiResponseDto> getAllUser() {
         List<CustomerDto> customer = customerService.getAllCustomer();
         return ResponseEntity.ok(
                 new ApiResponseDto(200, "OK", customer)
@@ -54,15 +54,6 @@ public class CustomerController {
         return ResponseEntity.ok(new ApiResponseDto(200, "Customer deleted successfully", null));
     }
 
-
-
-    @GetMapping("/dashboard")
-    @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<ApiResponseDto> staffDashboard() {
-        return ResponseEntity.ok(
-                new ApiResponseDto(200, "OK", "Welcome to the Staff Dashboard")
-        );
-    }
 
     @GetMapping("/paginated")
     public ResponseEntity<ApiResponseDto> getPaginated(
