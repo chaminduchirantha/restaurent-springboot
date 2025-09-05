@@ -1,54 +1,43 @@
 package lk.ijse.gdse.restaurentspringbootbackend.controller;
 
 import lk.ijse.gdse.restaurentspringbootbackend.dto.ApiResponseDto;
-import lk.ijse.gdse.restaurentspringbootbackend.dto.CustomerDto;
 import lk.ijse.gdse.restaurentspringbootbackend.dto.MenuDto;
 import lk.ijse.gdse.restaurentspringbootbackend.service.MenuService;
-import lk.ijse.gdse.restaurentspringbootbackend.util.VarList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/menu")
 @RequiredArgsConstructor
-//@CrossOrigin(origins = "http://localhost:63342")
-@CrossOrigin(origins = "http://localhost:63342", allowCredentials="true")
+@CrossOrigin(origins = "http://localhost:63342", allowCredentials = "true")
 public class MenuController {
 
     private final MenuService menuService;
     private final String uploadDir = "uploads/";
 
-
     @PostMapping(value = "/addItem", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> addMenuItem(
             @RequestParam("name") String name,
             @RequestParam("category") String category,
             @RequestParam("description") String description,
             @RequestParam("price") double price,
-            @RequestParam("file") MultipartFile file // single image
+            @RequestParam("file") MultipartFile file
     ) {
         try {
-            String uploadDir = "uploads/";
             String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
             Path filePath = Paths.get(uploadDir, fileName);
             Files.createDirectories(filePath.getParent());
@@ -71,25 +60,19 @@ public class MenuController {
     }
 
     @PutMapping(value = "/updateItem", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> upsertMenuItem(
-            @RequestParam(value = "id", required = false) Long menuid, // optional
+            @RequestParam(value = "id", required = false) Long menuid,
             @RequestParam("name") String name,
             @RequestParam("category") String category,
             @RequestParam("description") String description,
             @RequestParam("price") double price,
-            @RequestParam(value = "file", required = false) MultipartFile file // optional image
+            @RequestParam(value = "file", required = false) MultipartFile file
     ) {
         try {
-            MenuDto menuDto=new MenuDto();
+            MenuDto menuDto = new MenuDto();
 
             if (menuid != null) {
-               menuDto.setMenuid(menuid);
-                if (menuDto == null) {
-                    menuDto = new MenuDto();
-                }
-            } else {
-                menuDto = new MenuDto();
+                menuDto.setMenuid(menuid);
             }
 
             menuDto.setName(name);
@@ -98,12 +81,10 @@ public class MenuController {
             menuDto.setPrice(price);
 
             if (file != null && !file.isEmpty()) {
-                String uploadDir = "uploads/";
                 String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
                 Path filePath = Paths.get(uploadDir, fileName);
                 Files.createDirectories(filePath.getParent());
                 Files.write(filePath, file.getBytes());
-
                 menuDto.setImageUrl(fileName);
             }
 
@@ -119,7 +100,6 @@ public class MenuController {
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<ApiResponseDto> getAllMenu() {
         List<MenuDto> menus = menuService.getAllCustomer();
         return ResponseEntity.ok(
@@ -128,7 +108,6 @@ public class MenuController {
     }
 
     @DeleteMapping("/delete/{id}")
-    @PreAuthorize("hasRole('ADMIN')")  // Only admin can delete
     public ResponseEntity<ApiResponseDto> deleteMenu(@PathVariable Long id) {
         menuService.deleteCustomer(id);
         return ResponseEntity.ok(new ApiResponseDto(200, "Menu deleted successfully", null));
@@ -139,14 +118,13 @@ public class MenuController {
             @RequestParam int page,
             @RequestParam int size
     ) {
-        List<MenuDto> customers = menuService.getMenuByPage(page, size);
-        return ResponseEntity.ok(new ApiResponseDto(200, "OK", customers));
+        List<MenuDto> menus = menuService.getMenuByPage(page, size);
+        return ResponseEntity.ok(new ApiResponseDto(200, "OK", menus));
     }
 
     @GetMapping("search/{keyword}")
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<ApiResponseDto> searchMenus(@PathVariable("keyword") String keyword) {
-        List<MenuDto>menuDtos =  menuService.searchMenus(keyword);
+        List<MenuDto> menuDtos = menuService.searchMenus(keyword);
         return ResponseEntity.ok(
                 new ApiResponseDto(
                         200,
@@ -162,9 +140,7 @@ public class MenuController {
         return ResponseEntity.ok(totalPages);
     }
 
-
     @GetMapping("/images/{filename:.+}")
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<Resource> getImage(@PathVariable String filename) {
         try {
             Path file = Paths.get(uploadDir).resolve(filename);
@@ -182,5 +158,3 @@ public class MenuController {
         }
     }
 }
-
-
