@@ -310,6 +310,7 @@
     const pageSize = 6;
 
     const token = localStorage.getItem('token');
+
     function authHeaders() {
         return {
             'Authorization': 'Bearer ' + token,
@@ -320,6 +321,7 @@
     $('#submitFeedback').on('click', function (e) {
         e.preventDefault();
 
+        // 1. Check if user is logged in (token null/undefined check)
         if (!token) {
             Swal.fire({
                 icon: 'warning',
@@ -327,11 +329,21 @@
                 text: 'Please login first to submit feedback.',
                 confirmButtonText: 'Go to Login'
             }).then(() => {
-                window.location.href = "signInPage.html"; // redirect to login page
+                window.location.href = "signInPage.html"; // Redirect to login page
             });
             return;
         }
 
+        if (!$('#fullName').val() || !$('#email').val() || !$('#message').val()) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Please Fill the Fields',
+                text: 'Please fill required fields before submitting.'
+            });
+            return;
+        }
+
+        // 2. Collect form data
         let feedBackData = {
             fullname: $('#fullName').val(),
             email: $('#email').val(),
@@ -340,8 +352,7 @@
             message: $('#message').val()
         };
 
-        console.log("Sending feedback data:", feedBackData);
-
+        // 3. Send request
         $.ajax({
             url: "http://localhost:8080/api/v1/feedback/save",
             type: "POST",
@@ -358,11 +369,11 @@
                 $('#addFeedbackForm')[0].reset();
             },
             error: function (xhr) {
-                if (xhr.status === 403) {
+                if (xhr.status === 401 || xhr.status === 403) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Unauthorized',
-                        text: 'You are not authorized. Please login.',
+                        text: 'You must login to submit feedback.',
                         confirmButtonText: 'Login'
                     }).then(() => {
                         window.location.href = "signInPage.html";
@@ -377,6 +388,7 @@
             }
         });
     });
+
 
     function loadMenuCard() {
         $.ajax({

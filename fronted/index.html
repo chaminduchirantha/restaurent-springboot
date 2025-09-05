@@ -380,25 +380,42 @@
                     let stars = "";
                     for (let i = 1; i <= 5; i++) {
                         if (i <= fb.ratings) {
-                            stars += `<i class="fas fa-star rating-stars"></i>`;
+                            stars += `<i class="fas fa-star text-warning"></i>`;
                         } else {
-                            stars += `<i class="far fa-star rating-stars"></i>`;
+                            stars += `<i class="far fa-star text-warning"></i>`;
                         }
                     }
 
                     cards += `
                 <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card feedback-card h-100 ster mb-3">
-                            <div class="feedback-avatar">${fb.fullname.charAt(0).toUpperCase()}</div>
-                            <div>
-                                <h5 class="mb-0">${fb.fullname}</h5>
-                                <small class="text-muted">${fb.email}</small>
-                            </div>
-                        </div>
-                        <p class="card-text mb-2"><em>"${fb.message}"</em></p>
-                        <p class="card-text"><strong>Service:</strong> ${fb.services}</p>
-                        <div>${stars}</div>
+                  <div class="card shadow-sm border-0 rounded-4 p-3 h-100 feedback-card">
+                    <!-- Top section -->
+                    <div class="d-flex align-items-center mb-3">
+                      <div class="feedback-avatar">
+                        ${fb.fullname.charAt(0).toUpperCase()}
+                      </div>
+                      <div class="ms-3">
+                        <h6 class="mb-0 fw-semibold">${fb.fullname}</h6>
+                        <small class="text-muted">${fb.email}</small>
+                      </div>
                     </div>
+
+                    <!-- Message -->
+                    <p class="fst-italic text-dark small mb-3">
+                      “${fb.message}”
+                    </p>
+
+                    <!-- Service -->
+                    <p class="mb-2 small">
+                      <span class="fw-semibold">Service:</span>
+                      <span class="text-primary">${fb.services}</span>
+                    </p>
+
+                    <!-- Rating -->
+                    <div class="small">
+                      ${stars}
+                    </div>
+                  </div>
                 </div>
                 `;
                 });
@@ -410,6 +427,7 @@
             }
         });
     }
+
 
 
     // Call the function after page load
