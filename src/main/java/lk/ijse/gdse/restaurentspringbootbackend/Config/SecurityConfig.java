@@ -59,7 +59,8 @@ public class SecurityConfig{
                                 "api/v1/menu/images/{filename}",
                                 "auth/forgot-password",
                                 "auth/verify-otp",
-                                "auth/reset-password"
+                                "auth/reset-password",
+                                "api/v1/orders/place"
                         ).permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(
