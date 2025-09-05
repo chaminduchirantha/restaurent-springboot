@@ -328,7 +328,7 @@
         <hr class="my-4 border-light">
 
         <!-- Footer Bottom -->
-        <div class="text-center" style="font-size: 16px;">
+        <div class="text-center" style="">
             &copy; 2025 <strong>Golden Spoon</strong>. Designed with ❤️ by Chamindu Chirantha
         </div>
     </div>
@@ -371,34 +371,46 @@
         $.ajax({
             url: "http://localhost:8080/api/v1/feedback/all",
             type: "GET",
-            headers: authHeaders(), // JWT or auth headers if needed
+            headers: authHeaders(),
             success: function(res) {
-                const feedbackList = res.data || []; // <-- use the array inside the response
+                const feedbackList = res.data || [];
                 let cards = "";
                 feedbackList.forEach(fb => {
+                    // Create star rating icons dynamically
+                    let stars = "";
+                    for (let i = 1; i <= 5; i++) {
+                        if (i <= fb.ratings) {
+                            stars += `<i class="fas fa-star rating-stars"></i>`;
+                        } else {
+                            stars += `<i class="far fa-star rating-stars"></i>`;
+                        }
+                    }
+
                     cards += `
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">${fb.fullname}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">${fb.email}</h6>
-                        <p class="card-text">${fb.message}</p>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card feedback-card h-100 ster mb-3">
+                            <div class="feedback-avatar">${fb.fullname.charAt(0).toUpperCase()}</div>
+                            <div>
+                                <h5 class="mb-0">${fb.fullname}</h5>
+                                <small class="text-muted">${fb.email}</small>
+                            </div>
+                        </div>
+                        <p class="card-text mb-2"><em>"${fb.message}"</em></p>
                         <p class="card-text"><strong>Service:</strong> ${fb.services}</p>
-                        <p class="card-text"><strong>Rating:</strong> ${fb.ratings} / 5</p>
+                        <div>${stars}</div>
                     </div>
                 </div>
-            </div>
-        `;
+                `;
                 });
                 $('#feedbackCardContainer').html(cards);
-            }
-            ,
+            },
             error: function(err){
                 console.error(err);
                 $('#feedbackCardContainer').html('<p class="text-danger text-center">Failed to load feedback.</p>');
             }
         });
     }
+
 
     // Call the function after page load
     $(document).ready(function() {
