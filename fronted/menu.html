@@ -332,6 +332,16 @@
             return;
         }
 
+        if (!$('#fullName').val() || !$('#email').val() || !$('#message').val()) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Please Fill the Fields',
+                text: 'Please fill required fields before submitting.'
+            });
+            return;
+        }
+
+
         let feedBackData = {
             fullname: $('#fullName').val(),
             email: $('#email').val(),
@@ -399,8 +409,14 @@
                                         <span class="badge text-black ${getCategoryColor(menu.category)} mb-2">${menu.category}</span>
                                         <p class="card-text">${menu.description}</p>
                                         <div class="d-flex justify-content-between">
-                                            <button class="btn btn-outline-danger btn-sm w-80 mx-1">Add to Cart</button>
-                                            <a href="order.html"><button class="btn btn-warning btn-sm w-100 mx-1" >Order Now</button></a>
+                                            <button class="btn btn-outline-danger btn-sm w-100 mx-1">Add to Cart</button>
+                                            <button
+                                                class="btn btn-warning btn-sm w-100 mx-1 order-now-btn"
+                                                data-name="${menu.name}"
+                                                data-price="${menu.price.toFixed(2)}"
+                                          >
+                                                Order Now
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -417,6 +433,17 @@
             }
         });
     }
+
+    $(document).on("click", ".order-now-btn", function () {
+        const name = $(this).data("name");
+        const price = $(this).data("price");
+
+        localStorage.setItem("selectedMenuName", name);
+        localStorage.setItem("selectedMenuPrice", price);
+
+        window.location.href = "order.html";
+    });
+
 
     function getCategoryColor(category) {
         switch (category.toLowerCase()) {
