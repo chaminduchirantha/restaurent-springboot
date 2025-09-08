@@ -19,15 +19,18 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
 
+    private String name;
+    private double price;
     private String orderType;
+    private int orderQty;
     private Date orderDatetime;
     private String status;
     private String notes;
 
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     @OneToMany(mappedBy = "order")
     private List<Payment> payments;

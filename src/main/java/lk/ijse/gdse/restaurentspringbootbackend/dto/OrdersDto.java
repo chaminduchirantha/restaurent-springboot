@@ -1,5 +1,6 @@
 package lk.ijse.gdse.restaurentspringbootbackend.dto;
 
+import lk.ijse.gdse.restaurentspringbootbackend.entity.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,10 @@ import java.util.Date;
 @AllArgsConstructor
 public class OrdersDto {
     private Long orderId;
+    private String name;
+    private double price;
     private String orderType;
+    private int orderQty;
     private Date orderDatetime;
     private String status;
     private String notes;
