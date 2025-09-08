@@ -10,6 +10,8 @@ import lk.ijse.gdse.restaurentspringbootbackend.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,13 +28,15 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrdersDto createOrder(OrdersDto ordersDto) {
-        // 1. Customer ganna DB eken
-        Customer customer = customerRepo.findById(ordersDto.getCustomerId())
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        Customer customer = customerRepo.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
 
-        // 2. Order entity create karanna
         Order order = new Order();
         order.setName(ordersDto.getName());
+        order.setEmail(ordersDto.getEmail());
         order.setPrice(ordersDto.getPrice());
         order.setOrderType(ordersDto.getOrderType());
         order.setOrderQty(ordersDto.getOrderQty());
@@ -41,26 +45,24 @@ public class OrderServiceImpl implements OrderService {
         order.setNotes(ordersDto.getNotes());
         order.setCustomer(customer);
 
-        // 3. Save karanna
         Order savedOrder = orderRepo.save(order);
 
-        // 4. Return OrdersDto (id ekath ennawa)
         OrdersDto savedDto = new OrdersDto(
                 savedOrder.getOrderId(),
                 savedOrder.getName(),
+                savedOrder.getEmail(),
                 savedOrder.getPrice(),
                 savedOrder.getOrderType(),
                 savedOrder.getOrderQty(),
                 savedOrder.getOrderDatetime(),
                 savedOrder.getStatus(),
                 savedOrder.getNotes(),
-                savedOrder.getCustomer().getId()
+                customer.getId()
         );
 
         return savedDto;
     }
 
-    @Override
     public List<OrdersDto> getAllOrders() {
         List<Order>orders = orderRepo.findAll();
         List<OrdersDto> ordersDtos = new ArrayList<>();

@@ -22,6 +22,7 @@ public class Order {
 
     private String name;
     private double price;
+    private String email;
     private String orderType;
     private int orderQty;
     private Date orderDatetime;

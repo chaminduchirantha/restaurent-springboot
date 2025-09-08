@@ -15,6 +15,7 @@ import java.util.Date;
 public class OrdersDto {
     private Long orderId;
     private String name;
+    private String email;
     private double price;
     private String orderType;
     private int orderQty;
