@@ -38,7 +38,10 @@
                 <!--          <label for="menuPrice" class="form-label">Price</label>-->
                 <!--          <input type="text" class="form-control" id="menuPrice" >-->
                 <!--        </div>-->
-
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your Email" required>
+                </div>
                 <div class="col-md-6">
                     <label for="qty" class="form-label">Order Qty</label>
                     <input type="number" class="form-control" id="qty" required>
@@ -154,7 +157,8 @@
             orderQty: parseInt($("#qty").val()),
             orderDatetime: $("#orderDatetime").val(),
             status: $("#status").val(),
-            notes: $("#notes").val()
+            notes: $("#notes").val(),
+            email: $("#email").val()
         };
 
         $.ajax({
