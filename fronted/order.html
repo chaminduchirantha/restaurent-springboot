@@ -1,83 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Restaurant Order Form</title>
-  <!-- Bootstrap CSS CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: #f8f9fa;
-      /*display: none;*/
-    }
-    .order-form-container {
-      max-width: 600px;
-      margin: 50px auto;
-      padding: 30px;
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Order Form</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        /display: none;/
+        }
+        .order-form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
-  <div class="order-form-container">
-    <h2 class="text-center mb-4">Create New Order</h2>
-    <form id="orderForm">
+    <div class="order-form-container">
+        <h2 class="text-center mb-4">Create New Order</h2>
+        <form id="orderForm">
 
-      <!-- Customer ID & Order Type -->
-      <div class="row mb-3 g-3">
-<!--        <div class="mb-3">-->
-<!--          <label for="menuName" class="form-label">Menu Item</label>-->
-<!--          <input type="text" class="form-control" id="menuName" >-->
-<!--        </div>-->
-<!--        <div class="mb-3">-->
-<!--          <label for="menuPrice" class="form-label">Price</label>-->
-<!--          <input type="text" class="form-control" id="menuPrice" >-->
-<!--        </div>-->
+            <!-- Customer ID & Order Type -->
+            <div class="row mb-3 g-3">
+                <!--        <div class="mb-3">-->
+                <!--          <label for="menuName" class="form-label">Menu Item</label>-->
+                <!--          <input type="text" class="form-control" id="menuName" >-->
+                <!--        </div>-->
+                <!--        <div class="mb-3">-->
+                <!--          <label for="menuPrice" class="form-label">Price</label>-->
+                <!--          <input type="text" class="form-control" id="menuPrice" >-->
+                <!--        </div>-->
 
-        <div class="col-md-6">
-          <label for="qty" class="form-label">Order Qty</label>
-          <input type="number" class="form-control" id="qty" required>
-        </div>
-        <div class="col-md-6">
-          <label for="orderType" class="form-label">Order Type</label>
-          <select class="form-select" id="orderType" required>
-            <option value="" disabled selected>Select order type</option>
-            <option value="Dine-in">Dine-in</option>
-            <option value="Takeaway">Takeaway</option>
-            <option value="Delivery">Delivery</option>
-          </select>
-        </div>
-      </div>
+                <div class="col-md-6">
+                    <label for="qty" class="form-label">Order Qty</label>
+                    <input type="number" class="form-control" id="qty" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="orderType" class="form-label">Order Type</label>
+                    <select class="form-select" id="orderType" required>
+                        <option value="" disabled selected>Select order type</option>
+                        <option value="Dine-in">Dine-in</option>
+                        <option value="Takeaway">Takeaway</option>
+                        <option value="Delivery">Delivery</option>
+                    </select>
+                </div>
+            </div>
 
-      <!-- Order Datetime & Status -->
-      <div class="row mb-3 g-3">
-        <div class="col-md-6">
-          <label for="orderDatetime" class="form-label">Order Date</label>
-          <input type="date" class="form-control" id="orderDatetime" required>
-        </div>
-        <div class="col-md-6">
-          <label for="status" class="form-label">Status</label>
-          <input type="text" class="form-control" id="status" placeholder="e.g., Pending, Completed, Cancelled" required>
-        </div>
-      </div>
+            <!-- Order Datetime & Status -->
+            <div class="row mb-3 g-3">
+                <div class="col-md-6">
+                    <label for="orderDatetime" class="form-label">Order Date</label>
+                    <input type="date" class="form-control" id="orderDatetime" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="status" class="form-label">Status</label>
+                    <input type="text" class="form-control" id="status" placeholder="e.g., Pending, Completed, Cancelled" required>
+                </div>
+            </div>
 
-      <!-- Notes -->
-      <div class="mb-3">
-        <label for="notes" class="form-label">Notes</label>
-        <textarea class="form-control" id="notes" rows="3" placeholder="Add any special instructions or comments"></textarea>
-      </div>
+            <!-- Notes -->
+            <div class="mb-3">
+                <label for="notes" class="form-label">Notes</label>
+                <textarea class="form-control" id="notes" rows="3" placeholder="Add any special instructions or comments"></textarea>
+            </div>
 
-      <!-- Submit Button -->
-      <div class="d-grid gap-2 mt-4">
-        <button type="button" id="orderSave" class="btn btn-primary">Submit Order</button>
-      </div>
-    </form>
-  </div>
+            <!-- Submit Button -->
+            <div class="d-grid gap-2 mt-4">
+                <button type="button" id="orderSave" class="btn btn-primary">Submit Order</button>
+            </div>
+        </form>
+    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -85,46 +85,46 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 
-  const token = localStorage.getItem('token');
-  const username = localStorage.getItem('username');
-  const customerId = parseInt(localStorage.getItem("customerId"));
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('username');
+    const customerId = parseInt(localStorage.getItem("customerId"));
 
-  if (!token || !username) {
-    window.location.href = 'signInPage.html';
-  } else {
-    $.ajax({
-      method: 'GET',
-      url: 'http://localhost:8080/role/api/user-info',
-      headers: {
-        'Authorization': 'Bearer ' + token
-      },
-      success: function (response) {
-        if (response.role === 'USER') {
-          $('body').show(); // allow page to show
-          console.log(" Access granted for USER:", username);
-        } else {
-          alert("Access Denied: You are not a regular user.");
-          window.location.href ='signInPage.html';
-        }
-      },
-      error: function () {
-        alert("Session expired or unauthorized.");
-        localStorage.clear();
+    if (!token || !username) {
         window.location.href = 'signInPage.html';
-      }
-    });
-  }
+    } else {
+        $.ajax({
+            method: 'GET',
+            url: 'http://localhost:8080/role/api/user-info',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            },
+            success: function (response) {
+                if (response.role === 'USER') {
+                    $('body').show(); // allow page to show
+                    console.log(" Access granted for USER:", username);
+                } else {
+                    alert("Access Denied: You are not a regular user.");
+                    window.location.href ='signInPage.html';
+                }
+            },
+            error: function () {
+                alert("Session expired or unauthorized.");
+                localStorage.clear();
+                window.location.href = 'signInPage.html';
+            }
+        });
+    }
 
 
 
 
-  $(document).ready(function () {
-    const selectedName = localStorage.getItem("selectedMenuName");
-    const selectedPrice = localStorage.getItem("selectedMenuPrice");
+    $(document).ready(function () {
+        const selectedName = localStorage.getItem("selectedMenuName");
+        const selectedPrice = localStorage.getItem("selectedMenuPrice");
 
-    if (selectedName && selectedPrice) {
-      if ($("#menuName").length === 0) {
-        $("#orderForm").prepend(`
+        if (selectedName && selectedPrice) {
+            if ($("#menuName").length === 0) {
+                $("#orderForm").prepend(`
                 <div class="mb-3">
                     <label for="menuName" class="form-label">Menu Item</label>
                     <input type="text" class="form-control" id="menuName" value="${selectedName}" readonly>
@@ -134,57 +134,51 @@
                     <input type="text" class="form-control" id="menuPrice" value="Rs. ${selectedPrice}" readonly>
                 </div>
             `);
-      }
-    }
-  });
-
-  if (!token) {
-    window.location.href = "signInPage.html";
-  }
-
-  $("#orderSave").on("click", function(e) {
-    e.preventDefault();
-
-
-    // Prepare order data
-    const orderData = {
-      orderId: null, // auto-generated
-      name: $("#menuName").val(),
-      price: parseFloat($("#menuPrice").val()), // convert string to number
-      orderType: $("#orderType").val(),
-      orderQty: parseInt($("#qty").val()), // convert string to int
-      orderDatetime: $("#orderDatetime").val(),
-      status: $("#status").val(),
-      notes: $("#notes").val(),
-      customerId: 2
-    };
-
-    // Send AJAX POST request
-    $.ajax({
-      url: "http://localhost:8080/api/v1/orders/place",
-      type: "POST",
-      contentType: "application/json",
-      headers: { "Authorization": "Bearer " + token },
-      data: JSON.stringify(orderData),
-      success: function(res) {
-        alert(res.message);
-        console.log("Order saved:", res.data);
-
-        // Reset form
-        $("#orderForm")[0].reset();
-        localStorage.removeItem("selectedMenuName");
-        localStorage.removeItem("selectedMenuPrice");
-      },
-      error: function(xhr) {
-        console.error("Order save failed:", xhr);
-        if(xhr.responseJSON && xhr.responseJSON.message){
-          alert("Error: " + xhr.responseJSON.message);
-        } else {
-          alert("Error placing order!");
+            }
         }
-      }
     });
-  });
+
+    if (!token) {
+        window.location.href = "signInPage.html";
+    }
+
+    $("#orderSave").on("click", function(e) {
+        e.preventDefault();
+
+        const token = localStorage.getItem("token");
+
+        const orderData = {
+            name: $("#menuName").val(),
+            price: parseFloat($("#menuPrice").val().replace("Rs.", "").trim()),
+            orderType: $("#orderType").val(),
+            orderQty: parseInt($("#qty").val()),
+            orderDatetime: $("#orderDatetime").val(),
+            status: $("#status").val(),
+            notes: $("#notes").val()
+        };
+
+        $.ajax({
+            url: "http://localhost:8080/api/v1/orders/place",
+            type: "POST",
+            contentType: "application/json",
+            headers: {
+                "Authorization": "Bearer " + token
+            },
+            data: JSON.stringify(orderData),
+            success: function(res) {
+                alert(res.message);
+                console.log("Order saved:", res.data);
+                $("#orderForm")[0].reset();
+                localStorage.removeItem("selectedMenuName");
+                localStorage.removeItem("selectedMenuPrice");
+            },
+            error: function(xhr) {
+                console.error("Order save failed:", xhr);
+                alert("Error placing order!");
+            }
+        });
+    });
+
 
 </script>
 </body>
