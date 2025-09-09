@@ -34,31 +34,16 @@ public class OrderServiceImpl implements OrderService {
         Customer customer = customerRepo.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
 
-        Order order = new Order();
-        order.setName(ordersDto.getName());
-        order.setEmail(ordersDto.getEmail());
-        order.setPrice(ordersDto.getPrice());
-        order.setOrderType(ordersDto.getOrderType());
-        order.setOrderQty(ordersDto.getOrderQty());
-        order.setOrderDatetime(ordersDto.getOrderDatetime());
-        order.setStatus(ordersDto.getStatus());
-        order.setNotes(ordersDto.getNotes());
+        // DTO → Entity
+        Order order = modelMapper.map(ordersDto, Order.class);
         order.setCustomer(customer);
 
+        // Save order
         Order savedOrder = orderRepo.save(order);
 
-        OrdersDto savedDto = new OrdersDto(
-                savedOrder.getOrderId(),
-                savedOrder.getName(),
-                savedOrder.getEmail(),
-                savedOrder.getPrice(),
-                savedOrder.getOrderType(),
-                savedOrder.getOrderQty(),
-                savedOrder.getOrderDatetime(),
-                savedOrder.getStatus(),
-                savedOrder.getNotes(),
-                customer.getId()
-        );
+        // Entity → DTO
+        OrdersDto savedDto = modelMapper.map(savedOrder, OrdersDto.class);
+        savedDto.setCustomerId(customer.getId());
 
         return savedDto;
     }
