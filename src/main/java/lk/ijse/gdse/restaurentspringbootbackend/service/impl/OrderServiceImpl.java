@@ -2,14 +2,13 @@ package lk.ijse.gdse.restaurentspringbootbackend.service.impl;
 
 import lk.ijse.gdse.restaurentspringbootbackend.dto.OrdersDto;
 import lk.ijse.gdse.restaurentspringbootbackend.entity.Customer;
-import lk.ijse.gdse.restaurentspringbootbackend.entity.Feedback;
 import lk.ijse.gdse.restaurentspringbootbackend.entity.Order;
 import lk.ijse.gdse.restaurentspringbootbackend.repo.CustomerRepo;
 import lk.ijse.gdse.restaurentspringbootbackend.repo.OrderRepo;
 import lk.ijse.gdse.restaurentspringbootbackend.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.TypeToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -55,5 +54,17 @@ public class OrderServiceImpl implements OrderService {
             ordersDtos.add(modelMapper.map(order, OrdersDto.class));
         }
         return ordersDtos;
+    }
+
+    @Override
+    public List<OrdersDto> getOrdersByPage(int page, int size) {
+        int offset = page * size;
+        List<Order> orders = orderRepo.findOrderPaginated(size, offset);
+        return modelMapper.map(orders, new TypeToken<List<OrdersDto>>() {}.getType());    }
+
+    @Override
+    public int getTotalPages(int size) {
+        long totalOrders = orderRepo.getTotalOrdersCount();
+        return (int) Math.ceil((double) totalOrders / size);
     }
 }

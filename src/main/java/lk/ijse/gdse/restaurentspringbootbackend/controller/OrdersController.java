@@ -3,6 +3,7 @@ package lk.ijse.gdse.restaurentspringbootbackend.controller;
 import lk.ijse.gdse.restaurentspringbootbackend.dto.ApiResponseDto;
 import lk.ijse.gdse.restaurentspringbootbackend.dto.CustomerDto;
 import lk.ijse.gdse.restaurentspringbootbackend.dto.OrdersDto;
+import lk.ijse.gdse.restaurentspringbootbackend.entity.Order;
 import lk.ijse.gdse.restaurentspringbootbackend.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -36,5 +37,20 @@ public class OrdersController {
         return ResponseEntity.ok(
                 new ApiResponseDto(200, "OK", order)
         );
+    }
+
+    @GetMapping("/paginated")
+    public ResponseEntity<ApiResponseDto> getPaginated(
+            @RequestParam int page,
+            @RequestParam int size
+    ) {
+        List<OrdersDto> ordersDtos = orderService.getOrdersByPage(page, size);
+        return ResponseEntity.ok(new ApiResponseDto(200, "OK", ordersDtos));
+    }
+
+    @GetMapping("/total-pages")
+    public ResponseEntity<Integer> getTotalPages(@RequestParam int size) {
+        int totalPages = orderService.getTotalPages(size);
+        return ResponseEntity.ok(totalPages);
     }
 }
