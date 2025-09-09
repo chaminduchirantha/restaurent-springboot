@@ -21,9 +21,7 @@ public class FeedBackController {
 
     @PostMapping("/save")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<ApiResponseDto> submitFeedback(
-            @RequestBody FeedBackDto feedbackDto,
-            Authentication authentication) {
+    public ResponseEntity<ApiResponseDto> submitFeedback(@RequestBody FeedBackDto feedbackDto, Authentication authentication) {
 
         if (authentication == null || !authentication.isAuthenticated()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)

@@ -24,6 +24,6 @@ public class TableBooking {
     private String tables;
     private String requests;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Customer customer;
 }

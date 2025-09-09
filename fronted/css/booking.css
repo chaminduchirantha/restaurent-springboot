@@ -203,11 +203,19 @@ hr{
     background: #f8f9fa;
 }
 
+
+.table-item.selected {
+    border: 2px solid orange;
+    background-color: #fff3e0;
+    cursor: pointer;
+}
 .table-item.occupied {
-    background: #e67e22;
+    background-color: orange;
     color: white;
     cursor: not-allowed;
+    pointer-events: none; /* disable click */
 }
+
 
 @media (max-width: 768px) {
     .hero-section {

@@ -21,24 +21,114 @@
 
 <div class="container my-5">
     <h2 class="mb-4">Booking Reservations</h2>
-
+    <div class="text-end mb-3">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addCustomerModal">
+            + Add Mail
+        </button>
+    </div>
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
             <th>Full Name</th>
             <th>Phone Number</th>
-            <th>Date</th>
-            <th>Time</th>
+            <th>email</th>
+            <th>date</th>
+            <th>time</th>
             <th>Number of Guests</th>
+            <th>Number of tables</th>
+            <th>Request</th>
+            <th>Action</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
+        <tbody id="tableBooking">
 
-        </tr>
         </tbody>
     </table>
-</div>
 
+    <div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content rounded-4 shadow-lg border-0">
+
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title fw-bold" id="menuModalLabel">Add Customer</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body p-4">
+                    <div class="container">
+                        <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" style="max-width: 700px;">
+                            <div class="row g-3">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control custom-form" id="to" placeholder="To" required>
+                                </div>
+                                <div class= "mb-3">
+                                    <input type="text" class="form-control custom-form" id="subject" placeholder="subject" required>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <textarea class="form-control custom-form" id="message" rows="10" placeholder="Type to hear Message"></textarea>
+                                </div>
+                            </div>
+                            <div class="container mt-5">
+                                <div class="toolbar">
+                                    <div class="btn-group">
+                                        <button class="btn send-btn"  type="button" id="send">Send</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    const token = localStorage.getItem('token');
+    $(document).ready(function () {
+        loadTableBookings();
+    });
+
+    function authHeaders() {
+        return {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
+        };
+    }
+    function loadTableBookings() {
+        $.ajax({
+            url: `http://localhost:8080/api/v1/table/all`,
+            type: 'GET',
+            headers: authHeaders(),
+            success: function (res) {
+                const tableBooking = res.data || []; // <-- important
+                let rows = "";
+                tableBooking.forEach(tableBooking => {
+                    rows +=
+                        `<tr>
+                     <td>${tableBooking.fullname}</td>
+                     <td>${tableBooking.phoneNumber}</td>
+                     <td>${tableBooking.email}</td>
+                     <td>${tableBooking.date}</td>
+                     <td>${tableBooking.time}</td>
+                     <td>${tableBooking.guests}</td>
+                     <td>${tableBooking.tables}</td>
+                     <td>${tableBooking.requests}</td>
+                     <td>
+                         <button class="btn btn-sm btn-danger">Cancel Booking</button>
+                     </td>
+                  </tr>`;
+                });
+                $('#tableBooking').html(rows);
+            },
+            error: function(err){
+                console.log(err);
+                alert("Failed to load customers");
+            }
+        });
+    }
+
+</script>
 </body>
 </html>

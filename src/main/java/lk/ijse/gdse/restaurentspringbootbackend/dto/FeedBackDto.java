@@ -17,9 +17,8 @@ public class FeedBackDto {
     private String services;
     private String ratings;
     private String message;
-    private Long customerId; // ✅ FK reference
+    private Long customerId;
 
-    // Optional: feedback list show කරන වෙලාවේදී පමණක් use කරන්න
     private String customerUsername;
     private String customerEmail;
 }

@@ -169,23 +169,28 @@
     <!--    <hr>-->
     <!-- Form -->
     <div class="container col-md-8">
-        <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" style="max-width: 900px;" action="#" method="POST">
+        <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" id="table-form" style="max-width: 900px;">
             <div class="row g-3">
                 <div class="col-md-6">
                     <label for="fullName" class="form-label fw-semibold">Full name</label>
-                    <input type="text" class="form-control" id="fullName" name="first-name" autocomplete="given-name" placeholder="full name " required>
+                    <input type="text" class="form-control" id="fullName" name="first-name"  placeholder="full name " required>
                 </div>
                 <div class="col-md-6">
                     <label for="phoneNumber" class="form-label fw-semibold">phone number</label>
-                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" autocomplete="organization" placeholder="phone number" required>
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"  placeholder="phone number" required>
                 </div>
+                <div class="col-md-6">
+                    <label for="email" class="form-label fw-semibold">Email</label>
+                    <input type="email" class="form-control" id="email" name="phoneNumber"  placeholder="Email" required>
+                </div>
+
                 <div class="col-md-4">
                     <label for="date" class="form-label fw-semibold">Date</label>
-                    <input type="date" class="form-control" id="date" name="date" autocomplete="organization">
+                    <input type="date" class="form-control" id="date" name="date">
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label">Time</label>
-                    <select class="form-select" required>
+                    <select class="form-select" id="time" required>
                         <option value="">Select Time</option>
                         <option value="17:00">5:00 PM</option>
                         <option value="17:30">5:30 PM</option>
@@ -200,7 +205,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label">Guests</label>
-                    <select class="form-select" required>
+                    <select class="form-select" id="guests" required>
                         <option value="">Number of Guests</option>
                         <option value="1">1 Guest</option>
                         <option value="2">2 Guests</option>
@@ -221,12 +226,12 @@
                             Table 1<br>
                             <small>2 seats</small>
                         </div>
-                        <div class="table-item" data-table="2">
+                        <div class="table-item " data-table="2">
                             <i class="fas fa-chair"></i><br>
                             Table 2<br>
                             <small>4 seats</small>
                         </div>
-                        <div class="table-item occupied" data-table="3">
+                        <div class="table-item " data-table="3">
                             <i class="fas fa-chair"></i><br>
                             Table 3<br>
                             <small>6 seats</small>
@@ -259,14 +264,14 @@
                     </div>
 
                     <div class="">
-                        <label class="form-label">Special Requests</label>
+                        <label class="form-label" id="request">Special Requests</label>
                         <textarea class="form-control" rows="5" placeholder="Any special requirements or dietary restrictions..."></textarea>
                     </div>
                 </div>
             </div>
 
             <div class="mt-4">
-                <button type="submit" class="btn btn-warning btn-lg w-100">
+                <button type="button" class="btn btn-warning btn-lg w-100" id="table-booking">
                     <i class="fas fa-calendar-check me-2"></i>Reserve Table
                 </button>
             </div>
@@ -391,7 +396,7 @@
 
     <!-- Form -->
     <div class="container">
-        <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" style="max-width: 900px;" action="#" method="POST">
+        <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" style="max-width: 900px;" id="cateringForm">
             <div class="row g-3">
                 <div class="col-md-6 mb-3">
                     <label for="cateringName" class="form-label">Full Name</label>
@@ -400,6 +405,10 @@
                 <div class="col-md-6 mb-3">
                     <label for="cateringPhone" class="form-label">Phone Number</label>
                     <input type="tel" class="form-control custom-form" id="cateringPhone" placeholder="07XXXXXXXX" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="cateringEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control custom-form" id="cateringEmail" placeholder="enter your email" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="cateringDate" class="form-label">Date</label>
@@ -426,7 +435,7 @@
             </div>
 
             <div class="mb-2">
-                <button type="submit" class="btn btn-warning w-100 py-2">Book Now</button>
+                <button type="button" class="btn btn-warning w-100 py-2" id="cateringButton">Book Now</button>
             </div>
         </form>
     </div>
@@ -514,7 +523,8 @@
 </script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src="js/tableBooking.js"></script>
+<script src="js/cateringService.js"></script>
 <script>
     $('#home-button').on('click', function() {
         $('#booking').css('display', 'block');
@@ -587,6 +597,37 @@
         $('#footer-container').css('display', 'none');
         $('#contact-container').css('display', 'none');
     });
+
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('username');
+
+    if (!token || !username) {
+        window.location.href = 'signInPage.html';
+    } else {
+        $.ajax({
+            method: 'GET',
+            url: 'http://localhost:8080/role/api/user-info',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            },
+            success: function (response) {
+                if (response.role === 'USER') {
+                    // $('body').show(); // allow page to show
+                    console.log(" Access granted for USER:", username);
+                } else {
+                    alert("Access Denied: You are not a regular user.");
+                    window.location.href ='signInPage.html';
+                }
+            },
+            error: function () {
+                alert("Session expired or unauthorized.");
+                localStorage.clear();
+                window.location.href = 'signInPage.html';
+            }
+        });
+    }
+
+
 </script>
 </body>
 </html>

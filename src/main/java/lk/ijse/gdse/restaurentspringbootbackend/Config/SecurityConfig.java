@@ -61,7 +61,9 @@ public class SecurityConfig{
                                 "auth/verify-otp",
                                 "auth/reset-password",
                                 "api/v1/orders/**",
-                                "api/v1/mail/send"
+                                "api/v1/mail/send",
+                                "api/v1/table/**",
+                                "api/v1/catering/**"
                         ).permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(

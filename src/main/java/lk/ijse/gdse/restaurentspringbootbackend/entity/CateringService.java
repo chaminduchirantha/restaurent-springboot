@@ -17,11 +17,13 @@ public class CateringService {
     private Long cateringServiceId;
     private String fullname;
     private String phoneNumber;
+    private String email;
     private String date;
     private String time;
     private String type;
     private String guests;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 }

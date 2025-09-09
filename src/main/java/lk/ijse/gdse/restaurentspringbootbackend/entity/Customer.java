@@ -32,4 +32,10 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Feedback> feedbacks;
 
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<TableBooking> tableBookings;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<CateringService> cateringServices;
+
 }
