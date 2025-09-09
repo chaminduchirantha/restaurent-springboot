@@ -7,6 +7,7 @@
 
 </head>
 <body>
+
 <section class="container py-2">
     <div>
         <a href="adminDashBoard.html" style="text-decoration: none"><i class="fa-solid fa-arrow-left" style="font-size: 20px; color: black"></i></a>
@@ -42,6 +43,45 @@
         </table>
     </div>
 </section>
+
+
+<div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content rounded-4 shadow-lg border-0">
+
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title fw-bold" id="menuModalLabel">Add Customer</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body p-4">
+                <div class="container">
+                    <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" style="max-width: 700px;">
+                        <div class="row g-3">
+                            <div class="mb-3">
+                                <input type="text" class="form-control custom-form" id="to" placeholder="To" required>
+                            </div>
+                            <div class= "mb-3">
+                                <input type="text" class="form-control custom-form" id="subject" placeholder="subject" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <textarea class="form-control custom-form" id="message" rows="10" placeholder="Type to hear Message"></textarea>
+                            </div>
+                        </div>
+                        <div class="container mt-5">
+                            <div class="toolbar">
+                                <div class="btn-group">
+                                    <button class="btn send-btn"  type="button" id="send">Send</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <nav aria-label="..." style="position: relative; top:50px;" >
@@ -107,6 +147,32 @@
             }
         });
     }
+
+    $("#send").on("click", function (e) {
+        e.preventDefault();
+
+        const mailData = {
+            toMail: $("#to").val(),
+            subject: $("#subject").val(),
+            massage: $("#message").val()   // ✅ DTO field ekata match wenna
+        };
+
+        $.ajax({
+            url: "http://localhost:8080/api/v1/mail/send",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(mailData),
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token") // auth token hadanneth
+            },
+            success: function (response) {
+                alert(response); // Email sent successfully
+            },
+            error: function (xhr) {
+                alert("Error sending mail: " + xhr.responseText);
+            }
+        });
+    });
 </script>
 
 </body>
