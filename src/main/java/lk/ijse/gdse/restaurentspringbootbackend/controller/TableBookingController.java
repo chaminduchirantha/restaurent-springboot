@@ -30,11 +30,18 @@ public class TableBookingController {
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<ApiResponseDto> getAllBooking() {
         List<TableBookingDto> tableBooking = tableBookingService.getAllTableBooking();
         return ResponseEntity.ok(
                 new ApiResponseDto(200, "SuccessFull All the Table booking details;", tableBooking)
         );
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponseDto> deleteBooking(@PathVariable Long id) {
+        tableBookingService.deleteBooking(id);
+        return ResponseEntity.ok(new ApiResponseDto(200, "Booking deleted successfully", null));
     }
 }

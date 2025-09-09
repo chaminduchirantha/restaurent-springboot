@@ -104,21 +104,21 @@
             success: function (res) {
                 const tableBooking = res.data || []; // <-- important
                 let rows = "";
-                tableBooking.forEach(tableBooking => {
+                tableBooking.forEach(tb => {
                     rows +=
-                        `<tr>
-                     <td>${tableBooking.fullname}</td>
-                     <td>${tableBooking.phoneNumber}</td>
-                     <td>${tableBooking.email}</td>
-                     <td>${tableBooking.date}</td>
-                     <td>${tableBooking.time}</td>
-                     <td>${tableBooking.guests}</td>
-                     <td>${tableBooking.tables}</td>
-                     <td>${tableBooking.requests}</td>
-                     <td>
-                         <button class="btn btn-sm btn-danger">Cancel Booking</button>
-                     </td>
-                  </tr>`;
+                        `<tr data-id="${tb.tableid}">
+                             <td>${tb.fullname}</td>
+                             <td>${tb.phoneNumber}</td>
+                             <td>${tb.email}</td>
+                             <td>${tb.date}</td>
+                             <td>${tb.time}</td>
+                             <td>${tb.guests}</td>
+                             <td>${tb.tables}</td>
+                             <td>${tb.requests}</td>
+                             <td>
+                                 <button class="btn btn-sm btn-danger cancel-btn">Cancel Booking</button>
+                             </td>
+                        </tr>`;
                 });
                 $('#tableBooking').html(rows);
             },
@@ -128,6 +128,27 @@
             }
         });
     }
+
+    $(document).on("click", ".cancel-btn", function () {
+        const row = $(this).closest("tr");
+        const bookingId = row.data("id");
+
+        if (!confirm("Are you sure you want to cancel this booking?")) return;
+
+        $.ajax({
+            url: `http://localhost:8080/api/v1/table/delete/${bookingId}`,
+            type: 'DELETE',
+            headers: authHeaders(),
+            success: function (res) {
+                alert(res.message || "Booking deleted successfully");
+                row.remove(); // remove row from table
+            },
+            error: function (xhr) {
+                alert(xhr.responseText || "Failed to cancel booking");
+            }
+        });
+    });
+
 
 </script>
 </body>

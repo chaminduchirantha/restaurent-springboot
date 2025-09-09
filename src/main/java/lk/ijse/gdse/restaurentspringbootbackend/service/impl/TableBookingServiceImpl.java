@@ -52,4 +52,9 @@ public class TableBookingServiceImpl implements TableBookingService {
         }
         return tableBookingDtos;
     }
+
+    @Override
+    public void deleteBooking(Long id) {
+        tableBookingRepo.deleteById(id);
+    }
 }

@@ -8,6 +8,6 @@ import java.util.List;
 @Service
 public interface TableBookingService {
     TableBookingDto createBooking(TableBookingDto tableBookingDto);
-
     List<TableBookingDto> getAllTableBooking();
+    void deleteBooking(Long id);
 }
