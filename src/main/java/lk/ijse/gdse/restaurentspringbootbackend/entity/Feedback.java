@@ -22,6 +22,8 @@ public class Feedback {
     private String services;
     private String ratings;
     private String message;
+    private String sentiment;
+
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false) // FK column

@@ -368,6 +368,7 @@
             'Content-Type': 'application/json'
         };
     }
+
     function loadFeedbackCards() {
         $.ajax({
             url: "http://localhost:8080/api/v1/feedback/all",
@@ -376,50 +377,56 @@
             success: function(res) {
                 const feedbackList = res.data || [];
                 let cards = "";
+
                 feedbackList.forEach(fb => {
-                    // Create star rating icons dynamically
+                    // Determine rating from sentiment (auto star)
+                    let rating; // default neutral
+
+                    const sentiment = fb.sentiment ? fb.sentiment.toUpperCase() : "NEUTRAL";
+                    if (sentiment.includes("VERY POSITIVE")) rating = 5;
+                    else if (sentiment.includes("POSITIVE")) rating = 4;
+                    else if (sentiment.includes("NEUTRAL")) rating = 3;
+                    else if (sentiment.includes("NEGATIVE")) rating = 2;
+                    else if (sentiment.includes("VERY NEGATIVE")) rating = 1;
+                    else rating = 3;
+
+                    // Generate stars
                     let stars = "";
                     for (let i = 1; i <= 5; i++) {
-                        if (i <= fb.ratings) {
-                            stars += `<i class="fas fa-star text-warning"></i>`;
-                        } else {
-                            stars += `<i class="far fa-star text-warning"></i>`;
-                        }
+                        if (i <= rating) stars += `<i class="fas fa-star text-warning"></i>`;
+                        else stars += `<i class="far fa-star text-warning"></i>`;
                     }
 
                     cards += `
-                <div class="col-md-6 col-lg-4 mb-4">
-                  <div class="card shadow-sm border-0 rounded-4 p-3 h-100 feedback-card">
-                    <!-- Top section -->
-                    <div class="d-flex align-items-center mb-3">
-                      <div class="feedback-avatar">
-                        ${fb.fullname.charAt(0).toUpperCase()}
-                      </div>
-                      <div class="ms-3">
-                        <h6 class="mb-0 fw-semibold">${fb.fullname}</h6>
-                        <small class="text-muted">${fb.email}</small>
+                    <div class="col-md-6 col-lg-3 mb-4">
+                      <div class="card shadow-sm border-0 rounded-4 p-3 h-100 feedback-card">
+                        <div class="d-flex align-items-center mb-3">
+                          <div class="feedback-avatar rounded-circle bg-primary text-white d-flex justify-content-center align-items-center" style="width:40px;height:40px;">
+                            ${fb.fullname.charAt(0).toUpperCase()}
+                          </div>
+                          <div class="ms-3">
+                            <h6 class="mb-0 fw-semibold">${fb.fullname}</h6>
+                            <small class="text-muted">${fb.email}</small>
+                          </div>
+                        </div>
+
+                        <p class="fst-italic text-dark small mb-3">
+                          “${fb.message}”
+                        </p>
+
+                        <p class="mb-2 small">
+                          <span class="fw-semibold">Service:</span>
+                          <span class="text-primary">${fb.services}</span>
+                        </p>
+
+                        <div class="small mb-1">
+                          ${stars}
+                        </div>
                       </div>
                     </div>
-
-                    <!-- Message -->
-                    <p class="fst-italic text-dark small mb-3">
-                      “${fb.message}”
-                    </p>
-
-                    <!-- Service -->
-                    <p class="mb-2 small">
-                      <span class="fw-semibold">Service:</span>
-                      <span class="text-primary">${fb.services}</span>
-                    </p>
-
-                    <!-- Rating -->
-                    <div class="small">
-                      ${stars}
-                    </div>
-                  </div>
-                </div>
                 `;
                 });
+
                 $('#feedbackCardContainer').html(cards);
             },
             error: function(err){
@@ -429,9 +436,6 @@
         });
     }
 
-
-
-    // Call the function after page load
     $(document).ready(function() {
         loadFeedbackCards();
     });

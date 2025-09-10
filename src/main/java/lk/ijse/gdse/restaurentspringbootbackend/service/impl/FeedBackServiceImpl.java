@@ -7,6 +7,7 @@ import lk.ijse.gdse.restaurentspringbootbackend.entity.Feedback;
 import lk.ijse.gdse.restaurentspringbootbackend.repo.CustomerRepo;
 import lk.ijse.gdse.restaurentspringbootbackend.repo.FeedBackRepo;
 import lk.ijse.gdse.restaurentspringbootbackend.service.FeedBackService;
+import lk.ijse.gdse.restaurentspringbootbackend.service.SentimentService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -22,6 +23,8 @@ public class FeedBackServiceImpl implements FeedBackService {
     private final CustomerRepo customerRepo;
     private final FeedBackRepo feedBackRepo;
     private final ModelMapper modelMapper;
+    private final SentimentService sentimentService; // add this
+
 
     @Override
     public FeedBackDto submitFeedback(FeedBackDto feedbackDto, String username) {
@@ -33,13 +36,30 @@ public class FeedBackServiceImpl implements FeedBackService {
         feedback.setFullname(feedbackDto.getFullname());
         feedback.setEmail(feedbackDto.getEmail());
         feedback.setServices(feedbackDto.getServices());
-        feedback.setRatings(feedbackDto.getRatings());
         feedback.setMessage(feedbackDto.getMessage());
         feedback.setCustomer(customer);
+
+        // Analyze sentiment
+        String sentiment = sentimentService.analyzeSentiment(feedbackDto.getMessage());
+        feedback.setSentiment(sentiment);
+
+        // Auto assign star based on sentiment
+        feedback.setRatings(String.valueOf(mapSentimentToStar(sentiment)));
 
         feedBackRepo.save(feedback);
 
         return feedbackDto;
+    }
+
+    private int mapSentimentToStar(String sentiment) {
+        switch (sentiment.toUpperCase()) {
+            case "VERY POSITIVE": return 5;
+            case "POSITIVE": return 4;
+            case "NEUTRAL": return 3;
+            case "NEGATIVE": return 2;
+            case "VERY NEGATIVE": return 1;
+            default: return 3; // Neutral default
+        }
     }
 
 
