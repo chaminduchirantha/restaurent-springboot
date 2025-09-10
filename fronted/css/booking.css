@@ -193,6 +193,15 @@ hr{
     cursor: pointer;
     transition: all 0.3s ease;
 }
+.event-item {
+    background: white;
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 .booking-summary{
     border-radius: 10px;
     border: 1px solid #d35400;
@@ -210,6 +219,24 @@ hr{
     cursor: pointer;
 }
 .table-item.occupied {
+    background-color: orange;
+    color: white;
+    cursor: not-allowed;
+    pointer-events: none; /* disable click */
+}
+
+.event-item:hover {
+    border-color: #d35400;
+    background: #f8f9fa;
+}
+
+
+.event-item.selected {
+    border: 2px solid orange;
+    background-color: #fff3e0;
+    cursor: pointer;
+}
+.event-item.occupied {
     background-color: orange;
     color: white;
     cursor: not-allowed;
