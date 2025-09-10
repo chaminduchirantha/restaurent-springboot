@@ -1,0 +1,118 @@
+
+const token = localStorage.getItem('token');
+const username = localStorage.getItem('username');
+const customerId = parseInt(localStorage.getItem("customerId"));
+
+if (!token || !username) {
+    window.location.href = 'signInPage.html';
+} else {
+    $.ajax({
+        method: 'GET',
+        url: 'http://localhost:8080/role/api/user-info',
+        headers: {
+            'Authorization': 'Bearer ' + token
+        },
+        success: function (response) {
+            if (response.role === 'USER') {
+                $('body').show(); // allow page to show
+                console.log(" Access granted for USER:", username);
+            } else {
+                alert("Access Denied: You are not a regular user.");
+                window.location.href ='signInPage.html';
+            }
+        },
+        error: function () {
+            alert("Session expired or unauthorized.");
+            localStorage.clear();
+            window.location.href = 'signInPage.html';
+        }
+    });
+}
+
+
+
+
+$(document).ready(function () {
+    const selectedName = localStorage.getItem("selectedMenuName");
+    const selectedPrice = localStorage.getItem("selectedMenuPrice");
+
+    if (selectedName && selectedPrice) {
+        if ($("#menuName").length === 0) {
+            $("#orderForm").prepend(`
+                <div class="mb-3">
+                    <label for="menuName" class="form-label">Menu Item</label>
+                    <input type="text" class="form-control" id="menuName" value="${selectedName}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="menuPrice" class="form-label">Price</label>
+                    <input type="text" class="form-control" id="menuPrice" value="Rs. ${selectedPrice}" readonly>
+                </div>
+            `);
+        }
+    }
+});
+
+if (!token) {
+    window.location.href = "signInPage.html";
+}
+
+$("#orderSave").on("click", function(e) {
+    e.preventDefault();
+
+    const token = localStorage.getItem("token");
+
+    // Collect form values
+    const orderData = {
+        name: $("#menuName").val().trim(),
+        price: parseFloat($("#menuPrice").val().replace("Rs.", "").trim()),
+        orderType: $("#orderType").val().trim(),
+        orderQty: parseInt($("#qty").val()),
+        orderDatetime: $("#orderDatetime").val().trim(),
+        status: $("#status").val().trim(),
+        notes: $("#notes").val().trim(),
+        email: $("#email").val().trim()
+    };
+
+    // Validation: check required fields
+    if (!orderData.name || !orderData.price || !orderData.orderType ||
+        !orderData.orderQty || !orderData.orderDatetime || !orderData.status || !orderData.email) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Missing Fields',
+            text: 'Please fill all required fields before placing the order.'
+        });
+        return;
+    }
+
+    // AJAX request
+    $.ajax({
+        url: "http://localhost:8080/api/v1/orders/place",
+        type: "POST",
+        contentType: "application/json",
+        headers: {
+            "Authorization": "Bearer " + token
+        },
+        data: JSON.stringify(orderData),
+        success: function(res) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Order Placed!',
+                text: 'Your order has been saved successfully.',
+                confirmButtonText: 'OK'
+            });
+
+            console.log("Order saved:", res.data);
+            $("#orderForm")[0].reset();
+            localStorage.removeItem("selectedMenuName");
+            localStorage.removeItem("selectedMenuPrice");
+        },
+        error: function(xhr) {
+            console.error("Order save failed:", xhr);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Failed to place the order!'
+            });
+        }
+    });
+});
