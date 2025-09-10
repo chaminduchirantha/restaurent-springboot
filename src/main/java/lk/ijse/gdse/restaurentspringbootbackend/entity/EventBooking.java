@@ -25,6 +25,8 @@ public class EventBooking {
     private String hallNo;
     private String requests;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id", nullable = false)
+
     private Customer customer;
 }
