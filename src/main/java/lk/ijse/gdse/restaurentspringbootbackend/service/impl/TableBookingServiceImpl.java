@@ -55,6 +55,13 @@ public class TableBookingServiceImpl implements TableBookingService {
 
     @Override
     public void deleteBooking(Long id) {
-        tableBookingRepo.deleteById(id);
+        TableBooking booking = tableBookingRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Booking not found"));
+
+        // Break the relation so Hibernate doesn't cascade to customer
+        booking.setCustomer(null);
+
+        tableBookingRepo.delete(booking);
     }
+
 }
