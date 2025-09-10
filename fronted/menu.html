@@ -576,6 +576,154 @@
         });
     });
 
+    let cart = [];
+    let currentUser = token; // 👈 Change this dynamically to logged-in user's name/id
+
+    // Load cart for this user from LocalStorage on page load
+    $(document).ready(function () {
+        loadCartFromStorage();
+    });
+
+    // Save cart to LocalStorage (user-specific)
+    function saveCartToStorage() {
+        localStorage.setItem("cart_" + currentUser, JSON.stringify(cart));
+    }
+
+    // Load cart from LocalStorage (user-specific)
+    function loadCartFromStorage() {
+        const storedCart = localStorage.getItem("cart_" + currentUser);
+        if (storedCart) {
+            cart = JSON.parse(storedCart);
+            updateCartTable();
+            updateCartBadge();
+        }
+    }
+
+    // Add to Cart Button Click
+    $(document).on("click", ".btn-outline-danger", function () {
+        const card = $(this).closest(".card");
+        const name = card.find(".card-title").text().trim();
+        const price = parseFloat(card.find(".text-danger").text().replace("Rs.", "").trim());
+        const image = card.find("img").attr("src");
+
+        let existing = cart.find(item => item.name === name);
+
+        if (existing) {
+            existing.qty += 1;
+            existing.total = existing.qty * existing.price;
+        } else {
+            cart.push({
+                name: name,
+                price: price,
+                qty: 1,
+                total: price,
+                image: image
+            });
+        }
+
+        updateCartTable();
+        updateCartBadge();
+        saveCartToStorage();
+
+        // Show success alert
+        $("#cart-alert").removeClass("d-none").addClass("show");
+        setTimeout(() => {
+            $("#cart-alert").removeClass("show").addClass("d-none");
+        }, 2000);
+    });
+
+    // Update Cart Table
+    function updateCartTable() {
+        let tbody = $("#cartModal table tbody");
+        tbody.empty();
+
+        let totalPrice = 0;
+
+        cart.forEach((item, index) => {
+            totalPrice += item.total;
+            tbody.append(`
+            <tr>
+                <td>
+                    <img src="${item.image}" width="40" class="me-2">
+                    ${item.name}
+                </td>
+                <td>Rs. ${item.price.toFixed(2)}</td>
+                <td>
+                    <input type="number" class="form-control form-control-sm cart-qty"
+                           data-index="${index}" value="${item.qty}" min="1" style="width:70px;">
+                </td>
+                <td>Rs. ${item.total.toFixed(2)}</td>
+                <td><button class="btn btn-sm btn-danger remove-cart-item" data-index="${index}">Remove</button></td>
+            </tr>
+        `);
+        });
+
+        $(".modal-body .text-primary").text("Rs. " + totalPrice.toFixed(2));
+    }
+
+    // Update Cart Badge
+    function updateCartBadge() {
+        let count = cart.reduce((sum, item) => sum + item.qty, 0);
+        $("#cart-badge").text(count);
+    }
+
+    // Quantity Change in Cart
+    $(document).on("change", ".cart-qty", function () {
+        let index = $(this).data("index");
+        let qty = parseInt($(this).val());
+
+        if (qty <= 0) qty = 1;
+
+        cart[index].qty = qty;
+        cart[index].total = qty * cart[index].price;
+
+        updateCartTable();
+        updateCartBadge();
+        saveCartToStorage();
+    });
+
+    // Remove Item from Cart
+    $(document).on("click", ".remove-cart-item", function () {
+        let index = $(this).data("index");
+        cart.splice(index, 1);
+
+        updateCartTable();
+        updateCartBadge();
+        saveCartToStorage();
+    });
+
+    // Checkout Button Click
+    $(document).on("click", "#checkoutBtn", function () {
+        if (cart.length === 0) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Cart is Empty',
+                text: 'Please add items before checkout.'
+            });
+            return;
+        }
+
+        let total = cart.reduce((sum, item) => sum + item.total, 0);
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Order Placed!',
+            html: `<b>Total Amount:</b> Rs. ${total.toFixed(2)}<br>
+               <small>Thank you for your order!</small>`,
+            confirmButtonText: 'OK'
+        });
+
+        // Reset cart
+        cart = [];
+        updateCartTable();
+        updateCartBadge();
+        localStorage.removeItem("cart_" + currentUser); // Clear storage for this user
+        $("#cartModal").modal("hide");
+    });
+
+
+
+
 </script>
 
 </body>
