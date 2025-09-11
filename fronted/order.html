@@ -20,14 +20,14 @@
         }
 
         .order-form-container {
-            max-width: 700px;
+            max-width: 500px;
             height: auto;           /* Auto height based on content */
 
             margin: 50px auto;
             background: rgba(255, 255, 255, 0);
             z-index: 1;
 
-            backdrop-filter: blur(22px);
+            backdrop-filter: blur(12px);
             padding: 2rem;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
@@ -36,6 +36,12 @@
 
         .order-form-container .form-label {
             font-size: 0.9rem; /* Labels ට small font size */
+        }
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 10px;
+            padding: 10px 15px;
         }
 
         .order-form-container .form-control,
@@ -63,7 +69,7 @@
 
             <!-- Customer ID & Order Type -->
             <div class="row mb-3 g-3">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" placeholder="Enter your Email" required>
                 </div>
@@ -101,8 +107,9 @@
             </div>
 
             <!-- Submit Button -->
-            <div class="d-grid gap-2 mt-4">
-                <button type="button" id="orderSave" class="btn btn-primary">Submit Order</button>
+            <div class="d-flex justify-content-between">
+                <button type="button" id="orderSave" class="btn  btn-sm w-100 mx-1 text-white" style="background: #e67e22">Submit Order</button>
+                <button type="button" id="payment" class="btn  btn-sm w-100 mx-1 text-white" style="background: #e67e22">Payment</button>
             </div>
         </form>
     </div>
