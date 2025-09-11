@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     // --- Load occupied tables from localStorage (on page load) ---
     loadOccupiedFromLocal();
-    setInterval(syncOccupiedTables, 1000);
+    setInterval(syncOccupiedTables, 5000);
 
 
     // --- Table select click ---
