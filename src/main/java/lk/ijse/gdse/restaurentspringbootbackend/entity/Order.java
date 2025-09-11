@@ -27,6 +27,7 @@ public class Order {
     private int orderQty;
     private Date orderDatetime;
     private String status;
+    private double total;
     private String notes;
 
     @ManyToOne
