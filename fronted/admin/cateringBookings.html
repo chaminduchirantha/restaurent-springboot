@@ -26,6 +26,28 @@
     </table>
 </div>
 
+<div class="d-flex justify-content-center mt-4">
+    <div class="card shadow-sm border-0 col-lg-8">
+        <div class="card-header text-black fw-bold">
+            Send Mail
+        </div>
+        <div class="card-body">
+            <form id="mailForm">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="to" placeholder="To" required>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="subject" placeholder="Subject" required>
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control" id="message" rows="6" placeholder="Type your message..."></textarea>
+                </div>
+                <button class="btn btn-primary w-100" type="button" id="send">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
@@ -46,24 +68,56 @@
             type: 'GET',
             headers: authHeaders(),
             success: function (res) {
-                const cateringBooking = res.data || []; // <-- important
+                const cateringBooking = res.data || [];
                 let rows = "";
-                cateringBooking.forEach(cateringBooking => {
+                cateringBooking.forEach((c, index) => {
                     rows +=
-                        `<tr>
-                     <td>${cateringBooking.fullname}</td>
-                     <td>${cateringBooking.phoneNumber}</td>
-                     <td>${cateringBooking.email}</td>
-                     <td>${cateringBooking.date}</td>
-                     <td>${cateringBooking.time}</td>
-                     <td>${cateringBooking.type}</td>
-                     <td>${cateringBooking.guests}</td>
-                     <td>
-                         <button class="btn btn-sm btn-danger">Cancel Booking</button>
-                     </td>
-                  </tr>`;
+                        `<tr data-id="${index}">
+                        <td>${c.fullname}</td>
+                        <td>${c.phoneNumber}</td>
+                        <td>${c.email}</td>
+                        <td>${c.date}</td>
+                        <td>${c.time}</td>
+                        <td>${c.type}</td>
+                        <td>${c.guests}</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger">Cancel Booking</button>
+                            <button class="btn btn-sm btn-primary sendMailBtn">Send Mail</button>
+                        </td>
+                    </tr>`;
                 });
                 $('#cateringBookingTableBody').html(rows);
+
+                // Attach event for new buttons
+                $(".sendMailBtn").on("click", function () {
+                    const row = $(this).closest("tr").children("td");
+
+                    // Extract details from row
+                    const fullname = row.eq(0).text();
+                    const phone = row.eq(1).text();
+                    const email = row.eq(2).text();
+                    const date = row.eq(3).text();
+                    const time = row.eq(4).text();
+                    const type = row.eq(5).text();
+                    const guests = row.eq(6).text();
+
+                    // Autofill form
+                    $("#to").val(email);
+                    $("#subject").val("Booking Confirmation - " + type);
+                    $("#message").val(
+                        `Hello ${fullname},\n\n` +
+                        `This is regarding your booking:\n\n` +
+                        `Date: ${date}\n` +
+                        `Time: ${time}\n` +
+                        `Guests: ${guests}\n\n` +
+                        `Thank you,\nGolden Spoon Restaurant`
+                    );
+
+                    // Scroll to form
+                    $('html, body').animate({
+                        scrollTop: $("#mailForm").offset().top
+                    }, 500);
+                });
             },
             error: function (err) {
                 console.log(err);
@@ -71,6 +125,32 @@
             }
         });
     }
+
+    $("#send").on("click", function (e) {
+        e.preventDefault();
+
+        const mailData = {
+            toMail: $("#to").val(),
+            subject: $("#subject").val(),
+            massage: $("#message").val()
+        };
+
+        $.ajax({
+            url: "http://localhost:8080/api/v1/mail/send",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(mailData),
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token") // auth token hadanneth
+            },
+            success: function (response) {
+                alert(response); // Email sent successfully
+            },
+            error: function (xhr) {
+                alert("Error sending mail: " + xhr.responseText);
+            }
+        });
+    });
 </script>
 </body>
 </html>
