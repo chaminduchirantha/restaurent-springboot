@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface CustomerRepo extends JpaRepository<Customer, Long> {
     Optional<Customer> findByUsername(String username);
-    Optional<Customer> findByEmail(String username);
+    Optional<Customer> findByEmail(String email);
     @Query(value = "SELECT * FROM customer LIMIT :limit OFFSET :offset", nativeQuery = true)
     List<Customer> findCustomerPaginated(@Param("limit") int limit, @Param("offset") int offset);
 

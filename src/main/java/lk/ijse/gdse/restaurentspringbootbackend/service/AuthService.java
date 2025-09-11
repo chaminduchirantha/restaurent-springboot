@@ -50,6 +50,11 @@ public class AuthService {
         if (userRepo.findByUsername(registerDTO.getUsername()).isPresent()) {
             throw new RuntimeException("Username is already exist");
         }
+
+        if (userRepo.findByEmail(registerDTO.getEmail()).isPresent()) {
+            throw new RuntimeException("Email already exists");
+        }
+
         Customer user = Customer.builder()
                 .username(registerDTO.getUsername())
                 .password(passwordEncoder.encode(registerDTO.getPassword()))
