@@ -26,8 +26,13 @@ $('#signUp').on('click', function () {
                 });
             },
             error: function (xhr) {
-                let errorMessage = xhr.responseJSON?.message || 'Error occurred';
-                alert(errorMessage);
+                let errorMessage = xhr.responseJSON?.message || xhr.responseText || 'Error occurred';
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Registration Failed',
+                    text: errorMessage
+                });
             }
         });
     } else {
