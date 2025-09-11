@@ -61,6 +61,12 @@ $("#orderSave").on("click", function(e) {
 
     const token = localStorage.getItem("token");
 
+    const price = parseFloat($("#menuPrice").val().replace("Rs.", "").trim());
+    const qty = parseInt($("#qty").val());
+
+    const total = price * qty;
+
+
     // Collect form values
     const orderData = {
         name: $("#menuName").val().trim(),
@@ -70,7 +76,9 @@ $("#orderSave").on("click", function(e) {
         orderDatetime: $("#orderDatetime").val().trim(),
         status: $("#status").val().trim(),
         notes: $("#notes").val().trim(),
-        email: $("#email").val().trim()
+        email: $("#email").val().trim(),
+        total: total,
+
     };
 
     // Validation: check required fields
@@ -116,3 +124,21 @@ $("#orderSave").on("click", function(e) {
         }
     });
 });
+
+$("#qty").on("input", function () {
+    const price = parseFloat($("#menuPrice").val().replace("Rs.", "").trim());
+    const qty = parseInt($("#qty").val()) || 0;
+    const total = price * qty;
+
+    if ($("#total").length === 0) {
+        $("#orderForm").append(`
+            <div class="mb-3">
+                <label for="total" class="form-label">Total</label>
+                <input type="text" class="form-control" id="total" value="Rs. ${total}" readonly>
+            </div>
+        `);
+    } else {
+        $("#total").val("Rs. " + total);
+    }
+});
+
