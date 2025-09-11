@@ -21,11 +21,7 @@
 
 <div class="container my-5">
     <h2 class="mb-4">Booking Reservations</h2>
-    <div class="text-end mb-3">
-        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addCustomerModal">
-            + Add Mail
-        </button>
-    </div>
+
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -45,41 +41,25 @@
         </tbody>
     </table>
 
-    <div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content rounded-4 shadow-lg border-0">
-
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title fw-bold" id="menuModalLabel">Add Customer</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="d-flex justify-content-center mt-4">
+    <div class="card shadow-sm border-0 col-lg-8">
+        <div class="card-header text-black fw-bold">
+            Send Mail
+        </div>
+        <div class="card-body">
+            <form id="mailForm">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="to" placeholder="To" required>
                 </div>
-
-                <div class="modal-body p-4">
-                    <div class="container">
-                        <form class="mx-auto p-4 p-md-5 shadow rounded-4 border border-light bg-white" style="max-width: 700px;">
-                            <div class="row g-3">
-                                <div class="mb-3">
-                                    <input type="text" class="form-control custom-form" id="to" placeholder="To" required>
-                                </div>
-                                <div class= "mb-3">
-                                    <input type="text" class="form-control custom-form" id="subject" placeholder="subject" required>
-                                </div>
-                                <div class="col-12 mb-3">
-                                    <textarea class="form-control custom-form" id="message" rows="10" placeholder="Type to hear Message"></textarea>
-                                </div>
-                            </div>
-                            <div class="container mt-5">
-                                <div class="toolbar">
-                                    <div class="btn-group">
-                                        <button class="btn send-btn"  type="button" id="send">Send</button>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="subject" placeholder="Subject" required>
                 </div>
-            </div>
+                <div class="mb-3">
+                    <textarea class="form-control" id="message" rows="6" placeholder="Type your message..."></textarea>
+                </div>
+                <button class="btn btn-primary w-100" type="button" id="send">Send</button>
+            </form>
         </div>
     </div>
 </div>
@@ -102,32 +82,67 @@
             type: 'GET',
             headers: authHeaders(),
             success: function (res) {
-                const tableBooking = res.data || []; // <-- important
+                const tableBooking = res.data || [];
                 let rows = "";
-                tableBooking.forEach(tb => {
+                tableBooking.forEach((tb, index) => {
                     rows +=
                         `<tr data-id="${tb.tableid}">
-                             <td>${tb.fullname}</td>
-                             <td>${tb.phoneNumber}</td>
-                             <td>${tb.email}</td>
-                             <td>${tb.date}</td>
-                             <td>${tb.time}</td>
-                             <td>${tb.guests}</td>
-                             <td>${tb.tables}</td>
-                             <td>${tb.requests}</td>
-                             <td>
-                                 <button class="btn btn-sm btn-danger cancel-btn">Cancel Booking</button>
-                             </td>
-                        </tr>`;
+                         <td>${tb.fullname}</td>
+                         <td>${tb.phoneNumber}</td>
+                         <td>${tb.email}</td>
+                         <td>${tb.date}</td>
+                         <td>${tb.time}</td>
+                         <td>${tb.guests}</td>
+                         <td>${tb.tables}</td>
+                         <td>${tb.requests}</td>
+                         <td>
+                             <button class="btn btn-sm btn-danger cancel-btn">Cancel Booking</button>
+                             <button class="btn btn-sm btn-primary sendMailBtn">Send Mail</button>
+                         </td>
+                    </tr>`;
                 });
                 $('#tableBooking').html(rows);
+
+                // --- Send Mail button click ---
+                $(".sendMailBtn").on("click", function () {
+                    const row = $(this).closest("tr").children("td");
+
+                    const fullname = row.eq(0).text();
+                    const phone = row.eq(1).text();
+                    const email = row.eq(2).text();
+                    const date = row.eq(3).text();
+                    const time = row.eq(4).text();
+                    const guests = row.eq(5).text();
+                    const tables = row.eq(6).text();
+                    const requests = row.eq(7).text();
+
+                    // Autofill mail form
+                    $("#to").val(email);
+                    $("#subject").val("Booking Confirmation - Table Reservation");
+                    $("#message").val(
+                        `Hello ${fullname},\n\n` +
+                        `This is regarding your table booking:\n\n` +
+                        `Date: ${date}\n` +
+                        `Time: ${time}\n` +
+                        `Guests: ${guests}\n` +
+                        `Tables: ${tables}\n` +
+                        `Special Request: ${requests}\n\n` +
+                        `Thank you,\nGolden Spoon Restaurant`
+                    );
+
+                    // Smooth scroll to form
+                    $('html, body').animate({
+                        scrollTop: $("#mailForm").offset().top
+                    }, 500);
+                });
             },
-            error: function(err){
+            error: function (err) {
                 console.log(err);
                 alert("Failed to load customers");
             }
         });
     }
+
 
     $(document).on("click", ".cancel-btn", function () {
         const row = $(this).closest("tr");
@@ -145,6 +160,32 @@
             },
             error: function (xhr) {
                 alert(xhr.responseText || "Failed to cancel booking");
+            }
+        });
+    });
+
+    $("#send").on("click", function (e) {
+        e.preventDefault();
+
+        const mailData = {
+            toMail: $("#to").val(),
+            subject: $("#subject").val(),
+            massage: $("#message").val()
+        };
+
+        $.ajax({
+            url: "http://localhost:8080/api/v1/mail/send",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(mailData),
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token") // auth token hadanneth
+            },
+            success: function (response) {
+                alert(response); // Email sent successfully
+            },
+            error: function (xhr) {
+                alert("Error sending mail: " + xhr.responseText);
             }
         });
     });
