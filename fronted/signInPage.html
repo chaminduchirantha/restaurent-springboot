@@ -116,11 +116,30 @@
             <div class="mt-6 text-end">
                 <a href="forgetPassword.html" class="text-warning" style="font-size: 0.9rem;">Forgot Password?</a>
             </div>
+
+
             <button type="button" class="btn btn-login w-100" id="signIn">Login</button>
+            <br>
+            <br>
+            <div id="g_id_onload"
+                 data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                 data-callback="handleCredentialResponse"
+                 data-auto_prompt="false">
+            </div>
+            <div class="g_id_signin mb-3"
+                 data-type="standard"
+                 data-size="large"
+                 data-theme="outline"
+                 data-text_size="16"
+                 data-shape="rectangular"
+                 data-logo_alignment="left">
+            </div>
             <p class="text-center mt-3">Don't have an account? <a href="signUpPage.html">Sign Up</a></p>
+
         </form>
     </div>
 </div>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="js/signIn.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

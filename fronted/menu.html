@@ -41,6 +41,9 @@
 
             <div class="d-flex align-items-center">
                 <a href="#" class="text-white fs-5 position-relative " style="margin-right: 20px" data-bs-toggle="modal" data-bs-target="#cartModal"><i class="fas fa-shopping-cart"></i><span id="cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:0.7em;">0</span></a>
+                <a href="#" class="text-white fs-5 position-relative " style="margin-right: 20px" ><i class="fa-solid fa-bell"></i><span id="notificationBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:0.7em;">0</span></a>
+
+                <a href="#" class="text-white fs-5 position-relative " style="margin-right: 20px" data-bs-toggle="modal" data-bs-target="#orderModel"><i class="fa-solid fa-circle-info"></i></a>
             </div>
             <div class="d-flex">
                 <a href="signUpPage.html">
@@ -84,6 +87,35 @@
             <div class="modal-footer border-0">
                 <button type="button" class="btn btn-secondary rounded-pill px-4">Close</button>
                 <button type="button" class="btn btn-warning text-white fw-bold rounded-pill px-4">Checkout</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="orderModel" tabindex="-1" aria-labelledby="orderModelLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold" id="orderModelLabel">Your Order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Menu Item</th>
+                        <th>Price</th>
+                        <th>Email</th>
+                        <th>Order Qty</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                    </tr>
+                    </thead>
+                    <tbody id="orderViewTable">
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -577,7 +609,7 @@
     });
 
     let cart = [];
-    let currentUser = token; // 👈 Change this dynamically to logged-in user's name/id
+    let currentUser = token;
 
     // Load cart for this user from LocalStorage on page load
     $(document).ready(function () {
@@ -720,9 +752,6 @@
         localStorage.removeItem("cart_" + currentUser); // Clear storage for this user
         $("#cartModal").modal("hide");
     });
-
-
-
 
 </script>
 
