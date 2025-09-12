@@ -7,231 +7,540 @@
 
     <!-- Bootstrap 5.3.6 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 
     <style>
         :root {
-            --sidebar-width: 260px;
+            --primary: #2d3436;
+            --primary-dark: #2d3436;
+            --secondary: #ff9f43;
+            --success: #2ecc71;
+            --info: #00c9db;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --light: #f8f9fa;
+            --dark: #ffa502;
+            --sidebar-width: 250px;
+            --header-height: 60px;
+            --card-border-radius: 12px;
+            --sidebar-transition: all 0.3s ease;
         }
+
         body {
-            background-color: #f8f9fa;
+            background-color: #f5f7fb;
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
         }
 
-        /* Top Navbar */
-        .app-navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1040; /* above offcanvas */
+        /* Layout */
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
         }
 
-        /* Sidebar (desktop) */
+        /* Sidebar */
         .sidebar {
             width: var(--sidebar-width);
-            min-height: 100vh;
-            background-color: #212529;
-        }
-        .sidebar .brand {
-            font-weight: 700;
-            letter-spacing: .5px;
-        }
-        .sidebar a.nav-link {
-            color: #e9ecef;
-            border-radius: .5rem;
-            padding: .65rem .9rem;
-        }
-        .sidebar a.nav-link:hover,
-        .sidebar a.nav-link.active {
-            background-color: #fd7e14;
-            color: #fff;
-        }
-        .sidebar .section-title {
-            color: #adb5bd;
-            font-size: .75rem;
-            text-transform: uppercase;
-            letter-spacing: .08em;
-            margin: 1rem .75rem .25rem;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            transition: var(--sidebar-transition);
+            z-index: 1000;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
 
-        /* Layout */
-        .content-wrap {
+        .sidebar-header {
+            padding: 1.5rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
             display: flex;
-            width: 100%;
+            align-items: center;
+            gap: 10px;
         }
-        .sidebar-wrap {
-            display: none; /* hidden on mobile by default */
+
+        .sidebar-brand i {
+            background: var(--secondary);
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .main {
-            flex: 1 1 auto;
-            min-width: 0;
+
+        .sidebar-menu {
+            padding: 1rem 0;
+        }
+
+        .menu-item {
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+        .menu-item:hover, .menu-item.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .menu-item i {
+            font-size: 1.2rem;
+            width: 24px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            transition: var(--sidebar-transition);
+        }
+
+        /* Header */
+        .app-header {
+            background: white;
+            height: var(--header-height);
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .search-bar {
+            width: 300px;
+            position: relative;
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+
+        .search-bar input {
+            padding-left: 35px;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Content Area */
+        .content-wrapper {
             padding: 1.5rem;
         }
 
-        /* Desktop >= lg */
-        @media (min-width: 992px) {
-            .sidebar-wrap {
-                display: block;
-            }
-            .main {
-                margin-left: var(--sidebar-width);
-                padding: 2rem;
-            }
-            .sidebar.fixed-lg {
-                position: fixed;
-                left: 0;
-                top: 0;
-            }
-            .sidebar .nav .collapse .nav-link { padding-left: 2.2rem; }
+        .welcome-section {
+            margin-bottom: 2rem;
         }
 
-        /* Cards */
+        .welcome-section h1 {
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-section p {
+            color: #718096;
+            margin-bottom: 0;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
         .stat-card {
-            border: 0;
-            border-radius: 1rem;
-            box-shadow: 0 8px 24px rgba(0,0,0,.06);
+            background: white;
+            border-radius: var(--card-border-radius);
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        /* Iframe area */
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.07);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-content h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-content p {
+            color: #718096;
+            margin-bottom: 0;
+        }
+
+        /* Management Cards */
+        .management-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .management-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .management-card {
+            background: white;
+            border-radius: var(--card-border-radius);
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .management-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            border-color: rgba(58, 54, 219, 0.1);
+        }
+
+        .management-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .management-card h5 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+
+        .management-card p {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        /* Iframe Container */
+        .iframe-container {
+            display: none;
+            margin-top: 2rem;
+            background: white;
+            border-radius: var(--card-border-radius);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+        }
+
+        .iframe-header {
+            padding: 1rem 1.5rem;
+            background: var(--light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .iframe-header h4 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #2d3748;
+        }
+
+        .close-iframe {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #718096;
+            cursor: pointer;
+        }
+
         #pageFrame {
             width: 100%;
             height: 70vh;
-            border: 0;
-            background: #fff;
-            border-radius: 1rem;
-            box-shadow: 0 6px 20px rgba(0,0,0,.05);
+            border: none;
+            display: block;
         }
 
-        /* Spinner overlay for iframe */
-        .frame-loading {
-            position: relative;
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 0;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+                width: var(--sidebar-width);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .menu-toggle {
+                display: block !important;
+            }
+
+            .search-bar {
+                width: 200px;
+            }
         }
-        .frame-loading::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: rgba(255,255,255,.6);
+
+        @media (max-width: 768px) {
+            .stats-grid,
+            .management-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-bar {
+                display: none;
+            }
+        }
+
+        .menu-toggle {
             display: none;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(1px);
-        }
-        .frame-loading.loading::after {
-            display: flex;
-            content: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"64\" height=\"64\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"32\" stroke=\"%23fd7e14\" stroke-width=\"8\" fill=\"none\" stroke-linecap=\"round\"><animateTransform attributeName=\"transform\" type=\"rotate\" dur=\"1s\" repeatCount=\"indefinite\" from=\"0 50 50\" to=\"360 50 50\"/></circle></svg>');
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
         }
 
-        /* Footer */
-        .app-footer {
-            color: #6c757d;
-            font-size: .9rem;
+        /* Loading indicator */
+        .loading {
+            position: relative;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-<!-- Top Navbar -->
-<nav class="navbar navbar-dark bg-dark app-navbar">
-    <div class="container-fluid">
-        <button class="btn btn-outline-light d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
-            <i class="bi bi-list"></i>
-        </button>
-        <span class="navbar-brand ms-2">Restaurant Admin</span>
-        <div class="d-flex align-items-center gap-3 ms-auto">
-            <button class="btn btn-outline-light btn-sm" id="themeToggle" title="Toggle theme"><i class="bi bi-brightness-high"></i></button>
-            <button class="btn btn-outline-light btn-sm position-relative" title="Notifications">
-                <i class="bi bi-bell"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
+
+<div class="dashboard-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <span>Golden Spoon Admin</span>
+            </div>
+        </div>
+
+        <div class="sidebar-menu">
+            <a href="#" class="menu-item" data-url="customer.html">
+                <i class="bi bi-people"></i>
+                <span>Customers</span>
+            </a>
+            <a href="#" class="menu-item" data-url="menuAdmin.html">
+                <i class="bi bi-list-ul"></i>
+                <span>Menus</span>
+            </a>
+            <a href="#" class="menu-item" data-url="orderAdmin.html">
+                <i class="bi bi-bag-check"></i>
+                <span>Orders</span>
+            </a>
+            <a href="#" class="menu-item" data-url="feedback.html">
+                <i class="bi bi-chat-dots"></i>
+                <span>Feedback</span>
+            </a>
+            <a href="#" class="menu-item" data-url="tableBookings.html">
+                <i class="bi bi-table"></i>
+                <span>Table Bookings</span>
+            </a>
+            <a href="#" class="menu-item" data-url="funtionHallBookings.html">
+                <i class="bi bi-building"></i>
+                <span>Function Hall</span>
+            </a>
+            <a href="#" class="menu-item" data-url="cateringBookings.html">
+                <i class="bi bi-basket"></i>
+                <span>Catering</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="app-header">
+            <button class="menu-toggle">
+                <i class="bi bi-list"></i>
             </button>
+
             <div class="dropdown">
-                <button class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-light btn-sm dropdown-toggle" style="position:relative; left: 100px" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-person-circle me-1"></i> Admin
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item text-danger" href="../signInPage.html" >Logout</a></li>
                 </ul>
             </div>
-        </div>
-    </div>
-</nav>
+        </header>
 
-<div class="content-wrap">
-    <!-- Sidebar for desktop -->
-    <aside class="sidebar-wrap">
-        <div class="sidebar fixed-lg d-none d-lg-flex flex-column p-3">
-            <div class="text-center text-white brand fs-5 mb-3">Dashboard</div>
-            <div class="section-title">Overview</div>
-            <nav class="nav flex-column gap-1">
-                <a class="nav-link active" href="#" data-page="dashboard"><i class="bi bi-speedometer2 me-2"></i>Home</a>
-                <a class="nav-link" href="customer.html" target="pageFrame" data-frame><i class="bi bi-people me-2"></i>Customers</a>
-                <a class="nav-link" href="menuAdmin.html" target="pageFrame" data-frame><i class="bi bi-list-ul me-2"></i>Manage Menus</a>
-                <a class="nav-link" href="orderAdmin.html" target="pageFrame" data-frame><i class="bi bi-bag-check me-2"></i>Manage Orders</a>
-                <a class="nav-link" href="feedback.html" target="pageFrame" data-frame><i class="bi bi-chat-dots me-2"></i>Manage Feedback</a>
-                <a class="nav-link" href="cartTable.html" target="pageFrame" data-frame><i class="bi bi-cart4 me-2"></i>Add to Cart Table</a>
+        <!-- Content -->
+        <div class="content-wrapper">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <h1>Welcome to Admin Dashboard</h1>
+                <p>Manage your restaurant operations, view analytics, and handle bookings from one place.</p>
+            </div>
 
-                <div class="section-title">Bookings</div>
-                <a class="nav-link d-flex align-items-center" data-bs-toggle="collapse" href="#bookingMenu" role="button" aria-expanded="false" aria-controls="bookingMenu">
-                    <i class="bi bi-calendar2-check me-2"></i>Manage Bookings <i class="bi bi-caret-down ms-auto"></i>
-                </a>
-                <div class="collapse ps-2" id="bookingMenu">
-                    <a class="nav-link" href="tableBookings.html" target="pageFrame" data-frame><i class="bi bi-dot me-2"></i>Table Bookings</a>
-                    <a class="nav-link" href="funtionHallBookings.html" target="pageFrame" data-frame><i class="bi bi-dot me-2"></i>Event / Function Hall</a>
-                    <a class="nav-link" href="cateringBookings.html" target="pageFrame" data-frame><i class="bi bi-dot me-2"></i>Catering Bookings</a>
+            <div class="management-section">
+                <h2 class="section-title">
+                    <i class="bi bi-gear"></i>
+                    Management
+                </h2>
+
+                <div class="management-grid">
+                    <!-- Customers -->
+                    <div class="management-card" data-url="customer.html">
+                        <div class="management-icon" style="background: rgba(247, 156, 18, 0.1); color: var(--warning);">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <h5>Manage Customers</h5>
+                        <p>View, add, edit, and manage customer information</p>
+                    </div>
+
+                    <!-- Menus -->
+                    <div class="management-card" data-url="menuAdmin.html">
+                        <div class="management-icon" style="background: rgba(46, 204, 113, 0.1); color: var(--success);">
+                            <i class="bi bi-list-ul"></i>
+                        </div>
+                        <h5>Manage Menus</h5>
+                        <p>Create and update menu items, categories, and pricing</p>
+                    </div>
+
+                    <!-- Orders -->
+                    <div class="management-card" data-url="orderAdmin.html">
+                        <div class="management-icon" style="background: rgba(58, 54, 219, 0.1); color: var(--primary);">
+                            <i class="bi bi-bag-check"></i>
+                        </div>
+                        <h5>Manage Orders</h5>
+                        <p>Process, track, and manage customer orders</p>
+                    </div>
+
+                    <!-- Feedback -->
+                    <div class="management-card" data-url="feedback.html">
+                        <div class="management-icon" style="background: rgba(231, 76, 60, 0.1); color: var(--danger);">
+                            <i class="bi bi-chat-dots"></i>
+                        </div>
+                        <h5>Manage Feedback</h5>
+                        <p>View and respond to customer reviews and feedback</p>
+                    </div>
+
+                    <!-- Table Bookings -->
+                    <div class="management-card" data-url="tableBookings.html">
+                        <div class="management-icon" style="background: rgba(0, 201, 219, 0.1); color: var(--info);">
+                            <i class="bi bi-table"></i>
+                        </div>
+                        <h5>Table Bookings</h5>
+                        <p>Manage restaurant table reservations and bookings</p>
+                    </div>
+
+                    <!-- Event / Function Hall Bookings -->
+                    <div class="management-card" data-url="functionHallBookings.html">
+                        <div class="management-icon" style="background: rgba(108, 117, 125, 0.1); color: var(--secondary);">
+                            <i class="bi bi-building"></i>
+                        </div>
+                        <h5>Event / Function Hall</h5>
+                        <p>Handle event space bookings and management</p>
+                    </div>
+
+                    <!-- Catering Bookings -->
+                    <div class="management-card" data-url="cateringBookings.html">
+                        <div class="management-icon" style="background: rgba(46, 204, 113, 0.1); color: var(--success);">
+                            <i class="bi bi-basket"></i>
+                        </div>
+                        <h5>Catering Bookings</h5>
+                        <p>Manage off-site catering orders and events</p>
+                    </div>
                 </div>
-            </nav>
-            <div class="mt-auto small text-secondary">
-                <hr class="text-secondary" />
-                <div><i class="bi bi-shield-lock me-2"></i>Role: <span class="text-white">ADMIN</span></div>
+            </div>
+
+            <!-- Iframe Container -->
+            <div class="iframe-container" id="iframeContainer">
+                <div class="iframe-header">
+                    <h4 id="iframeTitle">Page Content</h4>
+                    <button class="close-iframe" id="closeIframe">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+                <iframe id="pageFrame" name="pageFrame"></iframe>
             </div>
         </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main container-fluid">
-        <!-- Header -->
-        <div class="mb-4">
-            <h1 class="display-6 fw-bold text-dark mb-1">Welcome to Admin Dashboard</h1>
-            <p class="text-muted mb-0">Use the sidebar to manage your content. This home shows live stats and trends.</p>
-        </div>
-
-
-        <!-- Iframe container for sub-pages -->
-
-        <footer class="app-footer text-center py-4">
-            <div>© <span id="year"></span> Your Restaurant. All rights reserved.</div>
-        </footer>
-    </main>
-</div>
-
-<!-- Offcanvas Sidebar (mobile) -->
-<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="mobileSidebarLabel">Menu</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <nav class="nav flex-column gap-2">
-            <a class="nav-link text-white" href="#" data-bs-dismiss="offcanvas" data-page="dashboard"><i class="bi bi-speedometer2 me-2"></i>Home</a>
-            <a class="nav-link text-white" href="customer.html" data-bs-dismiss="offcanvas" target="pageFrame" data-frame><i class="bi bi-people me-2"></i>Customers</a>
-            <a class="nav-link text-white" href="menuAdmin.html" data-bs-dismiss="offcanvas" target="pageFrame" data-frame><i class="bi bi-list-ul me-2"></i>Manage Menus</a>
-            <a class="nav-link text-white" href="orderAdmin.html" data-bs-dismiss="offcanvas" target="pageFrame" data-frame><i class="bi bi-bag-check me-2"></i>Manage Orders</a>
-            <a class="nav-link text-white" href="feedback.html" data-bs-dismiss="offcanvas" target="pageFrame" data-frame><i class="bi bi-chat-dots me-2"></i>Manage Feedback</a>
-            <a class="nav-link text-white" href="cartTable.html" data-bs-dismiss="offcanvas" target="pageFrame" data-frame><i class="bi bi-cart4 me-2"></i>Add to Cart Table</a>
-
-            <a class="nav-link text-white d-flex align-items-center" data-bs-toggle="collapse" href="#bookingMenuMobile" role="button" aria-expanded="false" aria-controls="bookingMenuMobile">
-                <i class="bi bi-calendar2-check me-2"></i>Manage Bookings <i class="bi bi-caret-down ms-auto"></i>
-            </a>
-            <div class="collapse ps-2" id="bookingMenuMobile">
-                <a class="nav-link text-white" href="tableBookings.html" data-bs-dismiss="offcanvas" target="pageFrame" data-frame><i class="bi bi-dot me-2"></i>Table Bookings</a>
-                <a class="nav-link text-white" href="funtionHallBookings.html" data-bs-dismiss="offcanvas" target="pageFrame" data-frame><i class="bi bi-dot me-2"></i>Event / Function Hall</a>
-                <a class="nav-link text-white" href="cateringBookings.html" data-bs-dismiss="offcanvas" target="pageFrame" data-frame><i class="bi bi-dot me-2"></i>Buffet Bookings</a>
-            </div>
-        </nav>
     </div>
 </div>
 
@@ -239,110 +548,75 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // Year in footer
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Theme toggle (light/dark body)
-    document.getElementById('themeToggle').addEventListener('click', () => {
-        document.body.classList.toggle('bg-white');
+    // Toggle sidebar on mobile
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+        document.querySelector('.sidebar').classList.toggle('active');
     });
 
-    // Logout demo
-    document.getElementById('logoutBtn').addEventListener('click', (e) => {
-        e.preventDefault();
-        // TODO: hook into your auth logic (clear token, redirect, etc.)
-        alert('Logged out (demo)');
-    });
+    // Function to load page in iframe
+    function loadPage(url, title) {
+        const iframeContainer = document.getElementById('iframeContainer');
+        const iframe = document.getElementById('pageFrame');
+        const iframeTitle = document.getElementById('iframeTitle');
 
-    // Sidebar active link management + iframe loading
-    const frame = document.getElementById('pageFrame');
-    const frameWrap = document.getElementById('frameWrap');
-    const sidebarLinks = document.querySelectorAll('[data-frame]');
-    const homeLinks = document.querySelectorAll('[data-page="dashboard"]');
+        // Show loading state
+        iframeContainer.style.display = 'block';
+        iframe.style.opacity = '0';
+        iframeTitle.textContent = 'Loading ' + title + '...';
 
-    sidebarLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            // Active style (desktop sidebar only)
-            document.querySelectorAll('.sidebar a.nav-link').forEach(a => a.classList.remove('active'));
-            const inDesktop = link.closest('.sidebar') !== null;
-            if (inDesktop) link.classList.add('active');
-
-            // Load into iframe
-            const url = link.getAttribute('href');
-            if (url && frame) {
-                e.preventDefault();
-                frameWrap.classList.add('loading');
-                frame.src = url;
-            }
-        });
-    });
-
-    // Home link clears iframe (shows dashboard)
-    homeLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            document.querySelectorAll('.sidebar a.nav-link').forEach(a => a.classList.remove('active'));
-            link.classList.add('active');
-            if (frame) frame.src = 'about:blank';
-        });
-    });
-
-    // Iframe loading indicator
-    if (frame) {
-        frame.addEventListener('load', () => frameWrap.classList.remove('loading'));
-    }
-
-    // Demo: fetch KPIs from backend (replace with your API).
-    // Here we mock values. Replace with real fetch calls to your Spring Boot endpoints.
-    function loadKpis() {
-        // Example: fetch('/api/admin/kpis', { headers: { Authorization: 'Bearer ...' }})
-        //  .then(r => r.json()).then(updateKpis)
-        const mock = {
-            customers: 120,
-            ordersToday: 34,
-            pendingBookings: 12,
-            revenue: 540000, // LKR
+        // Set iframe source
+        iframe.onload = function() {
+            iframe.style.opacity = '1';
+            iframeTitle.textContent = title;
         };
-        updateKpis(mock);
+
+        iframe.src = url;
+
+        // Scroll to iframe
+        iframeContainer.scrollIntoView({ behavior: 'smooth' });
     }
 
-    function updateKpis(data) {
-        document.getElementById('kpiCustomers').textContent = data.customers ?? 0;
-        document.getElementById('kpiOrdersToday').textContent = data.ordersToday ?? 0;
-        document.getElementById('kpiPendingBookings').textContent = data.pendingBookings ?? 0;
-        document.getElementById('kpiRevenue').textContent = 'LKR ' + (data.revenue ?? 0).toLocaleString('en-LK');
-    }
+    // Card click -> load iframe
+    document.querySelectorAll('.management-card, .menu-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
 
-    // Charts (replace datasets with your backend data)
-    let ordersChart, popularChart;
-    function initCharts() {
-        const ordersCtx = document.getElementById('ordersChart');
-        const popularCtx = document.getElementById('popularChart');
+            const url = item.getAttribute('data-url');
+            const title = item.querySelector('span').textContent;
 
-        ordersChart = new Chart(ordersCtx, {
-            type: 'line',
-            data: {
-                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                datasets: [{
-                    label: 'Orders',
-                    data: [28, 32, 30, 42, 38, 50, 47],
-                    tension: .35,
-                    fill: true,
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: true } },
-                scales: { y: { beginAtZero: true } }
+            if (url) {
+                loadPage(url, title);
+
+                // Update active menu item
+                document.querySelectorAll('.menu-item').forEach(menuItem => {
+                    menuItem.classList.remove('active');
+                });
+
+                // If it's a menu item, set it as active
+                if (item.classList.contains('menu-item')) {
+                    item.classList.add('active');
+                }
             }
         });
-    }
+    });
 
-    // Init
-    loadKpis();
-    // initCharts();
+    // Close iframe
+    document.getElementById('closeIframe').addEventListener('click', function() {
+        document.getElementById('iframeContainer').style.display = 'none';
+        document.getElementById('pageFrame').src = '';
+    });
+
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', function(event) {
+        const sidebar = document.querySelector('.sidebar');
+        const isClickInsideSidebar = sidebar.contains(event.target);
+        const isClickOnToggle = event.target.closest('.menu-toggle');
+
+        if (window.innerWidth < 992 && !isClickInsideSidebar && !isClickOnToggle && sidebar.classList.contains('active')) {
+            sidebar.classList.remove('active');
+        }
+    });
 </script>
+
 </body>
 </html>
