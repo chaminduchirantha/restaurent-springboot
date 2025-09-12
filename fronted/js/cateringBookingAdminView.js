@@ -28,7 +28,7 @@ function loadCateringBookings() {
                         <td>${c.type}</td>
                         <td>${c.guests}</td>
                         <td>
-                            <button class="btn btn-sm btn-danger">Cancel Booking</button>
+                            <button class="btn btn-sm btn-danger">Cancel</button>
                             <button class="btn btn-sm btn-primary sendMailBtn">Send Mail</button>
                         </td>
                     </tr>`;
