@@ -142,3 +142,51 @@ $("#qty").on("input", function () {
     }
 });
 
+$("#viewOrders").on("click", function () {
+    const token = localStorage.getItem("token");
+    const customerIdStr = localStorage.getItem("customerId"); // string
+    const customerId = customerIdStr ? parseInt(customerIdStr) : null;
+
+    if (!customerId || customerId === "null") {
+        Swal.fire({
+            icon: "error",
+            title: "User not logged in",
+            text: "Please log in first."
+        });
+        return;
+    }
+
+    $.ajax({
+        url: `http://localhost:8080/api/v1/orders/user/${customerId}`,
+        type: "GET",
+        headers: {
+            "Authorization": "Bearer " + token
+        },
+        success: function (res) {
+            let rows = "";
+            res.data.forEach((order, index) => {
+                rows += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${order.name}</td>
+                        <td>${order.orderQty}</td>
+                        <td>Rs. ${order.total}</td>
+                        <td>${order.status}</td>
+                    </tr>
+                `;
+            });
+            $("#ordersTableBody").html(rows);
+
+            // Modal show කරන්න
+            const modal = new bootstrap.Modal(document.getElementById('ordersModal'));
+            modal.show();
+        },
+        error: function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Failed to load orders!'
+            });
+        }
+    });
+});
