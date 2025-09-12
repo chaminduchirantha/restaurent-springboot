@@ -31,7 +31,7 @@ function loadCustomers() {
                      <td>${customer.role}</td>
                      <td>
                          <button class="btn btn-warning me-2" onclick="openEditModal('${customer.id}','${customer.username}', '${customer.email}', '${customer.password}', '${customer.role}')">Edit</button>
-                         <button class="btn btn-sm btn-danger" onclick="deleteCustomer('${customer.id}')">Delete</button>
+<!--                         <button class="btn btn-sm btn-danger" onclick="deleteCustomer('${customer.id}')">Delete</button>-->
                      </td>
                   </tr>`;
             });

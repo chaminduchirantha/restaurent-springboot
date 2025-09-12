@@ -30,7 +30,7 @@ function loadTableBookings() {
                              <td>${eb.hallNo}</td>
                              <td>${eb.requests}</td>
                              <td>
-                                 <button class="btn btn-sm btn-danger cancel-btn">Cancel Booking</button>
+                                 <button class="btn btn-sm btn-danger cancel-btn">Cancel</button>
                              </td>
                         </tr>`;
             });
