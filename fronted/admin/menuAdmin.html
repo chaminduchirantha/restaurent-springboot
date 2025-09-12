@@ -44,12 +44,8 @@
 
 
 <section class="container py-2">
-  <div>
-    <a href="adminDashBoard.html" style="text-decoration: none">
-      <i class="fa-solid fa-arrow-left me-2" style="font-size: 20px; color: black"></i> Back to Dashboard
-    </a>
-  </div>
-  <h1 class="text-center mb-4 mt-3">Manage Menu Items</h1>
+
+  <h5 class="text-left mb-4 mt-3">Manage Menu Items</h5>
 
   <div class="row align-items-center g-2 mb-6">
     <div class="col-md-6">
@@ -68,7 +64,7 @@
 
   <!-- Add Menu Item Button -->
   <div class="text-end mb-4">
-    <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#menuModal">
+    <button type="button" class="btn btn-warning btn-md" data-bs-toggle="modal" data-bs-target="#menuModal">
       <i class="fas fa-plus-circle me-2"></i>Add New Menu Item
     </button>
   </div>
@@ -253,7 +249,7 @@
             const imageUrl = `http://localhost:8080/api/v1/menu/images/${escapeString(menu.imageUrl)}`;
 
             let card = `
-                <div class="col-md-4 mb-4">
+                <div class="col-md-3 mb-4">
                   <div class="card shadow-sm rounded-4 h-100">
                     <img src="${imageUrl}"
                          class="card-img-top"
