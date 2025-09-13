@@ -29,7 +29,7 @@ function loadTableBookings() {
                          <td>${tb.tables}</td>
                          <td>${tb.requests}</td>
                          <td>
-                             <button class="btn btn-sm btn-danger cancel-btn" style="margin-bottom: 5px">Cancel Booking</button>
+                             <button class="btn btn-sm btn-danger cancel-btn">Cancel Booking</button>
                              <button class="btn btn-sm btn-primary sendMailBtn">Send Mail</button>
                          </td>
                     </tr>`;
