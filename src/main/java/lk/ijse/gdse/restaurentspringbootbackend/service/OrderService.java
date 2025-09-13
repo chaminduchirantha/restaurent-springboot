@@ -1,6 +1,7 @@
 package lk.ijse.gdse.restaurentspringbootbackend.service;
 
 import lk.ijse.gdse.restaurentspringbootbackend.dto.OrdersDto;
+import lk.ijse.gdse.restaurentspringbootbackend.entity.Order;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,4 +12,6 @@ public interface OrderService {
     List<OrdersDto> getAllOrders();
     List<OrdersDto> getOrdersByPage(int page, int size);
     int getTotalPages(int size);
+    List<Order> getOrdersByCustomer(Long customerId);
+    void changeStatus(Long id);
 }

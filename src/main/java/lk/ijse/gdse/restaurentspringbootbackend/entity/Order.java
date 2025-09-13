@@ -28,7 +28,6 @@ public class Order {
     private Date orderDatetime;
     private String status;
     private double total;
-    private String notes;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")

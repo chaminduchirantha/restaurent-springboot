@@ -39,7 +39,9 @@ public class OrderServiceImpl implements OrderService {
         // DTO → Entity
         Order order = modelMapper.map(ordersDto, Order.class);
         order.setCustomer(customer);
-        order.setTotal(total); // ensure entity also gets total
+        order.setTotal(total);// ensure entity also gets total
+        order.setStatus("pending");
+
 
         // Save order
         Order savedOrder = orderRepo.save(order);
@@ -70,5 +72,15 @@ public class OrderServiceImpl implements OrderService {
     public int getTotalPages(int size) {
         long totalOrders = orderRepo.getTotalOrdersCount();
         return (int) Math.ceil((double) totalOrders / size);
+    }
+
+    @Override
+    public List<Order> getOrdersByCustomer(Long customerId) {
+        return orderRepo.findByCustomerId(customerId);
+    }
+
+    @Override
+    public void changeStatus(Long id) {
+        orderRepo.updateStatus(id);
     }
 }

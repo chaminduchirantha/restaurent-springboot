@@ -1,11 +1,12 @@
 package lk.ijse.gdse.restaurentspringbootbackend.repo;
 
-import lk.ijse.gdse.restaurentspringbootbackend.entity.Customer;
 import lk.ijse.gdse.restaurentspringbootbackend.entity.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,4 +17,11 @@ public interface OrderRepo extends JpaRepository<Order , Long> {
 
     @Query(value = "SELECT COUNT(*) FROM orders", nativeQuery = true)
     long getTotalOrdersCount();
+
+    List<Order> findByCustomerId(Long customerId);
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE orders SET status='complete' WHERE order_id = :id", nativeQuery = true)
+    void updateStatus(@Param("id") Long id);
+
 }
