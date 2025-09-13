@@ -44,9 +44,6 @@
 
 
 <section class="container py-2">
-
-  <h5 class="text-left mb-4 mt-3">Manage Menu Items</h5>
-
   <div class="row align-items-center g-2 mb-6">
     <div class="col-md-6">
       <div class="input-group">
@@ -173,7 +170,7 @@
 
 <script>
   let currentPage = 0;
-  const pageSize = 3;
+  const pageSize = 4;
 
   const token = localStorage.getItem('token');
   let currentMenuId = null;
@@ -503,7 +500,7 @@
             const imageUrl = `http://localhost:8080/api/v1/menu/images/${escapeString(menu.imageUrl)}`;
 
             let card = `
-            <div class="col-md-4 mb-4">
+            <div class="col-lg-3 col-md-3 mb-4">
               <div class="card shadow-sm rounded-4 h-100">
                 <img src="${imageUrl}"
                      class="card-img-top"
