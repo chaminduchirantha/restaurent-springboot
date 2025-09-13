@@ -66,7 +66,6 @@ $("#orderSave").on("click", function(e) {
 
     const total = price * qty;
 
-
     // Collect form values
     const orderData = {
         name: $("#menuName").val().trim(),
@@ -74,16 +73,14 @@ $("#orderSave").on("click", function(e) {
         orderType: $("#orderType").val().trim(),
         orderQty: parseInt($("#qty").val()),
         orderDatetime: $("#orderDatetime").val().trim(),
-        status: $("#status").val().trim(),
-        notes: $("#notes").val().trim(),
+        status: 'pending',
         email: $("#email").val().trim(),
         total: total,
-
     };
 
-    // Validation: check required fields
+    // Validation
     if (!orderData.name || !orderData.price || !orderData.orderType ||
-        !orderData.orderQty || !orderData.orderDatetime || !orderData.status || !orderData.email) {
+        !orderData.orderQty || !orderData.orderDatetime || !orderData.email) {
         Swal.fire({
             icon: 'warning',
             title: 'Missing Fields',
@@ -92,34 +89,48 @@ $("#orderSave").on("click", function(e) {
         return;
     }
 
-    // AJAX request
-    $.ajax({
-        url: "http://localhost:8080/api/v1/orders/place",
-        type: "POST",
-        contentType: "application/json",
-        headers: {
-            "Authorization": "Bearer " + token
-        },
-        data: JSON.stringify(orderData),
-        success: function(res) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Order Placed!',
-                text: 'Your order has been saved successfully.',
-                confirmButtonText: 'OK'
-            });
+    // Confirmation dialog
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "Do you want to submit this order?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Submit Order',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // AJAX request only runs if user confirms
+            $.ajax({
+                url: "http://localhost:8080/api/v1/orders/place",
+                type: "POST",
+                contentType: "application/json",
+                headers: {
+                    "Authorization": "Bearer " + token
+                },
+                data: JSON.stringify(orderData),
+                success: function(res) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Order Placed!',
+                        text: 'Your order has been saved successfully.',
+                        confirmButtonText: 'OK'
+                    });
 
-            console.log("Order saved:", res.data);
-            $("#orderForm")[0].reset();
-            localStorage.removeItem("selectedMenuName");
-            localStorage.removeItem("selectedMenuPrice");
-        },
-        error: function(xhr) {
-            console.error("Order save failed:", xhr);
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Failed to place the order!'
+                    console.log("Order saved:", res.data);
+                    $("#orderForm")[0].reset();
+                    localStorage.removeItem("selectedMenuName");
+                    localStorage.removeItem("selectedMenuPrice");
+                },
+                error: function(xhr) {
+                    console.error("Order save failed:", xhr);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Failed to place the order!'
+                    });
+                }
             });
         }
     });
@@ -131,15 +142,16 @@ $("#qty").on("input", function () {
     const total = price * qty;
 
     if ($("#total").length === 0) {
-        $("#orderForm").append(`
-            <div class="mb-3">
-                <label for="total" class="form-label">Total</label>
-                <input type="text" class="form-control" id="total" value="Rs. ${total}" readonly>
-            </div>
-        `);
+        $("#orderForm .d-flex").before(`
+        <div class="mb-3">
+            <label for="total" class="form-label">Total</label>
+            <input type="text" class="form-control" id="total" value="Rs. ${total}" readonly>
+        </div>
+    `);
     } else {
         $("#total").val("Rs. " + total);
     }
+
 });
 
 $("#viewOrders").on("click", function () {
