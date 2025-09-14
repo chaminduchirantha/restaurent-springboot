@@ -115,10 +115,17 @@ $("#orderSave").on("click", function(e) {
                         icon: 'success',
                         title: 'Order Placed!',
                         text: 'Your order has been saved successfully.',
-                        confirmButtonText: 'OK'
+                        confirmButtonText: 'Proceed to Payment'
+                    }).then(() => {
+                        // Save total to session storage
+                        sessionStorage.setItem("lastOrderTotal", total);
+
+                        // Redirect to payment page
+                        window.location.href = "payment.html";
                     });
 
                     console.log("Order saved:", res.data);
+
                     $("#orderForm")[0].reset();
                     localStorage.removeItem("selectedMenuName");
                     localStorage.removeItem("selectedMenuPrice");
@@ -156,30 +163,32 @@ $("#qty").on("input", function () {
 
 $("#viewOrders").on("click", function () {
     const token = localStorage.getItem("token");
-    const customerIdStr = localStorage.getItem("customerId"); // string
-    const customerId = customerIdStr ? parseInt(customerIdStr) : null;
+    const email = localStorage.getItem("email");
 
-    if (!customerId || customerId === "null") {
+    if (!token || !email) {
         Swal.fire({
-            icon: "error",
-            title: "User not logged in",
-            text: "Please log in first."
+            icon: 'error',
+            title: 'Not Logged In',
+            text: 'Please log in first!'
         });
         return;
     }
 
+    console.log("Email from localStorage:", email);
+
     $.ajax({
-        url: `http://localhost:8080/api/v1/orders/user/${customerId}`,
+        url: `http://localhost:8080/api/v1/orders/user/${encodeURIComponent(localStorage.getItem("email"))}`,
         type: "GET",
         headers: {
             "Authorization": "Bearer " + token
         },
         success: function (res) {
+            console.log("Full API Response:", res);
+            console.log("Orders Array:", res.data);
             let rows = "";
             res.data.forEach((order, index) => {
                 rows += `
                     <tr>
-                        <td>${index + 1}</td>
                         <td>${order.name}</td>
                         <td>${order.orderQty}</td>
                         <td>Rs. ${order.total}</td>
@@ -189,7 +198,7 @@ $("#viewOrders").on("click", function () {
             });
             $("#ordersTableBody").html(rows);
 
-            // Modal show කරන්න
+
             const modal = new bootstrap.Modal(document.getElementById('ordersModal'));
             modal.show();
         },
@@ -202,3 +211,4 @@ $("#viewOrders").on("click", function () {
         }
     });
 });
+
