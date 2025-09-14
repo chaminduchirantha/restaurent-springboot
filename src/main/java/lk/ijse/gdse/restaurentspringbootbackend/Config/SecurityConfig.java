@@ -64,7 +64,8 @@ public class SecurityConfig{
                                 "api/v1/mail/send",
                                 "api/v1/table/**",
                                 "api/v1/catering/**",
-                                "api/v1/event/**"
+                                "api/v1/event/**",
+                                "api/v1/payment/**"
                         ).permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(
