@@ -16,23 +16,15 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long paymentId;
+    private String orderAmount;
+    private String cardHolderName;
+    private String email;
+    private Long cardNumber;
+    private String expireDate;
+    private String cvv;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
-
-    @ManyToOne
-    @JoinColumn(name = "order_id", nullable = true)
+    @JoinColumn(name = "order_id")
     private Order order;
 
-
-
-//    @ManyToOne
-//    @JoinColumn(name = "order_id", nullable = true)
-//    private Order order;
-
-    private Double amount;
-    private String method;
-    private String status;
-    private String transactionRef;
 }
