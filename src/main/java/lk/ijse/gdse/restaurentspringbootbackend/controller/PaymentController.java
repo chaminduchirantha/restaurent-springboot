@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("api/v1/payment")
 @RestController
 @RequiredArgsConstructor
@@ -22,8 +24,31 @@ public class PaymentController {
     public ResponseEntity<ApiResponseDto> save(@RequestBody PaymentDto paymentDto) {
         PaymentDto savePayment  = paymentService.createPayment(paymentDto);
         return ResponseEntity.ok(
-                new ApiResponseDto(201, "Order Saved Successfully", savePayment)
+                new ApiResponseDto(201, "Payment Saved Successfully", savePayment)
         );
+    }
+
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponseDto> getAllOrders() {
+        List<PaymentDto> paymentDtos = paymentService.getAllPayment();
+        return ResponseEntity.ok(
+                new ApiResponseDto(200, "OK", paymentDtos)
+        );
+    }
+    @GetMapping("/paginated")
+    public ResponseEntity<ApiResponseDto> getPaginated(
+            @RequestParam int page,
+            @RequestParam int size
+    ) {
+        List<PaymentDto> paymentDtos = paymentService.getPaymentByPage(page, size);
+        return ResponseEntity.ok(new ApiResponseDto(200, "OK", paymentDtos));
+    }
+
+    @GetMapping("/total-pages")
+    public ResponseEntity<Integer> getTotalPages(@RequestParam int size) {
+        int totalPages = paymentService.getTotalPages(size);
+        return ResponseEntity.ok(totalPages);
     }
 }
 
