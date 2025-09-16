@@ -26,7 +26,17 @@ $('#signUp').on('click', function () {
                 });
             },
             error: function (xhr) {
-                let errorMessage = xhr.responseJSON?.message || xhr.responseText || 'Error occurred';
+                let errors = xhr.responseJSON;
+                let errorMessage = "";
+
+                if (errors) {
+                    // backend වලින් map එකක් ආවොත් (username, password, email)
+                    for (const field in errors) {
+                        errorMessage += `${field}: ${errors[field]}\n`;
+                    }
+                } else {
+                    errorMessage = xhr.responseJSON?.message || xhr.responseText || 'Error occurred';
+                }
 
                 Swal.fire({
                     icon: 'error',
@@ -34,6 +44,7 @@ $('#signUp').on('click', function () {
                     text: errorMessage
                 });
             }
+
         });
     } else {
         Swal.fire({

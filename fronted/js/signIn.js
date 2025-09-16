@@ -15,10 +15,20 @@ $('#signIn').on('click', function () {
                 console.log("Login API Response:", response); // debug
 
                 const token = response.data?.accessToken;
+
+
                 if (token) {
                     // Save to localStorage
                     localStorage.setItem('username', username);
                     localStorage.setItem('token', token);
+
+                    if (response.data?.email) {
+                        localStorage.setItem("email", response.data.email);
+                    } else {
+                        // fallback: if backend didn’t send email, keep username
+                        localStorage.setItem("email", username);
+                    }
+
 
                     $.ajax({
                         method: 'GET',
