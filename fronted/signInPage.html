@@ -4,114 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Title</title>
+    <title>sign in page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oleo+Script:wght@400;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/signIn.css">
 
     <style>
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            height: 100vh;
-            background: url('Assets/images/drinks-glasses-new-year-eve-celebration.jpg') no-repeat center center fixed;
-            background-size: cover;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
 
-        body::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.55);
-            z-index: -2;
-        }
-
-        .auth-container {
-            position: relative;
-            z-index: 1;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            max-width: 420px;
-            width: 100%;
-            color: #fff; /* Optional: subtle blur behind */
-        }
-
-        .auth-container h3 {
-            font-family: "Oleo Script", system-ui;
-            font-weight: 700;
-            font-style: normal;
-        }
-
-        .form-label {
-            color: #fff;
-            font-weight: 500;
-        }
-
-        .form-control {
-            background-color: rgba(255, 255, 255, 0.8);
-            border: none;
-            border-radius: 10px;
-            padding: 10px 15px;
-        }
-
-        .btn-login {
-            background-color: #e67e22;
-            border: none;
-            padding: 10px;
-            border-radius: 20px;
-            color: #fff;
-            font-weight: 600;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .btn-login:hover {
-            background-color: #ff922b;
-            transform: scale(1.05);
-        }
-
-
-        .form-label {
-            color: #fff;
-            font-weight: 500;
-        }
-
-        .form-control {
-            background-color: rgba(255, 255, 255, 0.8);
-            border: none;
-            border-radius: 10px;
-            padding: 10px 15px;
-        }
-
-        .g_id_signin iframe {
-            border-radius: 20px !important;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: transform 0.2s ease;
-        }
-
-        .g_id_signin iframe:hover {
-            transform: scale(1.02);
-        }
-
-        .forgot-password-link {
-            font-size: 0.9rem;
-            color: #ffb703;         /* golden/yellow to match your theme */
-            text-decoration: none;
-            transition: color 0.2s ease, text-decoration 0.2s ease;
-        }
-
-        .forgot-password-link:hover {
-            color: #fb8500;         /* darker shade on hover */
-            text-decoration: underline;
-        }
 
 
 
