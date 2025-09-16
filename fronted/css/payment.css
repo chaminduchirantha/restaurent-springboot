@@ -1,0 +1,53 @@
+body {
+    background: linear-gradient(to right, #fdfbfb, #ebedee);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.payment-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.payment-card {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    background: #fff;
+}
+.form-section {
+    padding: 40px;
+}
+.form-section h3 {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.btn-primary {
+    background-color: #ff6b35;
+    border-color: #ff6b35;
+    border-radius: 8px;
+    font-weight: 600;
+}
+.btn-primary:hover {
+    background-color: #e55b2a;
+    border-color: #e55b2a;
+}
+.card-logos img {
+    height: 28px;
+    margin: 0 6px;
+}
+.image-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-height: 50%;
+}
+.image-section img {
+    max-width: 120%;   /* shrink image size */
+    border-radius: 15px;
+}
+@media (max-width: 768px) {
+    .image-section {
+        display: none;
+    }
+}

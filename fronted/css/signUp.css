@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    background: url('../Assets/images/drinks-glasses-new-year-eve-celebration.jpg') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: -2;
+}
+
+.auth-container {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    max-width: 420px;
+    width: 100%;
+    color: #fff; /* Optional: subtle blur behind */
+}
+
+.auth-container h3 {
+    font-family: "Oleo Script", system-ui;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.form-label {
+    color: #fff;
+    font-weight: 500;
+}
+
+.form-control {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 15px;
+}
+
+.btn-login {
+    background-color: #e67e22;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    color: #fff;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-login:hover {
+    background-color: #ff922b;
+    transform: scale(1.05);
+}
+
+.social-login {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-login a {
+    width: 45px;
+    height: 45px;
+    background-color: #e67e22;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 20px;
+    transition: transform 0.3s;
+}
+
+.social-login a:hover {
+    transform: scale(1.2);
+    background-color: #f4511e;
+}
+
+a {
+    color: #ffe0b2;
+    text-decoration: underline;
+}
