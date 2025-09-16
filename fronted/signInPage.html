@@ -90,6 +90,32 @@
             padding: 10px 15px;
         }
 
+        .g_id_signin iframe {
+            border-radius: 20px !important;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .g_id_signin iframe:hover {
+            transform: scale(1.02);
+        }
+
+        .forgot-password-link {
+            font-size: 0.9rem;
+            color: #ffb703;         /* golden/yellow to match your theme */
+            text-decoration: none;
+            transition: color 0.2s ease, text-decoration 0.2s ease;
+        }
+
+        .forgot-password-link:hover {
+            color: #fb8500;         /* darker shade on hover */
+            text-decoration: underline;
+        }
+
+
+
+
     </style>
 </head>
 
@@ -113,27 +139,33 @@
                     </label>
                 </div>
             </div>
-            <div class="mt-6 text-end">
-                <a href="forgetPassword.html" class="text-warning" style="font-size: 0.9rem;">Forgot Password?</a>
+            <div class="text-end mt-2">
+                <a href="forgetPassword.html" class="forgot-password-link">
+                    Forgot your password?
+                </a>
             </div>
-
 
             <button type="button" class="btn btn-login w-100" id="signIn">Login</button>
+
             <br>
             <br>
+
             <div id="g_id_onload"
-                 data-client_id="YOUR_GOOGLE_CLIENT_ID"
-                 data-callback="handleCredentialResponse"
+                 data-client_id="843649549532-umngqm8vcsrsssuds6ou4uqrfpdn419k.apps.googleusercontent.com"
+                 data-login_uri="http://localhost:63342/rms-springboot-application/rms-springboot-backend/fronted/index.html"
                  data-auto_prompt="false">
             </div>
-            <div class="g_id_signin mb-3"
+
+            <div class="g_id_signin"
                  data-type="standard"
-                 data-size="large"
+                 data-shape="circle"
                  data-theme="outline"
-                 data-text_size="16"
-                 data-shape="rectangular"
-                 data-logo_alignment="left">
+                 data-text="sign_in_with"
+                 data-size="large">
             </div>
+
+
+
             <p class="text-center mt-3">Don't have an account? <a href="signUpPage.html">Sign Up</a></p>
 
         </form>
