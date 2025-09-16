@@ -8,78 +8,115 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-      background-color: #f0f2f5;
+      background: linear-gradient(to right, #fdfbfb, #ebedee);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    .payment-container {
-      max-width: 550px;
-      margin-top: 50px;
+    .payment-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .card {
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    .payment-card {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      background: #fff;
+    }
+    .form-section {
+      padding: 40px;
+    }
+    .form-section h3 {
+      font-weight: bold;
+      margin-bottom: 20px;
     }
     .btn-primary {
-      background-color: #0d6efd;
-      border-color: #0d6efd;
+      background-color: #ff6b35;
+      border-color: #ff6b35;
       border-radius: 8px;
+      font-weight: 600;
     }
     .btn-primary:hover {
-      background-color: #0b5ed7;
-      border-color: #0a58ca;
+      background-color: #e55b2a;
+      border-color: #e55b2a;
     }
     .card-logos img {
-      height: 30px;
-      margin: 0 5px;
+      height: 28px;
+      margin: 0 6px;
+    }
+    .image-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      min-height: 50%;
+    }
+    .image-section img {
+      max-width: 120%;   /* shrink image size */
+      border-radius: 15px;
+    }
+    @media (max-width: 768px) {
+      .image-section {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="container payment-container">
-  <div class="card p-4">
-    <div class="d-flex justify-content-center mb-4 card-logos">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Visa Logo">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/2560px-Mastercard-logo.svg.png" alt="Mastercard Logo">
-<!--      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/American_Express_logo_(2018).svg/2560px-American_Express_logo_(2018).svg.png" alt="American Express Logo">-->
-<!--      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Discover_card_logo.svg/2560px-Discover_card_logo.svg.png" alt="Discover Logo">-->
-<!--      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/JCB_logo.svg/2560px-JCB_logo.svg.png" alt="JCB Logo">-->
+<div class="container payment-wrapper">
+  <div class="row payment-card w-100" style="max-width: 950px;">
+
+    <!-- Left Form Section -->
+    <div class="col-md-6 form-section">
+      <p class="text-muted">Complete your payment securely with your card.</p>
+
+      <div class="d-flex mb-3 card-logos">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa Logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard Logo">
+      </div>
+
+      <form id="paymentForm">
+        <!-- Order Amount -->
+        <div class="mb-3">
+          <label for="orderAmount" class="form-label">Order Amount</label>
+          <input type="text" class="form-control" id="orderAmount" readonly>
+        </div>
+
+        <h6 class="mt-4">Card Details</h6>
+        <div class="mb-3">
+          <label for="cardNumber" class="form-label">Card Number</label>
+          <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" class="form-control" id="email" placeholder="your@email.com" required>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="expiryDate" class="form-label">Expiry Date</label>
+            <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="cvv" class="form-label">CVV</label>
+            <input type="text" class="form-control" id="cvv" placeholder="123" required>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="cardName" class="form-label">Cardholder Name</label>
+          <input type="text" class="form-control" id="cardName" placeholder="Name on card" required>
+        </div>
+
+        <button type="button" class="btn btn-primary w-100 mt-3" id="payButton">Pay Now</button>
+      </form>
     </div>
-    <form id="paymentForm">
-      <!-- Order Details -->
-      <div class="mb-3">
-        <label for="orderAmount" class="form-label">Order Amount</label>
-        <input type="text" class="form-control" id="orderAmount" readonly>
-      </div>
 
-      <hr class="my-4">
-
-      <!-- Payment Details -->
-      <h5 class="mb-3">Enter Payment Details</h5>
-      <div class="mb-3">
-        <label for="cardNumber" class="form-label">Card Number</label>
-        <input type="text" class="form-control" id="cardNumber" placeholder="Enter card number" required>
-      </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">Enter Email</label>
-        <input type="text" class="form-control" id="email" placeholder="Enter email address" required>
-      </div>
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="expiryDate" class="form-label">Expiry Date</label>
-          <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" required>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="cvv" class="form-label">CVV</label>
-          <input type="text" class="form-control" id="cvv" placeholder="CVV" required>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label for="cardName" class="form-label">Cardholder Name</label>
-        <input type="text" class="form-control" id="cardName" placeholder="Name on card" required>
-      </div>
-
-      <button type="button" class="btn btn-primary w-100 mt-4" id="payButton">Pay Now</button>
-    </form>
+    <!-- Right Image Section -->
+    <div class="col-md-6 image-section">
+      <img src="Assets/images/bank-card-mobile-phone-online-payment.jpg" alt="Payment Illustration">
+    </div>
   </div>
 </div>
 
@@ -146,7 +183,6 @@
                 confirmButtonText: 'OK'
               }).then(() => {
                 sessionStorage.removeItem("lastOrderTotal");
-                window.location.href = "order-success.html"; // Optional redirect
               });
             },
             error: function(xhr) {
