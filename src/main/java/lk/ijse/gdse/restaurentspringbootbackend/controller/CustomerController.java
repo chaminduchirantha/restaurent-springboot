@@ -48,7 +48,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/delete/{id}")
-    @PreAuthorize("hasRole('ADMIN')")  // Only admin can delete
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponseDto> deleteCustomer(@PathVariable Long id) {
         customerService.deleteCustomer(id);
         return ResponseEntity.ok(new ApiResponseDto(200, "Customer deleted successfully", null));

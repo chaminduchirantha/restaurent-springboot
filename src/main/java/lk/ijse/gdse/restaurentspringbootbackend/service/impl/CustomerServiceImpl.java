@@ -47,7 +47,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         Customer saved = customerRepo.save(customer);
         CustomerDto response = modelMapper.map(saved, CustomerDto.class);
-        response.setPassword("********"); // hide password in response
+        response.setPassword("********");
         return response;
     }
 
@@ -67,13 +67,12 @@ public class CustomerServiceImpl implements CustomerService {
         Customer updated = customerRepo.save(customer);
 
         CustomerDto response = modelMapper.map(updated, CustomerDto.class);
-        response.setPassword("********"); // hide password in response
+        response.setPassword("********");
         return response;
     }
 
     @Override
     public void deleteCustomer(Long id) {
-        // Check if customer exists
         Customer customer = customerRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
         customerRepo.delete(customer);
