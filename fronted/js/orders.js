@@ -76,11 +76,12 @@ $("#orderSave").on("click", function(e) {
         status: 'pending',
         email: $("#email").val().trim(),
         total: total,
+        paymentMethod:$("#paymentType").val().trim()
     };
 
     // Validation
     if (!orderData.name || !orderData.price || !orderData.orderType ||
-        !orderData.orderQty || !orderData.orderDatetime || !orderData.email) {
+        !orderData.orderQty || !orderData.orderDatetime || !orderData.email || !orderData.paymentMethod) {
         Swal.fire({
             icon: 'warning',
             title: 'Missing Fields',

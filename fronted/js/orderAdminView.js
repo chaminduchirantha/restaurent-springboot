@@ -1,5 +1,5 @@
 let currentPage = 0;
-const pageSize = 3;
+const pageSize = 6;
 const token = localStorage.getItem("token");
 
 function authHeaders() {
@@ -31,6 +31,7 @@ function loadOrders() {
                         <td>${order.email}</td>
                         <td>${order.status}</td>
                         <td>Rs.${order.total}.00</td>
+                        <td>${order.paymentMethod}</td>
                         <td>
                             <button class="btn btn-sm btn-primary sendMailBtn" style="margin-bottom: 10px">Send Mail</button>
                              <button class="btn btn-success btn-sm mark-delivered" data-id="${order.orderId}">Complete</button>
