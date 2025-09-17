@@ -10,8 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +22,6 @@ public class NotificationServiceImpl implements NotificationService {
         Customer customer = customerRepo.findById(notificationDto.getCustomerId())
                 .orElseThrow(() -> new RuntimeException("Customer not found with id: " + notificationDto.getCustomerId()));
 
-        // Create Notification entity
         Notification notification = new Notification();
         notification.setMessage(notificationDto.getMessage());
         notification.setUsername(notificationDto.getUsername());
@@ -31,11 +29,8 @@ public class NotificationServiceImpl implements NotificationService {
         notification.setCreatedAt(LocalDateTime.now());
         notification.setCustomer(customer);
 
-        // Save notification
         notificationRepo.save(notification);
 
         return notificationDto;
     }
-
-
 }

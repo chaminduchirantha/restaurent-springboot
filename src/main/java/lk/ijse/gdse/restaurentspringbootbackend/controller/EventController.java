@@ -25,7 +25,7 @@ public class EventController {
     public ResponseEntity<ApiResponseDto> eventBooking(@RequestBody EventBookingDto eventBookingDto) {
         EventBookingDto eventBookingDto1=eventBookingService.createBooking(eventBookingDto);
         return ResponseEntity.ok(
-                new ApiResponseDto(201, "catering Booking Saved Successfully", eventBookingDto1)
+                new ApiResponseDto(201, "event Booking Saved Successfully", eventBookingDto1)
         );
     }
 

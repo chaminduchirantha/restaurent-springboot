@@ -23,7 +23,7 @@ public class FeedBackServiceImpl implements FeedBackService {
     private final CustomerRepo customerRepo;
     private final FeedBackRepo feedBackRepo;
     private final ModelMapper modelMapper;
-    private final SentimentService sentimentService; // add this
+    private final SentimentService sentimentService;
 
 
     @Override
@@ -39,11 +39,9 @@ public class FeedBackServiceImpl implements FeedBackService {
         feedback.setMessage(feedbackDto.getMessage());
         feedback.setCustomer(customer);
 
-        // Analyze sentiment
         String sentiment = sentimentService.analyzeSentiment(feedbackDto.getMessage());
         feedback.setSentiment(sentiment);
 
-        // Auto assign star based on sentiment
         feedback.setRatings(String.valueOf(mapSentimentToStar(sentiment)));
 
         feedBackRepo.save(feedback);
