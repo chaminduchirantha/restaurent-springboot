@@ -25,6 +25,10 @@ public class Delivery {
     private String date;
     private String time;
 
+    private Double latitude;
+    private Double longitude;
+
+
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
