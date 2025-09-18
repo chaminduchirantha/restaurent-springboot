@@ -43,7 +43,7 @@ body {
     min-height: 50%;
 }
 .image-section img {
-    max-width: 120%;   /* shrink image size */
+    max-width: 100%;   /* shrink image size */
     border-radius: 15px;
 }
 @media (max-width: 768px) {

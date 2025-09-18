@@ -1,5 +1,6 @@
 package lk.ijse.gdse.restaurentspringbootbackend.controller;
 
+import jakarta.validation.Valid;
 import lk.ijse.gdse.restaurentspringbootbackend.dto.ApiResponseDto;
 import lk.ijse.gdse.restaurentspringbootbackend.dto.AuthDto;
 import lk.ijse.gdse.restaurentspringbootbackend.dto.AuthResponseDto;
@@ -10,8 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -23,7 +26,20 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<ApiResponseDto> registerUser(
-            @RequestBody RegisterDto registerDTO) {
+            @Valid @RequestBody RegisterDto registerDTO , BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            bindingResult.getFieldErrors().forEach(error ->
+                    errors.put(error.getField(), error.getDefaultMessage()));
+
+            return ResponseEntity.badRequest().body(
+                    new ApiResponseDto(
+                            400,
+                            "Validation Failed",
+                            errors
+                    )
+            );
+        }
         return ResponseEntity.ok(
                 new ApiResponseDto(
                         200,
@@ -41,10 +57,10 @@ public class AuthController {
             String token = auth.getAccessToken();
 
             ResponseCookie jwtCookie = ResponseCookie.from("jwt", token)
-                    .httpOnly(true)              // JS access karanna ba
-                    .secure(false)               // dev walata false, prod walata true
-                    .path("/")                   // api okkoma path walata valid
-                    .maxAge(24 * 60 * 60)        // 1 day
+                    .httpOnly(true)
+                    .secure(false)
+                    .path("/")
+                    .maxAge(24 * 60 * 60)
                     .sameSite("Strict")
                     .build();
 
