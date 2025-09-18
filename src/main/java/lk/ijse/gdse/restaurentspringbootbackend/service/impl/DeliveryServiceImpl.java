@@ -8,6 +8,8 @@ import lk.ijse.gdse.restaurentspringbootbackend.repo.OrderRepo;
 import lk.ijse.gdse.restaurentspringbootbackend.service.DeliveryService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ public class DeliveryServiceImpl implements DeliveryService {
     private final DeliveryRepo deliveryRepo;
     private final ModelMapper modelMapper;
     private final OrderRepo orderRepo;
+    private final JavaMailSender mailSender; // Inject mail sender
 
     @Override
     public DeliveryDto createDelivery(DeliveryDto deliveryDto) {
@@ -31,6 +34,19 @@ public class DeliveryServiceImpl implements DeliveryService {
         delivery.setOrder(order);
 
         Delivery saved = deliveryRepo.save(delivery);
+
+        String mapsLink = "https://www.google.com/maps?q=" + deliveryDto.getLatitude() + "," + deliveryDto.getLongitude();
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("chaminduchirantha10@gmail.com");
+        message.setTo(delivery.getEmail());
+        message.setSubject("New Delivery Assigned");
+        message.setText("Delivery assigned to: " + deliveryDto.getFullName() +
+                "\nPhone: " + deliveryDto.getPhoneNumber() +
+                "\nAddress: " + deliveryDto.getAddress() +
+                "\nTrack Location: " + mapsLink);
+
+        mailSender.send(message);
 
         return modelMapper.map(saved, DeliveryDto.class);
     }
