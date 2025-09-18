@@ -12,6 +12,6 @@ public interface OrderService {
     List<OrdersDto> getAllOrders();
     List<OrdersDto> getOrdersByPage(int page, int size);
     int getTotalPages(int size);
-    List<Order> getOrdersByCustomer(Long customerId);
+    List<Order> getOrdersByCustomer(String email);
     void changeStatus(Long id);
 }

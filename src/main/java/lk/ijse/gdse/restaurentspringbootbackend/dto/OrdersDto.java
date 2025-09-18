@@ -22,5 +22,6 @@ public class OrdersDto {
     private Date orderDatetime;
     private String status;
     private double total;
+    private String paymentMethod;
     private Long customerId;
 }

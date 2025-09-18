@@ -28,7 +28,7 @@ body {
 .order-form-container .form-label {
     font-size: 0.9rem; /* Labels ට small font size */
 }
-.form-control {
+.form-control,.form-select {
     background-color: rgba(255, 255, 255, 0.8);
     border: none;
     border-radius: 10px;

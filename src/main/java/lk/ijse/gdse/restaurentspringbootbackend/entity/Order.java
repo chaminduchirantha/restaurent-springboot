@@ -29,12 +29,15 @@ public class Order {
     private Date orderDatetime;
     private String status;
     private double total;
+    private String paymentMethod;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "order",cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Payment> payments;
 
+    @OneToMany(mappedBy = "order", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Delivery> deliveries;
 }

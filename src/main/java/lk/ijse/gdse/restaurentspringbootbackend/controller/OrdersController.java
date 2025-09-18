@@ -55,10 +55,10 @@ public class OrdersController {
         return ResponseEntity.ok(totalPages);
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/user/{email}")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<ApiResponseDto> getOrdersByCustomer(@PathVariable("id") Long id) {
-        List<Order> orders = orderService.getOrdersByCustomer(id);
+    public ResponseEntity<ApiResponseDto> getOrdersByCustomer(@PathVariable("email") String email) {
+        List<Order> orders = orderService.getOrdersByCustomer(email);
 
         List<OrdersDto> dtos = orders.stream()
                 .map(o -> {

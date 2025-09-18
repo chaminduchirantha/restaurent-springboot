@@ -39,14 +39,16 @@ $(document).ready(function () {
     if (selectedName && selectedPrice) {
         if ($("#menuName").length === 0) {
             $("#orderForm").prepend(`
-                <div class="mb-3">
+            <div class="row mb-3 g-3">
+                <div class="col-md-6 mb-3">
                     <label for="menuName" class="form-label">Menu Item</label>
                     <input type="text" class="form-control" id="menuName" value="${selectedName}" readonly>
                 </div>
-                <div class="mb-3">
+                <div class="col-md-6 mb-3">
                     <label for="menuPrice" class="form-label">Price</label>
                     <input type="text" class="form-control" id="menuPrice" value="Rs. ${selectedPrice}" readonly>
                 </div>
+            </div>
             `);
         }
     }
@@ -66,7 +68,6 @@ $("#orderSave").on("click", function(e) {
 
     const total = price * qty;
 
-    // Collect form values
     const orderData = {
         name: $("#menuName").val().trim(),
         price: parseFloat($("#menuPrice").val().replace("Rs.", "").trim()),
@@ -79,7 +80,6 @@ $("#orderSave").on("click", function(e) {
         paymentMethod:$("#paymentType").val().trim()
     };
 
-    // Validation
     if (!orderData.name || !orderData.price || !orderData.orderType ||
         !orderData.orderQty || !orderData.orderDatetime || !orderData.email || !orderData.paymentMethod) {
         Swal.fire({
@@ -90,7 +90,6 @@ $("#orderSave").on("click", function(e) {
         return;
     }
 
-    // Confirmation dialog
     Swal.fire({
         title: 'Are you sure?',
         text: "Do you want to submit this order?",
@@ -102,7 +101,6 @@ $("#orderSave").on("click", function(e) {
         cancelButtonText: 'Cancel'
     }).then((result) => {
         if (result.isConfirmed) {
-            // AJAX request only runs if user confirms
             $.ajax({
                 url: "http://localhost:8080/api/v1/orders/place",
                 type: "POST",
@@ -116,13 +114,25 @@ $("#orderSave").on("click", function(e) {
                         icon: 'success',
                         title: 'Order Placed!',
                         text: 'Your order has been saved successfully.',
-                        confirmButtonText: 'Proceed to Payment'
+                        confirmButtonText:
+                            orderData.paymentMethod === "Card Payment" ? 'Proceed to Payment' :
+                            orderData.paymentMethod === "Cash On Delivery" ? 'Enter Your Delivery Details' :
+                                'OK'
                     }).then(() => {
-                        // Save total to session storage
                         sessionStorage.setItem("lastOrderTotal", total);
 
-                        // Redirect to payment page
-                        window.location.href = "payment.html";
+                        if (orderData.paymentMethod === "Card Payment") {
+                            window.location.href = "payment.html";
+
+                        } else if (orderData.paymentMethod === "Cash On Delivery") {
+                            const deliveryModal = new bootstrap.Modal(document.getElementById('deliveryModal'));
+                            deliveryModal.show();
+
+                        } else {
+                            $("#orderForm")[0].reset();
+                            localStorage.removeItem("selectedMenuName");
+                            localStorage.removeItem("selectedMenuPrice");
+                        }
                     });
 
                     console.log("Order saved:", res.data);
@@ -143,6 +153,23 @@ $("#orderSave").on("click", function(e) {
         }
     });
 });
+
+$("#orderType").on("change", function () {
+    const orderType = $(this).val();
+
+    if (orderType === "Delivery") {
+        $("#paymentType option[value='Card Payment']").prop("disabled", true);
+        $("#paymentType option[value='Cash Payment']").prop("disabled", true);
+        $("#paymentType option[value='Cash On Delivery']").prop("disabled", false);
+    } else {
+        $("#paymentType option[value='Card Payment']").prop("disabled", false);
+        $("#paymentType option[value='Cash Payment']").prop("disabled", false);
+        $("#paymentType option[value='Cash On Delivery']").prop("disabled", true);
+
+    }
+});
+
+
 
 $("#qty").on("input", function () {
     const price = parseFloat($("#menuPrice").val().replace("Rs.", "").trim());

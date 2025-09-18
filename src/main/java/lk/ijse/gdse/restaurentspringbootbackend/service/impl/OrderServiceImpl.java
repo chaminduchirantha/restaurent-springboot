@@ -75,8 +75,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getOrdersByCustomer(Long customerId) {
-        return orderRepo.findByCustomerId(customerId);
+    public List<Order> getOrdersByCustomer(String email) {
+        return orderRepo.findByEmail(email);
     }
 
     @Override
