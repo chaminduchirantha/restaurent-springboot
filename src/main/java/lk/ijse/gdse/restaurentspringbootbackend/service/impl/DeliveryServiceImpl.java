@@ -1,6 +1,7 @@
 package lk.ijse.gdse.restaurentspringbootbackend.service.impl;
 
 import lk.ijse.gdse.restaurentspringbootbackend.dto.DeliveryDto;
+import lk.ijse.gdse.restaurentspringbootbackend.dto.OrdersDto;
 import lk.ijse.gdse.restaurentspringbootbackend.entity.Delivery;
 import lk.ijse.gdse.restaurentspringbootbackend.entity.Order;
 import lk.ijse.gdse.restaurentspringbootbackend.repo.DeliveryRepo;
@@ -8,11 +9,15 @@ import lk.ijse.gdse.restaurentspringbootbackend.repo.OrderRepo;
 import lk.ijse.gdse.restaurentspringbootbackend.service.DeliveryService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +44,7 @@ public class DeliveryServiceImpl implements DeliveryService {
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("chaminduchirantha10@gmail.com");
-        message.setTo(delivery.getEmail());
+        message.setTo("chaminduchirantha10@gmail.com");
         message.setSubject("New Delivery Assigned");
         message.setText("Delivery assigned to: " + deliveryDto.getFullName() +
                 "\nPhone: " + deliveryDto.getPhoneNumber() +
@@ -50,4 +55,26 @@ public class DeliveryServiceImpl implements DeliveryService {
 
         return modelMapper.map(saved, DeliveryDto.class);
     }
+
+    @Override
+    public List<DeliveryDto> getAllDelivery() {
+        List<Delivery> deliveries = deliveryRepo.findAll();
+        List<DeliveryDto> deliveryDtos = new ArrayList<>();
+        for (Delivery delivery : deliveries) {
+            deliveryDtos.add(modelMapper.map(delivery, DeliveryDto.class));
+        }
+        return deliveryDtos;
+    }
+
+    @Override
+    public List<DeliveryDto> getDeliveryByPage(int page, int size) {
+        int offset = page * size;
+        List<Delivery> deliveries = deliveryRepo.findDeliveryPaginated(size, offset);
+        return modelMapper.map(deliveries, new TypeToken<List<DeliveryDto>>() {}.getType());
+    }
+
+    @Override
+    public int getTotalPages(int size) {
+        long totalDeliveries = deliveryRepo.getTotalDeliveryCount();
+        return (int) Math.ceil((double) totalDeliveries / size);    }
 }
