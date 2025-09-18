@@ -18,4 +18,7 @@ public class DeliveryDto {
     private String date;
     private String time;
     private Long orderId;
+
+    private Double latitude;
+    private Double longitude;
 }
