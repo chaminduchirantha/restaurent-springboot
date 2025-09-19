@@ -28,10 +28,6 @@ function loadFeeBack() {
                         <td>${fb.services}</td>
                         <td>${fb.ratings}</td>
                         <td>${fb.message}</td>
-                        <td>
-                            <button class="btn btn-warning me-2">Edit</button>
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </td>
                     </tr>`;
             });
             $('#feedbackTableBody').html(rows);

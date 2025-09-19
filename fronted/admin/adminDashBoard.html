@@ -79,6 +79,19 @@
                     <li><a class="dropdown-item text-danger" href="../signInPage.html" id="logoutBtn">Logout</a></li>
                 </ul>
             </div>
+
+            <!-- Header Notification Bell -->
+            <div class="dropdown me-3">
+                <button class="btn btn-light btn-sm position-relative" id="notificationBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-bell"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="notificationCount">0</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" id="notificationList">
+                    <li><span class="dropdown-item-text text-muted">Loading...</span></li>
+                </ul>
+            </div>
+
+
         </header>
 
         <!-- Content -->
@@ -183,6 +196,7 @@
 </div>
 
 <!-- Bootstrap Bundle -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
@@ -269,6 +283,35 @@
         }
 
     });
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "http://localhost:8080/api/v1/notification/all", // Adjust to your actual backend port
+            method: "GET",
+            success: function (notifications) {
+                const $notificationCount = $("#notificationCount");
+                const $notificationList = $("#notificationList");
+
+                if (notifications.length > 0) {
+                    $notificationCount.text(notifications.length);
+                    $notificationList.empty(); // clear existing content
+
+                    notifications.forEach(function (n) {
+                        const item = `<li><a class="dropdown-item" href="#">${n.message}</a></li>`;
+                        $notificationList.append(item);
+                    });
+                } else {
+                    $notificationCount.text("0");
+                    $notificationList.html(`<li><span class="dropdown-item-text text-muted">No new notifications</span></li>`);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error loading notifications:", error);
+                $("#notificationList").html(`<li><span class="dropdown-item-text text-danger">Error loading notifications</span></li>`);
+            }
+        });
+    });
+
 
 </script>
 
