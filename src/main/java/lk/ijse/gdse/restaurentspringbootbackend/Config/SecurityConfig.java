@@ -66,7 +66,8 @@ public class SecurityConfig{
                                 "api/v1/catering/**",
                                 "api/v1/event/**",
                                 "api/v1/payment/**",
-                                "api/v1/delivery/**"
+                                "api/v1/delivery/**",
+                                "api/v1/notification/**"
                         ).permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(
