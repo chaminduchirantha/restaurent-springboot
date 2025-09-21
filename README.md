@@ -37,9 +37,9 @@ In essence, this project is not just a digital ordering platform but a comprehen
   - Goole Sign in
 
  - other function** 
-  - Pagination  
-  - Search the Menus
-  - Goole Sign in 
+    - Pagination  
+    - Search the Menus
+    - Goole Sign in 
 
 - Admin Management**  
   - Full CRUD for Manage the Customers(Users), Menus, Bookingds , Deliveries , Payment and Orders  
