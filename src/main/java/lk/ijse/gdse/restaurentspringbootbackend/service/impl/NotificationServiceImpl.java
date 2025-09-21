@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -32,5 +34,20 @@ public class NotificationServiceImpl implements NotificationService {
         notificationRepo.save(notification);
 
         return notificationDto;
+    }
+
+    @Override
+    public List<NotificationDto> getAllNotifications() {
+        return notificationRepo.findAll()
+        .stream()
+        .map(notification -> new NotificationDto(
+                notification.getId(),
+                notification.getMessage(),
+                notification.getUsername(),
+                notification.isSeen(),
+                notification.getCreatedAt(),
+                notification.getCustomer().getId()
+        ))
+        .collect(Collectors.toList());
     }
 }

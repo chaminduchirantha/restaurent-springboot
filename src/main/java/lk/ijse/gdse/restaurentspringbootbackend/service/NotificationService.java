@@ -8,4 +8,6 @@ import java.util.List;
 @Service
 public interface NotificationService {
     NotificationDto createNotification(NotificationDto notificationDto);
+
+    List<NotificationDto> getAllNotifications();
 }

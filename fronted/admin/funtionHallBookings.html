@@ -29,6 +29,28 @@
         </tbody>
     </table>
 </div>
+
+<div class="d-flex justify-content-center mt-4">
+    <div class="card shadow-sm border-0 col-lg-8">
+        <div class="card-header text-black fw-bold">
+            Send Mail
+        </div>
+        <div class="card-body">
+            <form id="mailForm">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="to" placeholder="To" required>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="subject" placeholder="Subject" required>
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control" id="message" rows="6" placeholder="Type your message..."></textarea>
+                </div>
+                <button class="btn btn-primary w-100" type="button" id="send">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="../js/EventHallBookingAdminView.js"></script>
 

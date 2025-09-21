@@ -1,5 +1,6 @@
 package lk.ijse.gdse.restaurentspringbootbackend.service.impl;
 
+import lk.ijse.gdse.restaurentspringbootbackend.dto.NotificationDto;
 import lk.ijse.gdse.restaurentspringbootbackend.dto.OrdersDto;
 import lk.ijse.gdse.restaurentspringbootbackend.entity.Customer;
 import lk.ijse.gdse.restaurentspringbootbackend.entity.Order;
@@ -13,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,17 +38,20 @@ public class OrderServiceImpl implements OrderService {
         double total = ordersDto.getPrice() * ordersDto.getOrderQty();
         ordersDto.setTotal(total);
 
-        // DTO → Entity
         Order order = modelMapper.map(ordersDto, Order.class);
         order.setCustomer(customer);
-        order.setTotal(total);// ensure entity also gets total
+        order.setTotal(total);
         order.setStatus("pending");
 
-
-        // Save order
         Order savedOrder = orderRepo.save(order);
 
-        // Entity → DTO
+        NotificationDto notificationDto = new NotificationDto();
+        notificationDto.setMessage("New order placed by " + customer.getUsername());
+        notificationDto.setUsername(customer.getUsername());
+        notificationDto.setSeen(false);
+        notificationDto.setCreatedAt(LocalDateTime.now());
+        notificationDto.setCustomerId(customer.getId());
+
         OrdersDto savedDto = modelMapper.map(savedOrder, OrdersDto.class);
         savedDto.setCustomerId(customer.getId());
 
