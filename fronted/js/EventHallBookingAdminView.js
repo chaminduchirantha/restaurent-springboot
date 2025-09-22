@@ -65,7 +65,6 @@ function loadTableBookings() {
                     `Thank you,\nGolden Spoon Restaurant`
                 );
 
-                // Smooth scroll to mail form
                 $('html, body').animate({
                     scrollTop: $("#mailForm").offset().top
                 }, 500);

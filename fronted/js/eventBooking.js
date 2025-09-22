@@ -1,11 +1,9 @@
 $(document).ready(function () {
 
-    // --- Load occupied tables from localStorage (on page load) ---
     loadOccupiedFromLocal();
     setInterval(syncOccupiedTables, 5000);
 
 
-    // --- Table select click ---
     $(".event-item").on("click", function () {
         if ($(this).hasClass("occupied")) {
             Swal.fire({
@@ -19,7 +17,6 @@ $(document).ready(function () {
         $(this).addClass("selected");
     });
 
-    // --- Booking button ---
     $("#eventBookingButton").on("click", function (e) {
         e.preventDefault();
 
@@ -35,7 +32,6 @@ $(document).ready(function () {
             requests: $("#eventRequest").val().trim()   // <-- fixed id
         };
 
-        // Validation
         if (!eventBookingData.fullname || !eventBookingData.phoneNumber || !eventBookingData.email ||
             !eventBookingData.time || !eventBookingData.date || !eventBookingData.duration ||
             !eventBookingData.services || !eventBookingData.hallNo) {
@@ -65,19 +61,16 @@ $(document).ready(function () {
 
                 const selectedTable = $(".event-item.selected").data("table");
 
-                // Mark table as occupied immediately
                 $(".event-item.selected")
                     .addClass("occupied")
                     .removeClass("selected");
 
-                // Save to localStorage
                 let occupiedTables = JSON.parse(localStorage.getItem("occupiedTables")) || [];
                 if (!occupiedTables.includes(selectedTable)) {
                     occupiedTables.push(selectedTable);
                     localStorage.setItem("occupiedTables", JSON.stringify(occupiedTables));
                 }
 
-                // Reset form
                 $("#eventBookingForm")[0].reset();
             },
             error: function (xhr) {
@@ -90,7 +83,6 @@ $(document).ready(function () {
         });
     });
 
-    // --- Helper: Load from localStorage ---
     function loadOccupiedFromLocal() {
         let occupiedEvent = JSON.parse(localStorage.getItem("occupiedTables")) || [];
         $(".event-item").removeClass("occupied");
@@ -107,16 +99,12 @@ $(document).ready(function () {
                 "Authorization": "Bearer " + localStorage.getItem("token")
             },
             success: function (res) {
-                // Server response check
                 console.log("Server events:", res.data);
 
-                // use correct property (maybe hallNo, not tables)
                 const serverTables = (res.data || []).map(ev => ev.hallNo);
 
-                // Save to localStorage
                 localStorage.setItem("occupiedTables", JSON.stringify(serverTables));
 
-                // Update UI
                 $(".event-item").removeClass("occupied selected");
                 serverTables.forEach(id => {
                     $(`.event-item[data-table='${id}']`).addClass("occupied");

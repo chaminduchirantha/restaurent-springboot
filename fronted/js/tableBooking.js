@@ -1,12 +1,9 @@
 $(document).ready(function () {
 
-    // --- Load occupied tables from localStorage ---
     loadOccupiedFromLocal();
 
-    // --- Periodic sync with server (every 5s) ---
     setInterval(syncOccupiedTables, 5000);
 
-    // select table-item click
     $(".table-item").on("click", function () {
         if ($(this).hasClass("occupied")) {
             Swal.fire({
@@ -20,7 +17,6 @@ $(document).ready(function () {
         $(this).addClass("selected");
     });
 
-    // Booking button
     $("#table-booking").on("click", function (e) {
         e.preventDefault();
 
@@ -35,7 +31,6 @@ $(document).ready(function () {
             requests: $("textarea").val().trim(),
         };
 
-        // Validation
         if (!bookingData.fullname || !bookingData.phoneNumber || !bookingData.email ||
             !bookingData.time || !bookingData.orderDatetime || !bookingData.guests ||
             !bookingData.tables) {
@@ -65,12 +60,10 @@ $(document).ready(function () {
 
                 const selectedTable = $(".table-item.selected").data("table");
 
-                // Mark table as occupied
                 $(".table-item.selected")
                     .addClass("occupied")
                     .removeClass("selected");
 
-                // Save to localStorage
                 let occupiedTables = JSON.parse(localStorage.getItem("occupiedTables")) || [];
                 if (!occupiedTables.includes(selectedTable)) {
                     occupiedTables.push(selectedTable);
@@ -89,7 +82,6 @@ $(document).ready(function () {
         });
     });
 
-    // --- Helper: Load from localStorage ---
     function loadOccupiedFromLocal() {
         let occupiedTables = JSON.parse(localStorage.getItem("occupiedTables")) || [];
         $(".table-item").removeClass("occupied");
@@ -98,7 +90,6 @@ $(document).ready(function () {
         });
     }
 
-    // --- Helper: Sync with server ---
     function syncOccupiedTables() {
         $.ajax({
             url: "http://localhost:8080/api/v1/table/all",
@@ -109,10 +100,8 @@ $(document).ready(function () {
             success: function (res) {
                 const serverTables = (res.data || []).map(tb => tb.tables);
 
-                // Save to localStorage
                 localStorage.setItem("occupiedTables", JSON.stringify(serverTables));
 
-                // Update UI
                 $(".table-item").removeClass("occupied");
                 serverTables.forEach(id => {
                     $(`.table-item[data-table='${id}']`).addClass("occupied");

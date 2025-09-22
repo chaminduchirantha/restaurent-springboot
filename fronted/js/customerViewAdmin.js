@@ -13,7 +13,6 @@ function authHeaders() {
     };
 }
 
-// Load all customers
 function loadCustomers() {
     $.ajax({
         url: `http://localhost:8080/api/v1/user/paginated?page=${currentPage}&size=${pageSize}`,

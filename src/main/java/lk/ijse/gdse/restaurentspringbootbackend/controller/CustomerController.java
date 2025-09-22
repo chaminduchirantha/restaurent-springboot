@@ -5,6 +5,7 @@ import lk.ijse.gdse.restaurentspringbootbackend.dto.CustomerDto;
 import lk.ijse.gdse.restaurentspringbootbackend.repo.CustomerRepo;
 import lk.ijse.gdse.restaurentspringbootbackend.service.impl.CustomerServiceImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ import java.util.List;
 @RequestMapping("api/v1/user")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:63342")
-
+@Slf4j
 public class CustomerController {
     private final CustomerServiceImpl customerService;
     private final CustomerRepo userRepo;
@@ -32,6 +33,11 @@ public class CustomerController {
     @PostMapping("/save")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponseDto> saveCustomer(@RequestBody CustomerDto customerDto) {
+        log.info("INF - Customer created");
+        log.debug("DEBUG - Customer debug");
+        log.error("ERROR - Customer error");
+        log.warn("WARN - Customer warn");
+        log.trace("TRACE - Customer trace");
         CustomerDto savedCustomer = customerService.saveCustomer(customerDto);
         return ResponseEntity.ok(
                 new ApiResponseDto(201, "Customer Saved Successfully", savedCustomer)

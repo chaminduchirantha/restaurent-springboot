@@ -15,37 +15,47 @@ public class SentimentService {
 
     public SentimentService() {
         Properties props = new Properties();
+        // tokenize = wachana walata bedanna
+        // ssplit = vaakya walata bedanna
+        // pos = Part of Speech (nouns, verbs, etc.)
+        // lemma = wachanaye mul roopa (e.g. went -> go)
+        // parse = vaakya grammar tree hadanna
+        // sentiment = vaakya sentiment analyze karanna
         props.setProperty("annotators", "tokenize,ssplit,pos,lemma,parse,sentiment");
         pipeline = new StanfordCoreNLP(props);
     }
 
     public String analyzeSentiment(String text) {
         Annotation annotation = pipeline.process(text);
-        int mainSentiment = 0;
-        int longest = 0;
+
+        int totalScore = 0;
+        int count = 0;
+
         for (CoreMap sentence : annotation.get(CoreAnnotations.SentencesAnnotation.class)) {
             String sentimentStr = sentence.get(SentimentCoreAnnotations.SentimentClass.class);
-            int sentimentScore = convertSentimentToScore(sentimentStr);
-            String sentenceText = sentence.toString();
-            if (sentenceText.length() > longest) {
-                mainSentiment = sentimentScore;
-                longest = sentenceText.length();
-            }
+
+            totalScore += convertSentimentToScore(sentimentStr);
+            count++;
         }
 
-        if (mainSentiment > 2) return "POSITIVE";
-        else if (mainSentiment < 2) return "NEGATIVE";
-        else return "NEUTRAL";
+        int avgScore = (count > 0) ? totalScore / count : 3;
+
+        if (avgScore >= 5) return "VERY POSITIVE";
+        else if (avgScore == 4) return "POSITIVE";
+        else if (avgScore == 3) return "NEUTRAL";
+        else if (avgScore == 2) return "NEGATIVE";
+        else return "VERY NEGATIVE";
     }
 
     private int convertSentimentToScore(String sentiment) {
         switch (sentiment.toUpperCase()) {
-            case "VERY POSITIVE": return 4;
-            case "POSITIVE": return 3;
-            case "NEUTRAL": return 2;
-            case "NEGATIVE": return 1;
-            case "VERY NEGATIVE": return 0;
-            default: return 2;
+            case "VERY POSITIVE": return 5;
+            case "POSITIVE": return 4;
+            case "NEUTRAL": return 3;
+            case "NEGATIVE": return 2;
+            case "VERY NEGATIVE": return 1;
+            default: return 3;
         }
     }
+
 }

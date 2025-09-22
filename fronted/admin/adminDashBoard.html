@@ -207,6 +207,36 @@
         document.querySelector('.sidebar').classList.toggle('active');
     });
 
+
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('username');
+
+    if (!token || !username) {
+        window.location.href = '../signInPage.html';
+    } else {
+        $.ajax({
+            method: 'GET',
+            url: 'http://localhost:8080/role/api/user-info',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            },
+            success: function (response) {
+                if (response.role === 'ADMIN') {
+                    $('body').show(); // adminට page එක බලන්න දෙයි
+                    console.log("Access granted for ADMIN:", username);
+                } else {
+                    alert("Access Denied: Only admins can access this page.");
+                    window.location.href ='../signInPage.html';
+                }
+            },
+            error: function () {
+                alert("Session expired or unauthorized.");
+                localStorage.clear();
+                window.location.href = '../signInPage.html';
+            }
+        });
+    }
+
     // Function to load page in iframe
     function loadPage(url, title) {
         const iframeContainer = document.getElementById('iframeContainer');

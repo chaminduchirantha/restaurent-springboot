@@ -24,7 +24,7 @@ public class CheckRole {
     }
 
     @GetMapping("/hello-admin")
-    @PreAuthorize("hasRole('ADMIN')")   // role based access danw
+    @PreAuthorize("hasRole('ADMIN')")
     public String helloAdmin(){
         return "Hello World Admin";
     }
@@ -38,7 +38,7 @@ public class CheckRole {
                 .map(auth -> auth.getAuthority().replace("ROLE_", ""))
                 .orElse("UNKNOWN");
 
-        // Customer information ලබාගන්න
+
         Optional<Customer> customerOptional = customerRepo.findByUsername(username);
         Long customerId = customerOptional.map(Customer::getId).orElse(null);
 

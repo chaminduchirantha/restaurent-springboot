@@ -41,7 +41,6 @@ function loadOrders() {
             });
             $('#orderTableBody').html(rows);
 
-            // Bind event after rows load
             $('.sendMailBtn').on('click', function () {
                 const row = $(this).closest("tr").children("td");
 
@@ -54,7 +53,6 @@ function loadOrders() {
                 const status = row.eq(6).text();
                 const total = row.eq(7).text();
 
-                // Set values in mail form
                 $('#to').val(email);
                 $('#subject').val("Regarding Your Order");
                 $('#message').val(
@@ -72,7 +70,6 @@ function loadOrders() {
                     `Thank you,\nGolden Spoon Restaurant`
                 );
 
-                // Smooth scroll to mail form
                 $('html, body').animate({
                     scrollTop: $("#mailForm").offset().top
                 }, 500);
@@ -87,7 +84,6 @@ function loadOrders() {
     });
 }
 
-// Delegate click event for dynamically loaded rows
 $(document).on("click", ".mark-delivered", function() {
     const orderId = $(this).data("id");
     const token = localStorage.getItem("token");

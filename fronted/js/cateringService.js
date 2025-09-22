@@ -1,7 +1,6 @@
 $("#cateringButton").on("click", function (e) {
     e.preventDefault();
 
-    // Collect form data
     let cateringData = {
         fullname: $("#cateringName").val().trim(),
         phoneNumber: $("#cateringPhone").val().trim(),
@@ -12,7 +11,6 @@ $("#cateringButton").on("click", function (e) {
         guests: $("#buffetGuests").val(),
     };
 
-    // Validation: check required fields
     if (!cateringData.fullname || !cateringData.phoneNumber || !cateringData.email ||
         !cateringData.date || !cateringData.time || !cateringData.type || !cateringData.guests) {
         Swal.fire({
@@ -23,7 +21,6 @@ $("#cateringButton").on("click", function (e) {
         return;
     }
 
-    // Send data via AJAX
     $.ajax({
         url: "http://localhost:8080/api/v1/catering/booking",
         type: "POST",
